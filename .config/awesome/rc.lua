@@ -626,7 +626,7 @@ globalkeys = mytable.join(
     -- Screenshot snip
     awful.key({ modkey, "Shift" }, "s",
                 function ()
-                    awful.util.spawn_with_shell("FILE=" .. os.getenv("HOME") .. "/Pictures/Screenshots/snapshot-$(date +%Y-%m-%dT%H-%M-%S).png && maim -s --hidecursor $FILE && sleep 0.5 && xclip -selection clipboard $FILE -t image/png && play /home/smapo/Music/sound_effects/camera-shutter-click-01.wav")
+                    awful.util.spawn_with_shell("FILE=" .. os.getenv("HOME") .. "/Pictures/Screenshots/snapshot-$(date +%Y-%m-%dT%H-%M-%S).png && maim -s --hidecursor $FILE && sleep 0.5 && xclip -selection clipboard $FILE -t image/png && paplay /home/smapo/Music/sound_effects/camera-shutter-click-01.wav")
                 end,
               {description = "Grab a screenshot of selected area", group = "awesome"})
 )
