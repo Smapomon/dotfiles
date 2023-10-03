@@ -1,4 +1,4 @@
-## ARCH XORG AWESOME
+# ARCH XORG AWESOME
 ## INSTALLATION PROCESS:
 
 1. navigate to /etc/pacman.conf and uncomment and add jack2 to IgnorePKG =
@@ -77,3 +77,13 @@
         kb-remove-char-back: "BackSpace";
     }
     ```
+
+### Troubleshooting
+### AWESOMEWM
+#### Bad argument #1 to 'registerlock' (userdata expected, got nil)
+gdk 3 & 4 do not play nice together change if you are using nice window decorations
+find gdk require from nice files and change it:
+```lua
+--local gdk = lgi.require('Gdk')
+local gdk = lgi.require('Gdk', '3.0')
+```
