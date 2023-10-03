@@ -1,4 +1,5 @@
 All my configuration files I wish to make portable.
+Checkout setup.md for installation without copying from repo
 
 ## Current Setups
 These will probably change in the future.
