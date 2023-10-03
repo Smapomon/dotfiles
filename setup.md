@@ -15,6 +15,7 @@
     - xorg-xinput
     - nvidia-settings
     - arandr
+    - rofi
 
 3. install PARU the AUR helper
 	mkdir -p ~/packages
@@ -62,3 +63,17 @@
     - install window decorations with `git clone https://github.com/mut-ex/awesome-wm-nice.git nice`
     - replace rc.lua with github version or modify as you like
     - if using gihub version copy github contents to themes/dremora/theme.lua
+14. setup rofi
+    - add following config to /etc/rofi.rasi
+    ```
+    configuration {
+        kb-row-up: "Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab";
+        kb-row-down: "Down,Control+j";
+        kb-accept-entry: "Control+m,Return,KP_Enter";
+        terminal: "mate-terminal";
+        kb-remove-to-eol: "Control+Shift+e";
+        /*kb-mode-next: "Shift+Right,Control+Tab,Control+l";*/
+        kb-mode-previous: "Shift+Left,Control+Shift+Tab,Control+h";
+        kb-remove-char-back: "BackSpace";
+    }
+    ```

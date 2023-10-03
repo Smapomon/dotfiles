@@ -64,7 +64,7 @@ fi
 
 # BASIC SHELL STUFF
 alias ls="exa --long --header --icons --color=always --group-directories-first"
-alias files="clear;ls -alh"
+alias files="clear;ls -lh"
 alias s="kitty +kitten ssh"
 alias icat="kitty +kitten icat"
 alias update_kitty="curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin"
