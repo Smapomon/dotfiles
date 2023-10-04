@@ -16,6 +16,7 @@
     - nvidia-settings
     - arandr
     - rofi
+    - alsa-utils
 
 3. install PARU the AUR helper
 	mkdir -p ~/packages
