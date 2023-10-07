@@ -85,6 +85,7 @@ alias gnb='publish_new_branch'
 
 # ARCH SPECIFIC ALIASES
 alias paru_updates="paru -Qu"
+alias discord_update_skip="cd ~/.config/discordptb; clear; ls -alh; nvim settings.json"
 
 # NAVIGATION ALIASES
 alias dev='cd ~/dev; clear; ls -alh'
