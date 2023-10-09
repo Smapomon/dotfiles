@@ -89,7 +89,7 @@ alias discord_update_skip="cd ~/.config/discordptb; clear; ls -alh; nvim setting
 
 # NAVIGATION ALIASES
 alias dev='cd ~/dev; clear; ls -alh'
-alias omni="cd ~/dev/gitlab/omnitool-be; clear; ls -alh"
+alias omni="cd ~/dev/gitlab/omnitool; clear; ls -alh"
 alias sptla="cd ~/dev/work/spotilla-be; clear; ls -alh"
 alias get_perm="cd ~/dev/work/perms; clear; ls -alh"
 alias vimconf="cd ~/.config/nvim; clear; files; nvim init.lua"
