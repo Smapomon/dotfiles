@@ -136,24 +136,6 @@ awful.layout.layouts = {
     awful.layout.suit.floating,
     awful.layout.suit.spiral,
     awful.layout.suit.max,
-    --awful.layout.suit.tile.left,
-    --awful.layout.suit.tile.bottom,
-    --awful.layout.suit.tile.top,
-    --awful.layout.suit.fair,
-    --awful.layout.suit.fair.horizontal,
-    --awful.layout.suit.spiral.dwindle,
-    --awful.layout.suit.max.fullscreen,
-    --awful.layout.suit.magnifier,
-    --awful.layout.suit.corner.nw,
-    --awful.layout.suit.corner.ne,
-    --awful.layout.suit.corner.sw,
-    --awful.layout.suit.corner.se,
-    --lain.layout.cascade,
-    --lain.layout.cascade.tile,
-    --lain.layout.centerwork,
-    --lain.layout.centerwork.horizontal,
-    --lain.layout.termfair,
-    --lain.layout.termfair.center
 }
 
 lain.layout.termfair.nmaster           = 3
@@ -465,6 +447,9 @@ globalkeys = mytable.join(
               {description = "increase the number of master clients", group = "layout"}),
     awful.key({ modkey, "Control" }, "Down",     function () awful.client.incwfact(0.05) end,
               {description = "decrease the number of master clients", group = "layout"}),
+    awful.key({ altkey, "Control" }, "space",     function ()
+      awful.screen.focused().selected_tag.master_width_factor = 0.75
+    end, {description = "set master col size", group = "layout"}),
 
 
 
