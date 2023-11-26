@@ -21,6 +21,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
+export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 source $ZSH/oh-my-zsh.sh
 
 # ------------ NVM SETUP ------------ #
@@ -75,28 +76,31 @@ alias sdn="shutdown now"
 alias restart_audio="systemctl --user restart pipewire.service"
 alias set_caps_escape="~/shell_scripts/set_caps_escape.sh"
 alias set_mouse="~/shell_scripts/set_mouse.sh"
-alias print_disks="lsblk -e7,254 -A -o NAME,FSTYPE,LABEL,MOUNTPOINT,FSUSE%,FSSIZE | grep -v 'nvme1n1.*\|nvme0n1p3.*\|nvme0n1p4.*'"
+#alias print_disks="lsblk -e7,254 -A -o NAME,FSTYPE,LABEL,MOUNTPOINT,FSUSE%,FSSIZE | grep -v 'nvme1n1.*\|nvme0n1p3.*\|nvme0n1p4.*'"
+alias print_disks="lsblk -e 254 -A -o NAME,FSTYPE,LABEL,MOUNTPOINT,FSUSE%,FSSIZE"
 
 # GIT ALIASES
 alias co='checkout'
 alias c_branch="git branch --show-current | tr -d '\n' | xclip -selection clipboard"
 alias dgit='/usr/bin/git --git-dir=$HOME/.dotconf/ --work-tree=$HOME'
 alias gnb='publish_new_branch'
+alias git_prune="git fetch -p && git branch -vv | grep 'origin/.*: gone]' | grep -v '\*' | awk '{print \$1}' | xargs git branch -d"
+alias git_hard_prune="git fetch -p && git branch -vv | grep 'origin/.*: gone]' | grep -v '\*' | awk '{print \$1}' | xargs git branch -D"
 
 # ARCH SPECIFIC ALIASES
 alias paru_updates="paru -Qu"
 alias discord_update_skip="cd ~/.config/discordptb; clear; ls -alh; nvim settings.json"
 
 # NAVIGATION ALIASES
-alias dev='cd ~/dev; clear; ls -alh'
-alias omni="cd ~/dev/gitlab/omnitool; clear; ls -alh"
-alias sptla="cd ~/dev/work/spotilla-be; clear; ls -alh"
-alias get_perm="cd ~/dev/work/perms; clear; ls -alh"
+alias dev='cd ~/dev; clear; ls -lh'
+alias work='cd ~/dev/work; clear; ls -lh'
+alias omni="cd ~/dev/gitlab/omnitool; clear; ls -lh"
+alias sptla="cd ~/dev/work/spotilla-be; clear; ls -lh"
+alias get_perm="cd ~/dev/work/perms; clear; ls -lh"
 alias vimconf="cd ~/.config/nvim; clear; files; nvim init.lua"
 alias wmconf="cd ~/.config/awesome; clear; files; nvim rc.lua"
 alias kittyconf="cd ~/.config/kitty; clear; files; nvim kitty.conf"
 alias start_vpn="cd /usr/local/bin; clear; sudo sh goodaccess.sh -r smapo-linukka"
-alias mallu="cd ~/dev/gitlab/mallu-frontend/; clear; files"
 
 # NAVIGATE WINDOW CLIENTS
 alias fuzzy_win='wmctrl -i -a $(wmctrl -l | fzf | cut -d\  -f1); exit'
@@ -128,6 +132,7 @@ alias dbundle_install="install_with_bundle"
 
 # File operations
 alias ytdl="yt-dlp -o '%(title)s.%(ext)s' "
+alias lines_of_code="cloc ."
 
 
 # ------------ ALIAS FUNCTIONS ------------ #
@@ -250,7 +255,7 @@ export PATH="$HOME/dev/android_studio/android-studio-2021.3.1.16-linux/android-s
 export PATH="/usr/java/jre1.8.0_341/bin:$PATH"
 alias luamake=/luamake
 export PATH="${HOME}/lsp_servers/lua-language-server/bin:${PATH}"
-export PATH=/usr/local/bin/aws_completer:$PATH
+export PATH=/usr/bin/aws_completer:$PATH
 
 
 ##### XDG DIR CHANGES #####
@@ -279,7 +284,7 @@ PERL_MM_OPT="INSTALL_BASE=/home/smapo/perl5"; export PERL_MM_OPT;
 
 autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
-complete -C '/usr/local/bin/aws_completer' aws
+complete -C '/usr/bin/aws_completer' aws
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform

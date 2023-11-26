@@ -82,9 +82,9 @@ theme.titlebar_maximized_button_normal_inactive = theme.dir .. "/icons/titlebar/
 
 
 -- MONITOR ORDER (number is index)
-local monitor_left   = 3
+local monitor_left   = 2
 local monitor_center = 1
-local monitor_right  = 2
+local monitor_right  = 3
 
 theme.wallpaper = function(s)
   -- get wp based on screen index

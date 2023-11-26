@@ -17,8 +17,8 @@ for s in screen do
 end
 
 if monitor_count == 3 then
-  monitor_left  = 3
-  monitor_right = 2
+  monitor_left  = 2
+  monitor_right = 3
 end
 
 local user_home = 'smapo'
@@ -633,9 +633,9 @@ clientkeys = mytable.join(
               {description = "toggle floating", group = "client"}),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"}),
-    awful.key({ modkey,           }, "o",      function (c) c:move_to_screen(c.screen.index+1)             end,
+    awful.key({ modkey,           }, "o",      function (c) c:move_to_screen(c.screen.index-1)             end,
               {description = "move to screen", group = "client"}),
-    awful.key({ modkey, "Shift"   }, "o",      function (c) c:move_to_screen(c.screen.index-1)             end,
+    awful.key({ modkey, "Shift"   }, "o",      function (c) c:move_to_screen(c.screen.index+1)             end,
               {description = "move to screen", group = "client"}),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
               {description = "toggle keep on top", group = "client"}),
