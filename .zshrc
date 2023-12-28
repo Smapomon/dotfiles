@@ -113,7 +113,8 @@ alias jarru="clear; docker compose run be brakeman -A -z -I"
 
 # DOCKER FUNCTIONS
 alias dcup="clear; rm tmp/pids/server.pid; docker compose up"
-alias dbld="docker compose build"
+alias dc_debug="clear; rm tmp/pids/server.pid; docker compose run --service-ports be"
+alias dbld="clear; docker compose build"
 alias docker_start="sudo systemctl start docker.service"
 
 # RAILS FUNCTIONS
@@ -288,3 +289,19 @@ complete -C '/usr/bin/aws_completer' aws
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/usr/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/usr/etc/profile.d/conda.sh" ]; then
+        . "/usr/etc/profile.d/conda.sh"
+    else
+        export PATH="/usr/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
