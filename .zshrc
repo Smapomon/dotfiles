@@ -246,10 +246,6 @@ function install_with_bundle() {
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# Custom appends through shell
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-
 export PATH="$HOME/.local/kitty.app/bin:$PATH"
 
 export PATH="$HOME/dev/android_studio/android-studio-2021.3.1.16-linux/android-studio/bin:$PATH"
@@ -304,4 +300,8 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+# Custom appends through shell
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
 
