@@ -20,10 +20,10 @@ TWM      = awesomewm
 Installation processes
 ### Importing dotfiles to system
 ```console
-git clone --separate-git-dir=~/.myconf git@github.com:Smapomon/dotfiles.git $HOME/myconf-tmp
+git clone --separate-git-dir=~/.dotconf git@github.com:Smapomon/dotfiles.git $HOME/myconf-tmp
 cp ~/myconf-tmp/.gitmodules ~  # If you use Git submodules
 rm -r ~/myconf-tmp/
-alias config='/usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
+alias dgit='/usr/bin/git --git-dir=$HOME/.dotconf/ --work-tree=$HOME'
 ```
 
 ### Making a new dotfiles repo
@@ -37,12 +37,12 @@ Create an alias to bashr, zshrc or whichever shell system you use.
 Alias will make it easier to access the repo since using git without options will not work.
 Note that when installing to a new system from the repo, the alias is automatically going to be in the zshrc (in this case).
 ```
-alias dot_git='/usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
+alias dgit='/usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
 ```
 
 Turn off untracked files in status (there will be many)
 ```console
-dot_git config status.showUntrackedFiles no
+dgit config status.showUntrackedFiles no
 ```
 
 Finally add your new empty repo in github/gitlab to the bare repo remote.
@@ -62,21 +62,58 @@ Instructions for this can be seen when creating a new empty repo in github for e
 ```
 
 arandr:              GUI for handling some of the xrandr screen stuff
+
 bat:                 cat but better
+
 bluez:               bluetooth stuff
+
 diodon:              clipboard manager (history)
+
 ferdium-bin:         whatsapp
+
 neofetch:            show pretty system info on shell startup
+
 neovim:              text editor weapon of choice
+
 nitrogen:            manage wallpapers
+
 paru:                AUR helpers
+
 pavucontrol:         control sound
+
 picom-jonaburg-git:  compositor for transparency, and blur
+
 ripgrep:             very fast search
+
 rofi:                search and open task switcher
+
 scrot:               screenshot snipping
+
 solaar:              for monitoring logitech devices
+
 the_silver_searcher: more search stuff
+
+## Setup
+### Things to install:
+To get a minimal working setup (with sensible additions), install the following:
+```
+paru (https://github.com/Morganamilo/paru)
+alsa-utils
+nice (https://github.com/mut-ex/awesome-wm-nice)
+awesomewm-copycat (https://github.com/lcpz/awesome-copycats)
+picom
+kitty
+zsh
+oh-my-zsh
+powerlevel10k
+awesome-git (paru)
+nvm
+neovim
+paq (https://github.com/savq/paq-nvim)
+```
+
+After installing everything reset configs to remote main with:
+`dgit reset --hard origin/main`
 
 
 ## TODO
