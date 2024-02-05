@@ -110,6 +110,8 @@ awesome-git (paru)
 nvm
 neovim
 paq (https://github.com/savq/paq-nvim)
+zsh-autosuggestions (https://github.com/zsh-users/zsh-autosuggestions)
+zsh-syntax-highlight (https://github.com/zsh-users/zsh-syntax-highlighting)
 ```
 
 After installing everything reset configs to remote main with:
