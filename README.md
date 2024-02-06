@@ -124,6 +124,10 @@ linux-headers
 evdi-git (paru)
 displaylink (paru & remember to check archwiki for enabling and config)
 
+# for docker development
+docker (remember to enable+start docker.service)
+docker-compose
+
 ```
 
 After installing everything reset configs to remote main with:
