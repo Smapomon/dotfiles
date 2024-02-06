@@ -118,7 +118,13 @@ the_silver_searcher
 pavucontrol
 rofi
 diodon (paru)
+
+# fonts for terminal, emoji and supporting different languages
 ttf-iosevka (paru)
+noto-fonts-cjk (east asian languages)
+wqy-zenhei (chinese)
+otf-ipaexfont (japanese)
+ttf-baekmuk (korean)
 
 # for laptop or other devices with displaylink hubs
 linux-headers
