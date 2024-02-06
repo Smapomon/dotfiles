@@ -112,6 +112,12 @@ neovim
 paq (https://github.com/savq/paq-nvim)
 zsh-autosuggestions (https://github.com/zsh-users/zsh-autosuggestions)
 zsh-syntax-highlight (https://github.com/zsh-users/zsh-syntax-highlighting)
+
+# for laptop or other devices with displaylink hubs
+linux-headers
+evdi-git (paru)
+displaylink (paru & remember to check archwiki for enabling and config)
+
 ```
 
 After installing everything reset configs to remote main with:
