@@ -118,6 +118,7 @@ the_silver_searcher
 pavucontrol
 rofi
 diodon (paru)
+ttf-iosevka (paru)
 
 # for laptop or other devices with displaylink hubs
 linux-headers
