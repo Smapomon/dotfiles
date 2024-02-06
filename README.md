@@ -112,6 +112,12 @@ neovim
 paq (https://github.com/savq/paq-nvim)
 zsh-autosuggestions (https://github.com/zsh-users/zsh-autosuggestions)
 zsh-syntax-highlight (https://github.com/zsh-users/zsh-syntax-highlighting)
+playerctl (for media keys)
+ripgrep
+the_silver_searcher
+pavucontrol
+rofi
+diodon (paru)
 
 # for laptop or other devices with displaylink hubs
 linux-headers
