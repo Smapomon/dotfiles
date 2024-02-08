@@ -5,6 +5,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# SET MANPAGER
+export MANPAGER="nvim +Man!"
+
 # XDG Variables
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_CONFIG_HOME=$HOME/.config
@@ -26,6 +29,9 @@ source $ZSH/oh-my-zsh.sh
 
 # ------------ NVM SETUP ------------ #
 source /usr/share/nvm/init-nvm.sh
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # ------------ SSH SETUP ------------ #
 SSH_ENV="$HOME/.ssh/agent-environment"
@@ -304,4 +310,5 @@ unset __conda_setup
 # Custom appends through shell
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+nvm use node
 
