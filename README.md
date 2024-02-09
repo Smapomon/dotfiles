@@ -118,6 +118,10 @@ the_silver_searcher
 pavucontrol
 rofi
 diodon (paru)
+scrot
+i3lock
+maim
+xclip
 
 # fonts for terminal, emoji and supporting different languages
 ttf-iosevka (paru)
