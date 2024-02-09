@@ -150,6 +150,9 @@ function rails_dir_map {
 		spotilla-be)
 			APPNAME="be"
 			;;
+    herkkutori)
+			APPNAME="herkkutori"
+      ;;
 		*)
 			APPNAME="omnitool"
 			;;
