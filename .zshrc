@@ -8,6 +8,8 @@ fi
 # SET MANPAGER
 export MANPAGER="nvim +Man!"
 
+export VISUAL="nvim"
+
 # XDG Variables
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_CONFIG_HOME=$HOME/.config
@@ -84,6 +86,7 @@ alias set_caps_escape="~/shell_scripts/set_caps_escape.sh"
 alias set_mouse="~/shell_scripts/set_mouse.sh"
 #alias print_disks="lsblk -e7,254 -A -o NAME,FSTYPE,LABEL,MOUNTPOINT,FSUSE%,FSSIZE | grep -v 'nvme1n1.*\|nvme0n1p3.*\|nvme0n1p4.*'"
 alias print_disks="lsblk -e 254 -A -o NAME,FSTYPE,LABEL,MOUNTPOINT,FSUSE%,FSSIZE"
+alias ip='ip -c'
 
 # GIT ALIASES
 alias co='checkout'
