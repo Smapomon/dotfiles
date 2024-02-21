@@ -53,6 +53,8 @@ function add_ssh_keys {
 		if grep -q PRIVATE "$possiblekey"; then
 			ssh-add "$possiblekey"
 		fi
+
+    ssh-add "ssh_key"
 	done
 
 }
