@@ -54,6 +54,7 @@ function add_ssh_keys {
 			ssh-add "$possiblekey"
 		fi
 
+    ssh-add "smapo_host_yubi_key"
     ssh-add "ssh_key"
 	done
 
