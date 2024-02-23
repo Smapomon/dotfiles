@@ -122,6 +122,7 @@ scrot
 i3lock
 maim
 xclip
+fd (find replacement)
 libfido2 (for yubikey ssh auth)
 
 # fonts for terminal, emoji and supporting different languages
