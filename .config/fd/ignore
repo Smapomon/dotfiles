@@ -5,3 +5,5 @@ node_modules/*
 public/*/upload_items/*
 public/*/file_chunk_trackers/*
 vendor/assets/javascripts/*
+**/*.tfstate.backup
+**/*.tfstate.*.backup
