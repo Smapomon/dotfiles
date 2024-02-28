@@ -1,14 +1,24 @@
+// ==UserScript==
+// @name         Anichart Highlighter
+// @namespace    http://tampermonkey.net/
+// @version      2024-02-25
+// @description  try to take over the world!
+// @author       You
+// @match        https://anichart.net/*
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=anichart.net
+// @grant        none
+// @require       file:///home/smapo/.config/browser_scripts/anichart_highlighter.js
+// ==/UserScript==
+
 // **Script Info**
 // This script is for highlighting the anime cards on anichart.net
 // It will highlight the cards based on the color of the highlighter selected
 // It will also provide a button to toggle the visibility of non-highlighted cards
 //
-// to use the script, install tampermonkey extension in your browser
+// to use the script
+// install tampermonkey extension in your browser
+// and add a new script with the above userscript section to it
 //
-// go to extenstions settings, click tampermonkey details, click allow access to file URLs
-//
-// create a new script amd add the commented line below as the last line in UserScript section
-// @require        file:///path/to/anichart_highlighter.js
 // **/Script Info**
 
 (function() {
