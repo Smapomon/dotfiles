@@ -1,4 +1,5 @@
 tmp/cache/*
+tmp/mail/*
 node_modules/*
 **/node_modules/*
 .git/*
@@ -7,3 +8,5 @@ public/*/file_chunk_trackers/*
 vendor/assets/javascripts/*
 **/*.tfstate.backup
 **/*.tfstate.*.backup
+.gradle/*/dependencies-accessors/*
+tmp/db/*

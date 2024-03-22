@@ -75,6 +75,7 @@ fi
 # ------------ ALIASES ------------ #
 
 # BASIC SHELL STUFF
+alias cdf="cd \$(find * -type d | fzf) && files"
 alias ls="exa --long --header --icons --color=always --group-directories-first"
 alias files="clear;ls -lh"
 alias s="kitty +kitten ssh"
@@ -268,7 +269,6 @@ export PATH="/usr/java/jre1.8.0_341/bin:$PATH"
 alias luamake=/luamake
 export PATH="${HOME}/lsp_servers/lua-language-server/bin:${PATH}"
 export PATH=/usr/bin/aws_completer:$PATH
-
 
 ##### XDG DIR CHANGES #####
 export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME"/aws/credentials

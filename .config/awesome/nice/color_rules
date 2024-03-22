@@ -1,6 +1,7 @@
 return {
 -- Table: {1}
 {
+   ["discord"]="#141015",
    ["Navigator"]="#ebebebff",
 },
 }
