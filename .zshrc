@@ -93,12 +93,11 @@ alias print_disks="lsblk -e 254 -A -o NAME,FSTYPE,LABEL,MOUNTPOINT,FSUSE%,FSSIZE
 alias ip='ip -c'
 
 # GIT ALIASES
-alias co='checkout'
 alias c_branch="git branch --show-current | tr -d '\n' | xclip -selection clipboard"
 alias dgit='/usr/bin/git --git-dir=$HOME/.dotconf/ --work-tree=$HOME'
-alias gnb='publish_new_branch'
 alias git_prune="git fetch -p && git branch -vv | grep 'origin/.*: gone]' | grep -v '\*' | awk '{print \$1}' | xargs git branch -d"
 alias git_hard_prune="git fetch -p && git branch -vv | grep 'origin/.*: gone]' | grep -v '\*' | awk '{print \$1}' | xargs git branch -D"
+alias gco="_fuzzy_branches"
 
 # ARCH SPECIFIC ALIASES
 alias paru_updates="paru -Qu"
@@ -151,9 +150,39 @@ alias lines_of_code="cloc ."
 
 # ------------ ALIAS FUNCTIONS ------------ #
 
-function publish_new_branch() {
-  ex_command="git checkout -b $1 && git push -u origin $1"
-  eval $ex_command
+function is_in_git_repo() {
+  git rev-parse HEAD > /dev/null 2>&1
+}
+
+function _fuzzy_branches() {
+  is_in_git_repo || return
+
+  echo "Fetching branches..."
+  git fetch -a -p &
+  PID=$!
+  i=0
+  sp="/-\|"
+  echo -n ' '
+  while [ -d /proc/$PID ]; do
+    c=`expr ${i} % 4`
+    case ${c} in
+      0) echo "/\c" ;;
+      1) echo "-\c" ;;
+      2) echo "\\ \b\c" ;;
+      3) echo "|\c" ;;
+    esac
+    i=`expr ${i} + 1`
+
+    sleep 0.1
+    echo "\b\c"
+  done
+
+  current_branch="$(git branch --show-current | tr -d '\n')"
+
+  git for-each-ref --sort='authordate:iso8601' --format='%(refname:lstrip=2)' |
+  sed 's=origin/==g' | grep -v HEAD | sort | uniq |
+  fzf --tac --no-mouse --cycle --border=bottom --border-label="|| current: $current_branch ||" \
+  --bind 'enter:execute(echo {} | xargs git checkout)+abort,tab:execute-silent(echo {} | pbcopy)+abort'
 }
 
 function rails_dir_map {
@@ -163,8 +192,8 @@ function rails_dir_map {
 		spotilla-be)
 			APPNAME="be"
 			;;
-    herkkutori)
-			APPNAME="herkkutori"
+    api)
+			APPNAME="api"
       ;;
 		*)
 			APPNAME="omnitool"
