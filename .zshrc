@@ -75,7 +75,7 @@ fi
 # ------------ ALIASES ------------ #
 
 # BASIC SHELL STUFF
-alias cdf="cd \$(find * -type d | fzf) && files"
+alias cdf="cd \$(fd --type d --hidden --follow | fzf --color --scheme=path) && files"
 alias ls="exa --long --header --icons --color=always --group-directories-first"
 alias files="clear;ls -lh"
 alias s="kitty +kitten ssh"
