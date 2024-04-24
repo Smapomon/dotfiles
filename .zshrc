@@ -173,7 +173,7 @@ function _fuzzy_branches() {
     esac
     i=`expr ${i} + 1`
 
-    sleep 0.1
+    sleep 0.05
     echo "\b\c"
   done
 
