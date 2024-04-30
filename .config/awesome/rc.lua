@@ -886,11 +886,6 @@ awful.rules.rules = {
     },
 
     {
-        rule = { class = "Slack" },
-        properties = { screen = monitor_right, tags = {"WEB & CHAT"} }
-    },
-
-    {
         rule = { class = "Brave-browser" },
         properties = { screen = monitor_right, tags = {"WEB & CHAT"} }
     },

@@ -3,6 +3,7 @@ tmp/mail/*
 node_modules/*
 **/node_modules/*
 .git/*
+**/.git/*
 **/.git/**/*
 public/*/upload_items/*
 public/*/file_chunk_trackers/*
