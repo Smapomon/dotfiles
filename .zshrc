@@ -72,6 +72,8 @@ else
     start_agent;
 fi
 
+source ~/packages/fzf-git/fzf-git.sh
+
 # ------------ ALIASES ------------ #
 
 # BASIC SHELL STUFF
@@ -349,4 +351,3 @@ unset __conda_setup
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 nvm use node
-
