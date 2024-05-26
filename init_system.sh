@@ -31,8 +31,8 @@ echo "-"
 echo "#######################"
 echo "# Installing fonts... #"
 echo "#######################"
-sudo pacman -Syu --noconfirm noto-fonts-cjk wqy-zenhei otf-ipaexfont ttf-bakmuk
-paru -Syu --noconfirm noto-fonts-emoji adobe-source-han-sans-cn-fonts
+sudo pacman -Syu --noconfirm noto-fonts-cjk wqy-zenhei otf-ipaexfont ttf-bakmuk ttf-iosevka
+paru -Syu --noconfirm noto-fonts-emoji adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts
 
 # paru deps
 echo "-"
@@ -41,7 +41,7 @@ echo "-"
 echo "###############################"
 echo "# Installing deps from AUR... #"
 echo "###############################"
-paru -Syu --noconfirm ttf-iosevka diodon neovim-git
+paru -Syu --noconfirm diodon neovim-git
 
 echo "-"
 echo "-"

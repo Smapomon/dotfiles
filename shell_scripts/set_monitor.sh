@@ -6,6 +6,3 @@ echo "monitor 2 set..."
 xrandr --output DP-4 --mode 2560x1440 --rate 165.00 --left-of DP-0
 echo "monitor 3 set..."
 
-# not using nitrogen for now
-#nitrogen --restore
-#echo "restored wallpapers..."
