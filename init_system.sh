@@ -2,6 +2,9 @@
 echo "To run give sudo permissions..."
 sudo echo "Permissions recieved..."
 
+# Install Git as it will be needed for many tools
+sudo pacman -Syu --noconfirm git
+
 # check for paru installation
 if [ -d ~/packages/paru ]; then
 	echo "Paru already installed"
@@ -13,6 +16,7 @@ else
 	git clone https://aur.archlinux.org/paru.git
 	cd paru
 	makepkg -si
+  cd ~
 fi
 
 # install basic deps
@@ -81,6 +85,7 @@ rm -rf rainbow
 rm -rf steamburn
 rm -rf vertex
 
+# make the template config the one in use for now
 cd ..
 cp rc.lua.template rc.lua
 

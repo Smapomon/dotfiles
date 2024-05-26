@@ -50,102 +50,44 @@ Instructions for this can be seen when creating a new empty repo in github for e
 
 
 ## Software/Tools
-### Pacman:
-```
-[
-  1password, arandr, awesome, bat, bluez, bluez-utils, brave-beta-bin, diodon,
-  discord-ptb, docker, docker-compose, ferdium-bin, git, gnome-keyring, i3lock,
-  imagemagick, man-db, man-pages, neofetch, neovim, nitrogen, obs-studio, openvpn,
-  paru, pavucontrol, picom-jonaburg-git, qbittorrent, rbenv, ripgrep, rofi, scrot, slack-desktop,
-  solaar, spotify, the_silver_searcher, vlc, xclip, zsh
-]
-```
-
-arandr:              GUI for handling some of the xrandr screen stuff
-
-bat:                 cat but better
-
-bluez:               bluetooth stuff
-
-diodon:              clipboard manager (history)
-
-ferdium-bin:         whatsapp
-
-neofetch:            show pretty system info on shell startup
-
-neovim:              text editor weapon of choice
-
-nitrogen:            manage wallpapers
-
-paru:                AUR helpers
-
-pavucontrol:         control sound
-
-picom-jonaburg-git:  compositor for transparency, and blur
-
-ripgrep:             very fast search
-
-rofi:                search and open task switcher
-
-scrot:               screenshot snipping
-
-solaar:              for monitoring logitech devices
-
-the_silver_searcher: more search stuff
 
 ## Setup
-### Things to install:
-To get a minimal working setup (with sensible additions), install the following:
+Make sure that your Arch installation is up-to-date and Git is installed.
+```console
+sudo pacman -Syu
+sudo pacman -Sy git
 ```
-paru (https://github.com/Morganamilo/paru)
-alsa-utils
-nice (https://github.com/mut-ex/awesome-wm-nice)
-awesomewm-copycat (https://github.com/lcpz/awesome-copycats)
-picom
-kitty
-zsh
-oh-my-zsh
-powerlevel10k
-awesome-git (paru)
-nvm
-neovim
-paq (https://github.com/savq/paq-nvim)
-zsh-autosuggestions (https://github.com/zsh-users/zsh-autosuggestions)
-zsh-syntax-highlight (https://github.com/zsh-users/zsh-syntax-highlighting)
-playerctl (for media keys)
-ripgrep
-the_silver_searcher
-pavucontrol
-rofi
-diodon (paru)
-scrot
-i3lock
-maim
-xclip
-fd (find replacement)
-libfido2 (for yubikey ssh auth)
 
-# fonts for terminal, emoji and supporting different languages
-ttf-iosevka (paru)
-noto-fonts-cjk (east asian languages)
-wqy-zenhei (chinese)
-otf-ipaexfont (japanese)
-ttf-baekmuk (korean)
 
-# for laptop or other devices with displaylink hubs
-linux-headers
-evdi-git (paru)
-displaylink (paru & remember to check archwiki for enabling and config)
+Run `init_system.sh` to get minimal dependencies with some sensible additions
 
-# for docker development
-docker (remember to enable+start docker.service)
-docker-compose
 
-```
+Current setup:
+- Chinese, Japanese, and Korean fonts in additions to basic latin letters
+- Audio controls which are setup with AwesomeWM bindings
+- Paru as the AUR helper
+- kitty as the default terminal
+- Rofi as the application switcher
+- Diodon as the clipboard manager
+- neovim-git version
+- awesomewm-git version is used with slightly modified dremora theme
+- brave-beta-bin is the default browser
+- ZSH with some plugins, and powerlevel10k theme
+
+After running setup script, create a new ssh key for github, and set it up for use.
+
+
+Run the commands in `Importing dotfiles to system` section, but you can skip the submodules command since it's not used currently.
+
 
 After installing everything reset configs to remote main with:
 `dgit reset --hard origin/main`
 
 
 ## TODO
-- add shell script for installing dependencies
+- git installation to init script
+- script for github setup
+- script for dotfiles init
+- script for neovim setup
+- wallpapers setup script
+
