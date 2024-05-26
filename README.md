@@ -91,3 +91,11 @@ After installing everything reset configs to remote main with:
 - script for neovim setup
 - wallpapers setup script
 
+## Troubleshooting
+
+### AWESOMEWM
+Bad argument #1 to 'registerlock' (userdata expected, got nil)
+gdk 3 & 4 do not play nice together change if you are using nice window decorations find gdk require from nice files and change it:
+
+--local gdk = lgi.require('Gdk')
+local gdk = lgi.require('Gdk', '3.0')
