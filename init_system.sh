@@ -26,7 +26,7 @@ echo "-"
 echo "####################################"
 echo "# Installing basic dependencies... #"
 echo "####################################"
-sudo pacman -Syu --noconfirm alsa-utils picom kitty playerctl ripgrep the_silver_searcher pavucontrol rofi scrot i3lock maim xclip fd libfido2
+sudo pacman -Sy --noconfirm alsa-utils picom kitty playerctl ripgrep the_silver_searcher pavucontrol rofi scrot i3lock maim xclip fd libfido2
 
 # install fonts
 echo "-"
@@ -35,8 +35,8 @@ echo "-"
 echo "#######################"
 echo "# Installing fonts... #"
 echo "#######################"
-sudo pacman -Syu --noconfirm noto-fonts-cjk wqy-zenhei otf-ipaexfont ttf-bakmuk ttf-iosevka
-paru -Syu --noconfirm noto-fonts-emoji adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts ttf-droid
+sudo pacman -Sy --noconfirm noto-fonts-cjk wqy-zenhei otf-ipaexfont ttf-bakmuk ttf-iosevka
+paru -Sy --noconfirm noto-fonts-emoji adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts ttf-droid
 
 # paru deps
 echo "-"
@@ -45,7 +45,7 @@ echo "-"
 echo "###############################"
 echo "# Installing deps from AUR... #"
 echo "###############################"
-paru -Syu --noconfirm diodon neovim-git fzf
+paru -Sy --noconfirm diodon neovim-git fzf
 
 echo "-"
 echo "-"
@@ -60,7 +60,7 @@ echo "-"
 echo "########################################"
 echo "# Changing AwesomeWM to git version... #"
 echo "########################################"
-paru -Syu awesome-git
+paru -Sy awesome-git
 cd ~
 
 # install nice window decorators
@@ -92,15 +92,46 @@ cp rc.lua.template rc.lua
 cd ~
 
 # Install theme deps
-sudo pacman -Syu --noconfirm amixer dmenu librewolf mpc mpd scrot unclutter xbacklight xsel slock rofi
+sudo pacman -Sy --noconfirm amixer dmenu librewolf mpc mpd scrot unclutter xbacklight xsel slock rofi
 
-# Install more stuff
-paru -Syu --noconfirm brave-beta-bin deno
-sudo pacman -Syu --noconfirm zsh
-paru -Syu --noconfirm neofetch rbenv nvm
-paru -Syu --noconfirm discord-ptb bat man-db man-pages openvpn slack-desktop solaar vlc nemo nemo-preview
-paru -Syu --noconfirm exa ttf-firacode-nerd xorg-xinput
+echo "-"
+echo "-"
+echo "-"
+echo "################################"
+echo "# Installing tools and apps... #"
+echo "################################"
+paru -Sy --noconfirm brave-beta-bin deno
+sudo pacman -Sy --noconfirm zsh
+paru -Sy --noconfirm neofetch rbenv nvm
+paru -Sy --noconfirm discord-ptb bat man-db man-pages openvpn slack-desktop solaar vlc nemo nemo-preview
+paru -Sy --noconfirm exa ttf-firacode-nerd xorg-xinput
 
+echo "-"
+echo "-"
+echo "-"
+echo "########################"
+echo "# Installing docker... #"
+echo "########################"
+paru -Sy --noconfirm docker docker-compose
+sudo systemctl --now enable docker.service
+sudo groupadd docker
+sudo usermod -aG docker $USER
+
+echo "-"
+echo "-"
+echo "-"
+echo "###############################"
+echo "# Full update just in case... #"
+echo "###############################"
+paru -Syu
+
+
+echo "-"
+echo "-"
+echo "-"
+echo "#####################"
+echo "# Installing ZSH... #"
+echo "#####################"
 cd ~/packages
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
