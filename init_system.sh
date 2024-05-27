@@ -45,7 +45,7 @@ echo "-"
 echo "###############################"
 echo "# Installing deps from AUR... #"
 echo "###############################"
-paru -Syu --noconfirm diodon neovim-git
+paru -Syu --noconfirm diodon neovim-git fzf
 
 echo "-"
 echo "-"
