@@ -83,6 +83,21 @@ Run the commands in `Importing dotfiles to system` section, but you can skip the
 After installing everything reset configs to remote main with:
 `dgit reset --hard origin/main`
 
+create the file: "/etc/rofi.rasi" with the following:
+
+```console
+configuration {
+    kb-row-up: "Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab";
+    kb-row-down: "Down,Control+j";
+    kb-accept-entry: "Control+m,Return,KP_Enter";
+    terminal: "mate-terminal";
+    kb-remove-to-eol: "Control+Shift+e";
+    /*kb-mode-next: "Shift+Right,Control+Tab,Control+l";*/
+    kb-mode-previous: "Shift+Left,Control+Shift+Tab,Control+h";
+    kb-remove-char-back: "BackSpace";
+}
+```
+
 
 ## TODO
 - git installation to init script
