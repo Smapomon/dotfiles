@@ -75,7 +75,7 @@ else
     start_agent;
 fi
 
-source ~/packages/fzf-git/fzf-git.sh
+#source ~/packages/fzf-git/fzf-git.sh
 
 # ------------ ALIASES ------------ #
 
