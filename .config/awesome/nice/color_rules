@@ -1,8 +1,9 @@
 return {
 -- Table: {1}
 {
-   ["Navigator"]="#ebebebff",
-   ["discord"]="#141015",
    ["brave-browser"]="#2b373dff",
+   ["Navigator"]="#ebebebff",
+   ["gnome-calculator"]="#ffffffff",
+   ["discord"]="#141015",
 },
 }

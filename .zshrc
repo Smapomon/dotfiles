@@ -96,6 +96,7 @@ alias set_mouse="~/shell_scripts/set_mouse.sh"
 #alias print_disks="lsblk -e7,254 -A -o NAME,FSTYPE,LABEL,MOUNTPOINT,FSUSE%,FSSIZE | grep -v 'nvme1n1.*\|nvme0n1p3.*\|nvme0n1p4.*'"
 alias print_disks="lsblk -e 254 -A -o NAME,FSTYPE,LABEL,MOUNTPOINT,FSUSE%,FSSIZE"
 alias ip='ip -c'
+alias chown_all='sudo chown -R $USER:$USER *'
 
 # GIT ALIASES
 alias c_branch="git branch --show-current | tr -d '\n' | xclip -selection clipboard"
@@ -302,7 +303,7 @@ export PATH="$HOME/dev/android_studio/android-studio-2021.3.1.16-linux/android-s
 export PATH="/usr/java/jre1.8.0_341/bin:$PATH"
 alias luamake=/luamake
 export PATH="${HOME}/lsp_servers/lua-language-server/bin:${PATH}"
-export PATH=/usr/bin/aws_completer:$PATH
+export PATH=/usr/local/bin/aws_completer:$PATH
 
 ##### XDG DIR CHANGES #####
 export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME"/aws/credentials
@@ -330,7 +331,7 @@ PERL_MM_OPT="INSTALL_BASE=/home/smapo/perl5"; export PERL_MM_OPT;
 
 autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
-complete -C '/usr/bin/aws_completer' aws
+complete -C '/usr/local/bin/aws_completer' aws
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
