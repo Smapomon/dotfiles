@@ -84,7 +84,7 @@ alias cdf="cd \$(fd --type d --hidden --follow | fzf --color --scheme=path) && f
 alias ls="exa --long --header --icons --color=always --group-directories-first"
 alias files="clear;ls -lh"
 alias s="kitty +kitten ssh"
-alias icat="kitty +kitten icat"
+alias icat="wezterm imgcat"
 alias update_kitty="curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin"
 alias termconf="cd ~; clear; nvim .zshrc"
 alias :q="exit"
