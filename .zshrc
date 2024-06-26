@@ -1,3 +1,4 @@
+fastfetch
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -117,8 +118,6 @@ alias sptla="cd ~/dev/work/spotilla-be; clear; ls -lh"
 alias get_perm="cd ~/dev/work/perms; clear; ls -lh"
 alias vimconf="cd ~/.config/nvim; clear; files; nvim init.lua"
 alias wmconf="cd ~/.config/awesome; clear; files; nvim rc.lua"
-alias kittyconf="cd ~/.config/kitty; clear; files; nvim kitty.conf"
-alias start_vpn="cd /usr/local/bin; clear; sudo sh goodaccess.sh -r smapo-linukka"
 
 # NAVIGATE WINDOW CLIENTS
 alias fuzzy_win='wmctrl -i -a $(wmctrl -l | fzf | cut -d\  -f1); exit'
@@ -319,9 +318,6 @@ export RBENV_ROOT="$XDG_DATA_HOME"/rbenv
 export SOLARGRAPH_CACHE="$XDG_CACHE_HOME"/solargraph
 alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 ##### XDG DIR CHANGES #####
-
-
-neofetch
 
 PATH="/home/smapo/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="/home/smapo/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
