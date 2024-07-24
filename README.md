@@ -66,7 +66,7 @@ Current setup:
 - Chinese, Japanese, and Korean fonts in additions to basic latin letters
 - Audio controls which are setup with AwesomeWM bindings
 - Paru as the AUR helper
-- kitty as the default terminal
+- wezterm as the default terminal
 - Rofi as the application switcher
 - Diodon as the clipboard manager
 - neovim-git version

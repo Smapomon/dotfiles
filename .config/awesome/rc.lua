@@ -837,7 +837,7 @@ awful.rules.rules = {
     },
 
     {
-        rule       = { class     = "Terminator", "kitty" },
+        rule       = { class     = "Terminator" },
         properties = { maximized = false }
     },
 
@@ -852,10 +852,7 @@ awful.rules.rules = {
             -- Add classes that should not sticky
             -- might be best to just make client open function
             -- for this eventually since stickyness is cancer
-            class = {
-                "Terminator",
-                "kitty"
-            }
+            class = { "Terminator" }
         },
         properties = { sticky = false }
     },

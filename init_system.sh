@@ -26,7 +26,7 @@ echo "-"
 echo "####################################"
 echo "# Installing basic dependencies... #"
 echo "####################################"
-sudo pacman -Sy --noconfirm alsa-utils picom kitty playerctl ripgrep the_silver_searcher pavucontrol rofi scrot i3lock maim xclip fd libfido2
+sudo pacman -Sy --noconfirm alsa-utils picom wezterm playerctl ripgrep the_silver_searcher pavucontrol rofi scrot i3lock maim xclip fd libfido2
 
 # install fonts
 echo "-"
