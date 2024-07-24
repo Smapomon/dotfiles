@@ -2,7 +2,6 @@ nohup ferdium &
 nohup slack &
 nohup discord-ptb &
 nohup solaar &
-nohup diodon &
-nohup fcitx5
+nohup diodon
 echo "Apps started..."
 
