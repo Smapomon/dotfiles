@@ -91,8 +91,8 @@ theme.wallpaper = function(s)
   local wallpapers = {
     --"/home/vim_muumi/wallpapers/Trump-Wrong-1024.png",
     "/home/vim_muumi/wallpapers/Duckful (2).png",
+    "/home/vim_muumi/wallpapers/Duckful (2).png",
     "/home/vim_muumi/wallpapers/reckful-everland.jpg",
-    "/home/vim_muumi/wallpapers/byron-last-wave-dark.jpg",
   }
 
   return wallpapers[s.index]

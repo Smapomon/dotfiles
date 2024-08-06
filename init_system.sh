@@ -93,6 +93,10 @@ cd ~
 
 # Install theme deps
 sudo pacman -Sy --noconfirm amixer dmenu librewolf mpc mpd scrot unclutter xbacklight xsel slock rofi
+sudo pacman -Sy --noconfirm lxappearance-gtk3 arc-gtk-theme
+paru -Sy --noconfirm gtk2_prefs
+paru -Sy --noconfirm bibata-cursor-theme-bin
+ln --symbolic /usr/share/icons/Bibata-Original-Ice ~/.local/share/icons/default
 
 echo "-"
 echo "-"
