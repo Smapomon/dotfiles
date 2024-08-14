@@ -1,5 +1,6 @@
 local wezterm = require 'wezterm'
 local config  = wezterm.config_builder()
+local act     = wezterm.action
 
 -- STYLE
 config.font                         = wezterm.font 'Iosevka'
@@ -34,6 +35,13 @@ config.colors = {
       italic = true,
     },
   },
+}
+
+-- KEY BINDS
+config.keys = {
+  { key = 'k', mods = 'CTRL|SHIFT',   action = act.ScrollByLine(-1) },
+  { key = 'j', mods = 'CTRL|SHIFT',   action = act.ScrollByLine(1) },
+  { key = 'Tab', mods = 'CTRL|SHIFT', action = act.ShowTabNavigator },
 }
 
 return config
