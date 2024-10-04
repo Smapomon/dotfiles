@@ -26,4 +26,5 @@ tmp/db/*
 **/.cache/mozilla/*
 **/Brave-Browser/Default/*
 **/share/rbenv/versions/*/lib/*
+**/src-tauri/target/debug/*
 

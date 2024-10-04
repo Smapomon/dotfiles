@@ -1,8 +1,11 @@
-xrandr --output DP-2 --primary
-xrandr --output DP-2 --mode 3440x1440 --rate 165.00 --right-of DP-0
+MONITOR_LEFT=DP-4
+MONITOR_MIDDLE=DP-2
+MONITOR_RIGHT=DP-0
+xrandr --output $MONITOR_MIDDLE --primary
+xrandr --output $MONITOR_MIDDLE --mode 3440x1440 --rate 165.00 --right-of $MONITOR_RIGHT
 echo "monitor 1 set..."
-xrandr --output DP-0 --mode 2560x1440 --rate 165.00 --right-of DP-2
+xrandr --output $MONITOR_RIGHT --mode 2560x1440 --rate 165.00 --right-of $MONITOR_MIDDLE
 echo "monitor 2 set..."
-xrandr --output DP-4 --mode 2560x1440 --rate 165.00 --left-of DP-2
+xrandr --output $MONITOR_LEFT --mode 2560x1440 --rate 165.00 --left-of $MONITOR_MIDDLE
 echo "monitor 3 set..."
 

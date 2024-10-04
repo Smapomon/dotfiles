@@ -351,3 +351,13 @@ unset __conda_setup
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 nvm use node
+
+# pnpm
+export PNPM_HOME="/home/vim_muumi/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+WEBKIT_DISABLE_DMABUF_RENDERER=1

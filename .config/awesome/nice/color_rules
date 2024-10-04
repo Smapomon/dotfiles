@@ -1,10 +1,12 @@
 return {
 -- Table: {1}
 {
-   ["discord"]="#141015",
-   ["brave-browser-beta"]="#2b373dff",
-   ["gnome-calculator"]="#ffffffff",
+   ["slack"]="#212428",
    ["brave-browser"]="#2b373dff",
    ["Navigator"]="#ebebebff",
+   ["discord"]="#141015",
+   ["bytm"]="#efefefff",
+   ["brave-browser-beta"]="#2b373dff",
+   ["gnome-calculator"]="#ffffffff",
 },
 }

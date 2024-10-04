@@ -17,8 +17,8 @@ for s in screen do
 end
 
 if monitor_count == 3 then
-  monitor_left  = 2
-  monitor_right = 3
+  monitor_left  = 3
+  monitor_right = 2
 end
 
 local user_home = 'vim_muumi'
