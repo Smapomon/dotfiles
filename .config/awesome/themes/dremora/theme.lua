@@ -15,6 +15,24 @@ local os = os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 local theme                                     = {}
+
+-- MONITOR ORDER (number is index)
+local monitor_left   = 2
+local monitor_center = 1
+local monitor_right  = 3
+
+theme.wallpaper = function(s)
+  -- get wp based on screen index
+  local wallpapers = {
+    --"/home/vim_muumi/wallpapers/Trump-Wrong-1024.png",
+    "/home/vim_muumi/wallpapers/Duckful (2).png",
+    "/home/vim_muumi/wallpapers/Duckful (2).png",
+    "/home/vim_muumi/wallpapers/reckful-everland.jpg",
+  }
+
+  return wallpapers[s.index]
+end
+
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/dremora"
 theme.font                                      = "FuraCode Nerd Font 10.5"
 theme.taglist_font                              = "FuraCode Nerd Font"
@@ -79,25 +97,6 @@ theme.titlebar_maximized_button_focus_active    = theme.dir .. "/icons/titlebar/
 theme.titlebar_maximized_button_normal_active   = theme.dir .. "/icons/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_inactive  = theme.dir .. "/icons/titlebar/maximized_focus_inactive.png"
 theme.titlebar_maximized_button_normal_inactive = theme.dir .. "/icons/titlebar/maximized_normal_inactive.png"
-
-
--- MONITOR ORDER (number is index)
-local monitor_left   = 3
-local monitor_center = 1
-local monitor_right  = 2
-
-theme.wallpaper = function(s)
-  -- get wp based on screen index
-  local wallpapers = {
-    --"/home/vim_muumi/wallpapers/Trump-Wrong-1024.png",
-    "/home/vim_muumi/wallpapers/Duckful (2).png",
-    "/home/vim_muumi/wallpapers/Duckful (2).png",
-    "/home/vim_muumi/wallpapers/reckful-everland.jpg",
-  }
-
-  return wallpapers[s.index]
-end
-
 
 awful.util.tagnames   = { "ƀ", "Ƅ", "Ɗ", "ƈ", "ƙ" }
 

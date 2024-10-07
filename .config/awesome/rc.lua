@@ -17,8 +17,8 @@ for s in screen do
 end
 
 if monitor_count == 3 then
-  monitor_left  = 3
-  monitor_right = 2
+  monitor_left  = 2
+  monitor_right = 3
 end
 
 local user_home = 'vim_muumi'
@@ -127,7 +127,7 @@ local terminal     = "wezterm"
 local vi_focus     = false -- vi-like client focus https://github.com/lcpz/awesome-copycats/issues/275
 local cycle_prev   = true  -- cycle with only the previously focused client or all https://github.com/lcpz/awesome-copycats/issues/274
 local editor       = os.getenv("EDITOR") or "nvim"
-local browser      = "Brave-browser"
+local browser      = "Brave-browser-beta"
 
 awful.util.terminal = terminal
 awful.util.tagnames = { "1", "2", "3", "4", "5" }
@@ -864,6 +864,7 @@ awful.rules.rules = {
             class = {
                 "Google-chrome",
                 "Brave-browser",
+                "Brave-browser-beta",
                 "Spotify"
             }
         },
@@ -873,24 +874,25 @@ awful.rules.rules = {
 
     -- Set apps to always map on the correct tag on the correct screen
     {
-        rule = { class = "Spotify" },
-        properties = { screen = monitor_left, tag = "MUSIC" }
+      rule_any = {
+        class = {
+          "Spotify",
+          "Ferdium"
+        }
+      },
+      properties = { screen = monitor_left, tag = "MUSIC" }
     },
 
     {
-        rule = { class = "Ferdium" },
-        properties = { screen = monitor_left, tag = "MUSIC" }
+      rule_any = {
+        class = {
+          "Brave-browser",
+          "Brave-browser-beta",
+          "discord"
+        }
+      },
+      properties = { screen = monitor_right, tag = "WEB & CHAT" }
     },
-
-    {
-        rule = { class = "Brave-browser" },
-        properties = { screen = monitor_right, tags = {"WEB & CHAT"} }
-    },
-
-    {
-        rule = { class = "discord" },
-        properties = { screen = monitor_right, tags = {"WEB & CHAT"} }
-    }
 }
 
 -- }}}
