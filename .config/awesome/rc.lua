@@ -448,7 +448,7 @@ globalkeys = mytable.join(
     awful.key({ modkey, "Control" }, "Down",     function () awful.client.incwfact(0.05) end,
               {description = "decrease the number of master clients", group = "layout"}),
     awful.key({ altkey, "Control" }, "space",     function ()
-      awful.screen.focused().selected_tag.master_width_factor = 0.75
+      awful.screen.focused().selected_tag.master_width_factor = 0.70
     end, {description = "set master col size", group = "layout"}),
 
 
@@ -886,8 +886,6 @@ awful.rules.rules = {
     {
       rule_any = {
         class = {
-          "Brave-browser",
-          "Brave-browser-beta",
           "discord"
         }
       },
