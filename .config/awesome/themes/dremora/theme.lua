@@ -17,8 +17,9 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 local theme                                     = {}
 
 -- MONITOR ORDER (number is index)
-local monitor_left   = 2
 local monitor_center = 1
+
+local monitor_left   = 2
 local monitor_right  = 3
 
 theme.wallpaper = function(s)

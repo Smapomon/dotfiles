@@ -16,6 +16,15 @@ for s in screen do
   monitor_count = monitor_count + 1
 end
 
+local app_direction   = "right"
+local direction_right = 1
+local direction_left  = -1
+
+if app_direction == "right" then
+  direction_right = -1
+  direction_left  = 1
+end
+
 if monitor_count == 3 then
   monitor_left  = 2
   monitor_right = 3
@@ -625,19 +634,19 @@ clientkeys = mytable.join(
             c:raise()
         end,
         {description = "toggle fullscreen", group = "client"}),
-    awful.key({ modkey, "Control"   }, "c",      function (c) c:kill()                       end,
+    awful.key({ modkey, "Control"   }, "c",      function (c) c:kill()                                       end,
               {description = "close", group = "client"}),
-    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
+    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle,
               {description = "toggle floating", group = "client"}),
-    awful.key({ modkey, }, "space",  function (c) awful.titlebar.toggle(c)               end,
+    awful.key({ modkey, }, "space",  function (c) awful.titlebar.toggle(c)                                   end,
               {description = "toggle floating", group = "client"}),
-    awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
+    awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster())                 end,
               {description = "move to master", group = "client"}),
-    awful.key({ modkey,           }, "o",      function (c) c:move_to_screen(c.screen.index-1)             end,
+    awful.key({ modkey,           }, "o",      function (c) c:move_to_screen(c.screen.index+direction_right) end,
               {description = "move to screen", group = "client"}),
-    awful.key({ modkey, "Shift"   }, "o",      function (c) c:move_to_screen(c.screen.index+1)             end,
+    awful.key({ modkey, "Shift"   }, "o",      function (c) c:move_to_screen(c.screen.index+direction_left)  end,
               {description = "move to screen", group = "client"}),
-    awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
+    awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop                            end,
               {description = "toggle keep on top", group = "client"}),
     awful.key({ modkey,           }, "n",
         function (c)

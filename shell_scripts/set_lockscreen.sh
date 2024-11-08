@@ -11,6 +11,5 @@ convert $TMPBG \
 	-pointsize 25 -gravity North -background Orange -splice 0x32 -annotate -300+2 "System Locked..." \
 	$TMPBG
 
-i3lock -i $TMPBG \
-	& sleep 5 && xset dpms force off
+i3lock -i $TMPBG & sleep 5
 

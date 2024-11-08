@@ -108,6 +108,7 @@ alias gco="_fuzzy_branches"
 
 # ARCH SPECIFIC ALIASES
 alias paru_updates="paru -Qu"
+alias paru_fzf="paru -Sy \$(paru -Qu | fzf | cut -d \" \" -f 1)"
 alias discord_update_skip="cd ~/.config/discordptb; clear; ls -alh; nvim settings.json"
 
 # NAVIGATION ALIASES
