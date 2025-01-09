@@ -11,7 +11,7 @@ if [[ -z "$mouse_one" ]]; then
   echo "--> G Pro not found..."
 else
   echo "--> G Pro found..."
-  for mouse in $mouse_one; do echo -e "\t--> G Pro with id: $mouse"; xinput set-prop $mouse "libinput Accel Speed" -0.9; done
+  for mouse in $mouse_one; do echo -e "\t--> G Pro with id: $mouse"; xinput set-prop $mouse "libinput Accel Speed" -1; done
 fi
 if [[ -z "$mouse_two" ]]; then
   echo "--> MX Master 3 not found..."

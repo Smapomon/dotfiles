@@ -84,9 +84,7 @@ fi
 alias cdf="cd \$(fd --type d --hidden --follow | fzf --color --scheme=path) && files"
 alias ls="exa --long --header --icons --color=always --group-directories-first"
 alias files="clear;ls -lh"
-alias s="kitty +kitten ssh"
 alias icat="wezterm imgcat"
-alias update_kitty="curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin"
 alias termconf="cd ~; clear; nvim .zshrc"
 alias :q="exit"
 alias :qa="exit"
@@ -120,9 +118,6 @@ alias get_perm="cd ~/dev/work/perms; clear; ls -lh"
 alias vimconf="cd ~/.config/nvim; clear; files; nvim init.lua"
 alias wmconf="cd ~/.config/awesome; clear; files; nvim rc.lua"
 
-# NAVIGATE WINDOW CLIENTS
-alias fuzzy_win='wmctrl -i -a $(wmctrl -l | fzf | cut -d\  -f1); exit'
-
 # SPTLA FUNCTIONS
 alias specmigrate="docker compose run be rake db:migrate RAILS_ENV=test"
 alias dspec="docker compose run be rspec ./spec/$1"
@@ -130,7 +125,7 @@ alias dspec_all="docker compose run be rspec ./spec"
 alias jarru="clear; docker compose run be brakeman -A -z -I"
 
 # DOCKER FUNCTIONS
-alias dcup="clear; rm tmp/pids/server.pid; docker compose up"
+alias dcup="clear; rm tmp/pids/server.pid; docker compose up --remove-orphans"
 alias dc_debug="clear; rm tmp/pids/server.pid; docker compose run --service-ports be"
 alias dbld="clear; docker compose build"
 alias docker_start="sudo systemctl start docker.service"
@@ -150,8 +145,14 @@ alias dbundle_install="install_with_bundle"
 
 
 # File operations
-alias ytdl="yt-dlp -o '%(title)s.%(ext)s' "
 alias lines_of_code="cloc ."
+
+# most of the time it's better to just use the yt-dlp directly since
+# it needs to be run from python venv
+# `python -m venv ytenv`
+# `ytenv/bin/pip install yt-dlp`
+# `ytenv/bin/yt-dlp -o '%(title)s.%(ext)s' URL`
+alias ytdl="yt-dlp -o '%(title)s.%(ext)s' "
 
 
 # ------------ ALIAS FUNCTIONS ------------ #
@@ -296,8 +297,6 @@ function install_with_bundle() {
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-export PATH="$HOME/.local/kitty.app/bin:$PATH"
 
 export PATH="$HOME/dev/android_studio/android-studio-2021.3.1.16-linux/android-studio/bin:$PATH"
 export PATH="/usr/java/jre1.8.0_341/bin:$PATH"
