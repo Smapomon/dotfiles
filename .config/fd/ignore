@@ -27,4 +27,6 @@ tmp/db/*
 **/Brave-Browser/Default/*
 **/share/rbenv/versions/*/lib/*
 **/src-tauri/target/debug/*
+.dart_tool/flutter_build/*
+build/linux/x64/debug/bundle/*
 

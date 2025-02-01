@@ -584,17 +584,8 @@ globalkeys = mytable.join(
     awful.key({ modkey }, "q", function () awful.spawn(browser) end,
               {description = "run browser", group = "launcher"}),
 
-    -- Default
-    --awful.key({ modkey }, "p", function() menubar.show() end,
-              --{description = "show the menubar", group = "launcher"}),
-    -- dmenu
-    --awful.key({ modkey }, "space", function ()
-            --awful.util.spawn_with_shell("~/shell_scripts/fuzzy_win")
-        --end,
-        --{description = "show dmenu", group = "launcher"}),
-    -- alternatively use rofi, a dmenu-like application with more features
-    -- check https://github.com/DaveDavenport/rofi for more details
     -- rofi
+    -- check https://github.com/DaveDavenport/rofi for more details
     awful.key({ modkey }, "p", function ()
             awful.screen.focus(monitor_center)
             os.execute(string.format('rofi -combi-modi window,drun,ssh -theme solarized -font "hack 10" -show combi -icon-theme "Papirus" -show-icons',

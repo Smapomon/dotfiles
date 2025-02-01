@@ -117,6 +117,7 @@ alias sptla="cd ~/dev/work/spotilla-be; clear; ls -lh"
 alias get_perm="cd ~/dev/work/perms; clear; ls -lh"
 alias vimconf="cd ~/.config/nvim; clear; files; nvim init.lua"
 alias wmconf="cd ~/.config/awesome; clear; files; nvim rc.lua"
+alias pit="cd ~/dev/github/privateInvestmentTracker; clear; files;"
 
 # SPTLA FUNCTIONS
 alias specmigrate="docker compose run be rake db:migrate RAILS_ENV=test"
@@ -304,6 +305,9 @@ alias luamake=/luamake
 export PATH="${HOME}/lsp_servers/lua-language-server/bin:${PATH}"
 export PATH=/usr/local/bin/aws_completer:$PATH
 
+export ANDROID_SDK_ROOT="/home/vim_muumi/Android/Sdk"
+export ANDROID_HOME="/home/vim_muumi/Android/Sdk"
+
 ##### XDG DIR CHANGES #####
 export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME"/aws/credentials
 export AWS_CONFIG_FILE="$XDG_CONFIG_HOME"/aws/config
@@ -319,11 +323,11 @@ export SOLARGRAPH_CACHE="$XDG_CACHE_HOME"/solargraph
 alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 ##### XDG DIR CHANGES #####
 
-PATH="/home/smapo/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/home/smapo/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/smapo/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/smapo/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/smapo/perl5"; export PERL_MM_OPT;
+PATH="/home/vim_muumi//perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/vim_muumi/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/vim_muumi/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/vim_muumi/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/vim_muumi/perl5"; export PERL_MM_OPT;
 
 autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
@@ -331,6 +335,50 @@ complete -C '/usr/local/bin/aws_completer' aws
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
+
+###-begin-flutter-completion-###
+if type complete &>/dev/null; then
+  __flutter_completion() {
+    local si="$IFS"
+    IFS=$'\n' COMPREPLY=($(COMP_CWORD="$COMP_CWORD" \
+                           COMP_LINE="$COMP_LINE" \
+                           COMP_POINT="$COMP_POINT" \
+                           flutter completion -- "${COMP_WORDS[@]}" \
+                           2>/dev/null)) || return $?
+    IFS="$si"
+  }
+  complete -F __flutter_completion flutter
+elif type compdef &>/dev/null; then
+  __flutter_completion() {
+    si=$IFS
+    compadd -- $(COMP_CWORD=$((CURRENT-1)) \
+                 COMP_LINE=$BUFFER \
+                 COMP_POINT=0 \
+                 flutter completion -- "${words[@]}" \
+                 2>/dev/null)
+    IFS=$si
+  }
+  compdef __flutter_completion flutter
+elif type compctl &>/dev/null; then
+  __flutter_completion() {
+    local cword line point words si
+    read -Ac words
+    read -cn cword
+    let cword-=1
+    read -l line
+    read -ln point
+    si="$IFS"
+    IFS=$'\n' reply=($(COMP_CWORD="$cword" \
+                       COMP_LINE="$line" \
+                       COMP_POINT="$point" \
+                       flutter completion -- "${words[@]}" \
+                       2>/dev/null)) || return $?
+    IFS="$si"
+  }
+  compctl -K __flutter_completion flutter
+fi
+
+###-end-flutter-completion-###
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
