@@ -305,8 +305,8 @@ alias luamake=/luamake
 export PATH="${HOME}/lsp_servers/lua-language-server/bin:${PATH}"
 export PATH=/usr/local/bin/aws_completer:$PATH
 
-export ANDROID_SDK_ROOT="/home/vim_muumi/Android/Sdk"
-export ANDROID_HOME="/home/vim_muumi/Android/Sdk"
+export ANDROID_SDK_ROOT="/home/smapo/Android/Sdk"
+export ANDROID_HOME="/home/smapo/Android/Sdk"
 
 ##### XDG DIR CHANGES #####
 export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME"/aws/credentials
@@ -323,11 +323,11 @@ export SOLARGRAPH_CACHE="$XDG_CACHE_HOME"/solargraph
 alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 ##### XDG DIR CHANGES #####
 
-PATH="/home/vim_muumi//perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/home/vim_muumi/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/vim_muumi/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/vim_muumi/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/vim_muumi/perl5"; export PERL_MM_OPT;
+PATH="/home/smapo//perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/smapo/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/smapo/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/smapo/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/smapo/perl5"; export PERL_MM_OPT;
 
 autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
@@ -401,7 +401,7 @@ eval "$(rbenv init -)"
 nvm use node
 
 # pnpm
-export PNPM_HOME="/home/vim_muumi/.local/share/pnpm"
+export PNPM_HOME="/home/smapo/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;

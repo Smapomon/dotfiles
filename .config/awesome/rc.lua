@@ -30,7 +30,7 @@ if monitor_count == 3 then
   monitor_right = 3
 end
 
-local user_home = 'vim_muumi'
+local user_home = 'smapo'
 
 -- {{{ Required libraries
 

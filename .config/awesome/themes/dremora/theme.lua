@@ -25,10 +25,10 @@ local monitor_right  = 3
 theme.wallpaper = function(s)
   -- get wp based on screen index
   local wallpapers = {
-    --"/home/vim_muumi/wallpapers/Trump-Wrong-1024.png",
-    "/home/vim_muumi/wallpapers/Duckful (2).png",
-    "/home/vim_muumi/wallpapers/Duckful (2).png",
-    "/home/vim_muumi/wallpapers/reckful-everland.jpg",
+    --"/home/smapo/wallpapers/Trump-Wrong-1024.png",
+    "/home/smapo/wallpapers/Duckful (2).png",
+    "/home/smapo/wallpapers/Duckful (2).png",
+    "/home/smapo/wallpapers/reckful-everland.jpg",
   }
 
   return wallpapers[s.index]
@@ -301,7 +301,7 @@ function theme.at_screen_connect(s)
     if(s.index == monitor_left)
     then
         awful.tag.add("MUSIC", {
-            icon               = "/home/vim_muumi/.config/awesome/icons/music.png",
+            icon               = "/home/smapo/.config/awesome/icons/music.png",
             layout             = awful.layout.layouts[1],
             screen             = s,
             selected           = true
@@ -311,14 +311,14 @@ function theme.at_screen_connect(s)
     elseif(s.index == monitor_center)
     then
         awful.tag.add("MAIN", {
-            icon     = "/home/vim_muumi/.config/awesome/icons/home-icon.png",
+            icon     = "/home/smapo/.config/awesome/icons/home-icon.png",
             layout   = awful.layout.layouts[1],
             screen   = s,
             selected = true
         })
 
         awful.tag.add("CODE", {
-            icon   = "/home/vim_muumi/.config/awesome/icons/terminal.png",
+            icon   = "/home/smapo/.config/awesome/icons/terminal.png",
             layout = awful.layout.layouts[1],
             screen = s,
         })
@@ -327,7 +327,7 @@ function theme.at_screen_connect(s)
     elseif(s.index == monitor_right)
     then
         awful.tag.add("WEB & CHAT", {
-            icon   = "/home/vim_muumi/.config/awesome/icons/web-icon.png",
+            icon   = "/home/smapo/.config/awesome/icons/web-icon.png",
             layout = awful.layout.layouts[1],
             screen = s,
             selected = true

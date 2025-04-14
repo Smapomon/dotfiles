@@ -109,7 +109,9 @@ sudo pacman -Sy --noconfirm zsh
 paru -Sy --noconfirm neofetch rbenv nvm
 paru -Sy --noconfirm discord-ptb bat man-db man-pages openvpn slack-desktop solaar vlc nemo nemo-preview
 paru -Sy --noconfirm exa ttf-firacode-nerd xorg-xinput
-paru -Sy --noconfirm ferdium-bin
+paru -Sy --noconfirm ferdium-bin arandr
+
+git clone --depth=1 https://github.com/savq/paq-nvim.git "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/pack/paqs/start/paq-nvim
 
 echo "-"
 echo "-"
