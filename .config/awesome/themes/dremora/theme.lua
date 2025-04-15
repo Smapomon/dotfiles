@@ -272,7 +272,7 @@ theme.volume = lain.widget.alsa({
 
 paru_updates_widget = wibox.widget.textbox()
 function update_package_count()
-  awful.spawn.easy_async_with_shell("paru -Qua | wc -l", function(stdout)
+  awful.spawn.easy_async_with_shell("paru -Qu | wc -l", function(stdout)
     local count = tonumber(stdout) or 0
 
     -- Get current time

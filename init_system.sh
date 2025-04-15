@@ -113,6 +113,19 @@ paru -Sy --noconfirm gtk2_prefs
 paru -Sy --noconfirm bibata-cursor-theme-bin
 ln --symbolic /usr/share/icons/Bibata-Original-Ice ~/.local/share/icons/default
 
+sudo tee -a /etc/rofi.rasi > /dev/null <<EOT
+configuration {
+    kb-row-up: "Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab";
+    kb-row-down: "Down,Control+j";
+    kb-accept-entry: "Control+m,Return,KP_Enter";
+    terminal: "mate-terminal";
+    kb-remove-to-eol: "Control+Shift+e";
+    /*kb-mode-next: "Shift+Right,Control+Tab,Control+l";*/
+    kb-mode-previous: "Shift+Left,Control+Shift+Tab,Control+h";
+    kb-remove-char-back: "BackSpace";
+}
+EOT
+
 echo "-"
 echo "-"
 echo "-"
