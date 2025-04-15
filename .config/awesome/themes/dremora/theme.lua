@@ -269,14 +269,35 @@ theme.volume = lain.widget.alsa({
     end
 })
 
--- Weather
---[[ to be set before use
-theme.weather = lain.widget.weather({
-    --APPID =
-    city_id = 2643743, -- placeholder (London)
-    notification_preset = { fg = white }
-})
---]]
+
+paru_updates_widget = wibox.widget.textbox()
+function update_package_count()
+  awful.spawn.easy_async_with_shell("paru -Qua | wc -l", function(stdout)
+    local count = tonumber(stdout) or 0
+
+    -- Get current time
+    local time = os.date("%H:%M:%S")  -- You can customize the format
+    local update_time = " (checked: " .. time .. ")"
+
+    paru_updates_widget:set_markup(
+      markup.font(theme.font,
+        markup(gray, ' | ') ..
+        markup(gray, " ") ..
+        markup(gray, count) ..
+        markup(gray, update_time)
+      )
+    )
+  end)
+end
+
+update_package_count()
+
+gears.timer {
+    timeout = 600, -- 10 minutes
+    autostart = true,
+    call_now = true,
+    callback = update_package_count
+}
 
 -- Separators
 local first     = wibox.widget.textbox('<span font="Terminus 4">    </span>')
@@ -430,11 +451,8 @@ function theme.at_screen_connect(s)
             active_app,
             wibox.widget.systray(),
             first,
-            --theme.mpd.widget,
-            --theme.mail.widget,
-            --theme.fs.widget,
-            --theme.volume.bar,
             volume_widget,
+            paru_updates_widget,
             mytextclock,
         },
     }
