@@ -142,6 +142,18 @@ sudo usermod -aG docker $USER
 echo "-"
 echo "-"
 echo "-"
+echo "########################"
+echo "# Switching theme... #"
+echo "########################"
+mkdir -p ~/packages/ && cd ~/packages
+git clone https://github.com/horst3180/arc-theme --depth 1 && cd arc-theme
+./autogen.sh --prefix=/usr
+sudo make install
+cd ~
+
+echo "-"
+echo "-"
+echo "-"
 echo "###############################"
 echo "# Full update just in case... #"
 echo "###############################"
