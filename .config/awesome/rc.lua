@@ -492,7 +492,8 @@ globalkeys = mytable.join(
     --awful.key({ altkey }, "Up",
     awful.key({ }, "XF86AudioRaiseVolume",
         function ()
-            os.execute(string.format("amixer sset %s 1%%+", beautiful.volume.channel))
+            local cmd = "pactl set-sink-volume 0 +1%"
+            os.execute(cmd)
             os.execute("sleep 0.05")
             update_volume(volume_widget)
         end,
@@ -500,7 +501,8 @@ globalkeys = mytable.join(
     --awful.key({ altkey }, "Down",
     awful.key({ }, "XF86AudioLowerVolume",
         function ()
-            os.execute(string.format("amixer sset %s 1%%-", beautiful.volume.channel))
+            local cmd = "pactl set-sink-volume 0 -1%"
+            os.execute(cmd)
             os.execute("sleep 0.05")
             update_volume(volume_widget)
         end,
@@ -508,7 +510,7 @@ globalkeys = mytable.join(
     --awful.key({ altkey }, "m",
     awful.key({ }, "XF86AudioMute",
         function ()
-            os.execute(string.format("amixer sset %s toggle", beautiful.volume.togglechannel or beautiful.volume.channel))
+            os.execute("pactl set-sink-mute 0 toggle")
             os.execute("sleep 0.1")
             update_volume(volume_widget)
         end,
