@@ -26,7 +26,22 @@ echo "-"
 echo "####################################"
 echo "# Installing basic dependencies... #"
 echo "####################################"
-sudo pacman -Sy --noconfirm alsa-utils picom wezterm playerctl ripgrep the_silver_searcher pavucontrol rofi scrot i3lock maim xclip fd libfido2
+sudo pacman -Sy --noconfirm alsa-utils picom wezterm playerctl ripgrep the_silver_searcher pavucontrol rofi scrot i3lock maim xclip fd libfido2 ufw
+
+# enable firewall
+echo "-"
+echo "-"
+echo "-"
+echo "#######################"
+echo "# Enable firewall... #"
+echo "#######################"
+sudo systemctl start ufw
+sudo systemctl enable ufw
+sudo ufw enable
+echo "IPV6=yes" | sudo tee -a /etc/default/ufw
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw enable
 
 # install fonts
 echo "-"
