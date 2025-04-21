@@ -26,8 +26,8 @@ if app_direction == "right" then
 end
 
 if monitor_count == 3 then
-  monitor_left  = 3
-  monitor_right = 2
+  monitor_left  = 2
+  monitor_right = 3
 end
 
 local user_home = 'smapo'
@@ -613,7 +613,7 @@ globalkeys = mytable.join(
     -- Screenshot snip
     awful.key({ modkey, "Shift" }, "s",
                 function ()
-                    awful.util.spawn_with_shell("FILE=" .. os.getenv("HOME") .. "/Pictures/Screenshots/snapshot-$(date +%Y-%m-%dT%H-%M-%S).png && maim -s --hidecursor $FILE && sleep 0.5 && xclip -selection clipboard $FILE -t image/png && paplay /home/vim_muumi/Music/sound_effects/camera-shutter.mp3")
+                    awful.util.spawn_with_shell("FILE=" .. os.getenv("HOME") .. "/Pictures/Screenshots/snapshot-$(date +%Y-%m-%dT%H-%M-%S).png && maim -s --hidecursor $FILE && sleep 0.5 && xclip -selection clipboard $FILE -t image/png && paplay /home/smapo/Music/sound_effects/camera-shutter.mp3")
                 end,
               {description = "Grab a screenshot of selected area", group = "awesome"})
 )
