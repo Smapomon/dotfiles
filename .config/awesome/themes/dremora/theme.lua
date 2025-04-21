@@ -431,6 +431,11 @@ function theme.at_screen_connect(s)
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(18), bg = theme.bg_normal, fg = theme.fg_normal })
 
+    local updates_widget = nil
+    if(s.index == monitor_center) then
+      updates_widget = paru_updates_widget
+    end
+
     -- Add widgets to the wibox
     s.mywibox:setup {
         expand = "none",
@@ -452,7 +457,7 @@ function theme.at_screen_connect(s)
             wibox.widget.systray(),
             first,
             volume_widget,
-            paru_updates_widget,
+            updates_widget,
             mytextclock,
         },
     }

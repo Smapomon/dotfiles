@@ -2,3 +2,5 @@
   co     = checkout
   remove = !git checkout master && git push -d origin $1 && git branch -D
   cob    = !git checkout -b $1 && git push -u origin
+[pull]
+	rebase = false
