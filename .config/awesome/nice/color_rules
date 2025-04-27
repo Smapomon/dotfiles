@@ -1,12 +1,13 @@
 return {
 -- Table: {1}
 {
+   ["org.wezfurlong.wezterm"]="#000000d9",
    ["slack"]="#212428",
-   ["brave-browser"]="#2b373dff",
-   ["Navigator"]="#ebebebff",
-   ["discord"]="#141015",
    ["bytm"]="#efefefff",
    ["brave-browser-beta"]="#2b373dff",
+   ["brave-browser"]="#2b373dff",
    ["gnome-calculator"]="#ffffffff",
+   ["discord"]="#141015",
+   ["Navigator"]="#ebebebff",
 },
 }

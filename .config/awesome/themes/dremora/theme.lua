@@ -19,8 +19,8 @@ local theme                                     = {}
 -- MONITOR ORDER (number is index)
 local monitor_center = 1
 
-local monitor_left   = 3
-local monitor_right  = 2
+local monitor_left   = 2
+local monitor_right  = 3
 
 theme.wallpaper = function(s)
   -- get wp based on screen index
@@ -271,29 +271,59 @@ theme.volume = lain.widget.alsa({
 
 
 paru_updates_widget = wibox.widget.textbox()
+LAST_UPDATE_TIME    = os.time()
+LAST_PACKAGE_AMOUNT = nil
 function update_package_count()
-  awful.spawn.easy_async_with_shell("paru -Qu | wc -l", function(stdout)
-    local count = tonumber(stdout) or 0
+  local now            = os.time()
+  local seconds_passed = now - LAST_UPDATE_TIME
+  local minutes_passed = math.floor(seconds_passed / 60)
+  local update_time    = ""
 
-    -- Get current time
-    local time = os.date("%H:%M:%S")  -- You can customize the format
-    local update_time = " (checked: " .. time .. ")"
+  if seconds_passed < 60 then
+    update_time = string.format(" (%ds ago)", seconds_passed)
+  else
+    update_time = string.format(" (%dmin ago)", minutes_passed)
+  end
 
+  if (minutes_passed >= 10 or LAST_PACKAGE_AMOUNT == nil) then
     paru_updates_widget:set_markup(
       markup.font(theme.font,
         markup(gray, ' | ') ..
         markup(gray, " ") ..
-        markup(gray, count) ..
+        markup(gray, "…") .. -- loading dots
         markup(gray, update_time)
       )
     )
-  end)
+    awful.spawn.easy_async_with_shell("paru -Qu | wc -l", function(stdout)
+      update_time         = " (<1min ago)"
+      LAST_UPDATE_TIME    = os.time()
+      LAST_PACKAGE_AMOUNT = tonumber(stdout) or 0
+
+      paru_updates_widget:set_markup(
+        markup.font(theme.font,
+          markup(gray, ' | ') ..
+          markup(gray, " ") ..
+          markup(gray, LAST_PACKAGE_AMOUNT) ..
+          markup(gray, update_time)
+        )
+      )
+    end)
+  else
+    paru_updates_widget:set_markup(
+      markup.font(theme.font,
+        markup(gray, ' | ') ..
+        markup(gray, " ") ..
+        markup(gray, LAST_PACKAGE_AMOUNT) ..
+        markup(gray, update_time)
+      )
+    )
+  end
 end
 
 update_package_count()
 
 gears.timer {
-    timeout = 600, -- 10 minutes
+    timeout = 10, -- seconds
     autostart = true,
     call_now = true,
     callback = update_package_count

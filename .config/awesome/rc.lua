@@ -16,7 +16,7 @@ for s in screen do
   monitor_count = monitor_count + 1
 end
 
-local app_direction   = "left"
+local app_direction   = "right"
 local direction_right = 1
 local direction_left  = -1
 

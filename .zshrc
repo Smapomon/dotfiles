@@ -336,6 +336,9 @@ complete -C '/usr/bin/aws_completer' aws
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
 
+export PATH="$HOME/packages/flutter/bin:$PATH"
+
+
 ###-begin-flutter-completion-###
 if type complete &>/dev/null; then
   __flutter_completion() {
