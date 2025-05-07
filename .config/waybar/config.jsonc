@@ -9,7 +9,7 @@
     "hyprland/workspaces",
     "hyprland/submap",
     "hyprland/scratchpad",
-    "custom/media"
+    "custom/playerctl"
   ],
   "modules-center": [
     "wlr/taskbar"
@@ -195,28 +195,14 @@
     },
     "on-click": "pavucontrol"
   },
-  "custom/media": {
-    "format": "{icon} {text}",
-    "return-type": "json",
-    "max-length": 40,
-    "format-icons": {
-      "spotify": "",
-      "default": "🎜"
-    },
-    "escape": true,
-    "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-    // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-  },
-  "custom/power": {
-    "format" : "⏻ ",
-    "tooltip": false,
-    "menu": "on-click",
-    "menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
-    "menu-actions": {
-      "shutdown": "shutdown",
-      "reboot": "reboot",
-      "suspend": "systemctl suspend",
-      "hibernate": "systemctl hibernate"
-    }
-  }
+  "custom/playerctl": {
+		"format": "{}",
+		"return-type": "json",
+		"max-length": 40,
+		"exec": "$HOME/.config/waybar/scripts/playerctl.sh 2> /dev/null",
+		"on-click": "playerctl play-pause",
+		"on-right-click": "sys-notif media",
+		"on-scroll-up": "playerctl position 3+",
+		"on-scroll-down": "playerctl position 3-"
+	}
 }
