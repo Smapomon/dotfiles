@@ -58,11 +58,43 @@ tooltip {
     color:@color7;
 }
 #clock{
-    padding: 0px 5px;
-    transition: all .3s ease;
+    padding: 2px 8px;
+    background-image: linear-gradient(
+      to right,
+      rgba(50, 50, 50, 0.8) 0%,
+      rgba(50, 50, 50, 0.8) 0.5%
+      );
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+}
+#pulseaudio{
+    padding: 2px 8px;
+    background-image: linear-gradient(
+      to right,
+      rgba(50, 50, 50, 0.8) 0%,
+      rgba(50, 50, 50, 0.8) 0.5%
+      );
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    border-radius: 4px;
+    transition: background 0.2s ease;
 }
 #workspaces {
     padding: 0px 5px;
+}
+#window {
+    padding: 2px 8px;
+    background-image: linear-gradient(
+      to right,
+      rgba(50, 50, 50, 0.8) 0%,
+      rgba(50, 50, 50, 0.8) 0.5%
+      );
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    border-radius: 4px;
+    transition: background 0.2s ease;
 }
 #taskbar {
 }
@@ -194,4 +226,17 @@ tooltip {
 #tray menu separator {
     padding: 0px 5px;
     transition: all .3s ease; 
+}
+
+#custom-playerctl {
+    background-image: linear-gradient(
+        to right,
+        rgba(181,137,0,0.8) 0%,
+        rgba(181,137,0,0.2) 0.5%
+    );
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    border-radius: 4px;
+    padding: 2px 8px;
+    transition: background 0.2s ease;
 }

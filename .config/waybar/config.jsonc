@@ -24,7 +24,7 @@
     "temperature",
     "backlight",
     "keyboard-state",
-    "hyprland/language",
+    //"hyprland/language",
     "battery",
     "battery#bat2",
     "clock",
@@ -203,6 +203,7 @@
 		"on-click": "playerctl play-pause",
 		"on-right-click": "sys-notif media",
 		"on-scroll-up": "playerctl position 3+",
-		"on-scroll-down": "playerctl position 3-"
+		"on-scroll-down": "playerctl position 3-",
+    "tooltip": false
 	}
 }
