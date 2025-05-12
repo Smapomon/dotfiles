@@ -119,7 +119,7 @@ alias omni="cd ~/dev/gitlab/omnitool; clear; ls -lh"
 alias sptla="cd ~/dev/work/spotilla-be; clear; ls -lh"
 alias get_perm="cd ~/dev/work/perms; clear; ls -lh"
 alias vimconf="cd ~/.config/nvim; clear; files; nvim init.lua"
-alias wmconf="cd ~/.config/hypr; clear; files; nvim hyprland.conf"
+alias wmconf="cd ~/.config/awesome; clear; files; nvim rc.lua"
 alias pit="cd ~/dev/github/privateInvestmentTracker; clear; files;"
 
 # SPTLA FUNCTIONS

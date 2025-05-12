@@ -13,7 +13,7 @@ while true; do
 		case $playing in
 		⏸️ | Paused) text='<span foreground=\"#cccc00\" size=\"smaller\">'"$line"'</span>' ;;
 		▶️ | Playing) text="<small>$line</small>" ;;
-		*) text='<span foreground=\"#073642\">⏹</span>' ;;
+		*) text='<span foreground=\"#073642\">No Audio</span>' ;;
 		esac
 
 		printf '{"text":"%s","tooltip":"%s","class":"%s","percentage":%s}\n' \
@@ -25,7 +25,7 @@ while true; do
 		echo $! >"$XDG_RUNTIME_DIR/waybar-playerctl.pid"
 	)
 
-	echo '<span foreground=#dc322f>⏹</span>' || break
+	echo '<span foreground=#dc322f>No Audio</span>' || break
 	sleep 15
 done
 

@@ -374,6 +374,11 @@ function theme.at_screen_connect(s)
             screen = s,
         })
 
+        awful.tag.add("NOTES", {
+            layout = awful.layout.layouts[1],
+            screen = s,
+        })
+
     -- RIGHT MONITOR
     elseif(s.index == monitor_right)
     then

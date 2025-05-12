@@ -8,7 +8,6 @@
   "modules-left": [
     "hyprland/workspaces",
     "hyprland/submap",
-    "hyprland/scratchpad",
     "custom/playerctl"
   ],
   "modules-center": [
@@ -24,28 +23,26 @@
     "temperature",
     "backlight",
     "keyboard-state",
-    //"hyprland/language",
     "battery",
     "battery#bat2",
     "clock",
   ],
   // Modules configuration
   "hyprland/window": {
-    "format": "<span font='9' rise='-4444'>{}</span>"
+    "format": "<span font='9' rise='-4444'>{class}</span>",
+    "separate-outputs": true
   },
   "hyprland/workspaces": {
-    "format": "{icon}",
+    "format": "{name}: {icon}",
     "format-icons": {
-      "urgent": "",
-      "active": "", // focused workspace on current monitor 
-      "visible": "", // focused workspace on other monitors
-      "default": "",
-      "empty": "" // persistent (created by this plugin)
+      "active": "",
+      "default": "",
+      //"persistent": ""
     },
     "all-outputs": false // recommended
   },
   "wlr/taskbar": {
-    "format": "{icon} {title:.17} ({state})",
+    "format": "{icon} {title} ({short_state})",
     "icon-size": 18,
     "spacing": 3,
     "on-click-middle": "close",
@@ -67,7 +64,7 @@
   "hyprland/submap": {
     "format": "<span style=\"italic\">{}</span>"
   },
-  "hyprland/scratchpad": {
+  "sway/scratchpad": {
     "format": "{icon} {count}",
     "show-empty": false,
     "format-icons": ["", ""],
@@ -178,19 +175,15 @@
   },
   "pulseaudio": {
     // "scroll-step": 1, // %, can be a float
-    "format": "{volume}% {icon} {format_source}",
+    "format": "{icon} {volume}% {format_source}",
     "format-bluetooth": "{volume}% {icon} {format_source}",
     "format-bluetooth-muted": " {icon} {format_source}",
     "format-muted": " {format_source}",
-    "format-source": "{volume}% ",
+    "format-source": "",
     "format-source-muted": "",
     "format-icons": {
-      "headphone": "",
-      "hands-free": "",
-      "headset": "",
-      "phone": "",
-      "portable": "",
-      "car": "",
+      "headphone": " ",
+      "headset": " ",
       "default": ["", "", ""]
     },
     "on-click": "pavucontrol"
