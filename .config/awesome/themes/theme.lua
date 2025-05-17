@@ -70,7 +70,7 @@ local gray       = "#858585"
 
 -- Textclock
 local mytextclock = wibox.widget.textclock(
-  markup(gray, " | ") .. markup(white, " %d.") .. markup(white, "%m.") .. markup(white, "%Y - ") ..  markup(white, "%H:%M:%S ")
+  markup(white, " %d.") .. markup(white, "%m.") .. markup(white, "%Y - ") ..  markup(white, "%H:%M:%S ")
 )
 mytextclock.font    = theme.font
 mytextclock.refresh = 1
@@ -113,7 +113,7 @@ function update_active_app(widget, current_client)
     client_state = 'maximized'
   end
 
-  widget:set_markup(markup.font(theme.font, markup(gray, current_app) .. markup(gray, ' >>> ') .. markup(gray, client_state) .. markup(gray, ' | ')))
+  widget:set_markup(markup.font(theme.font, markup(gray, current_app) .. markup(gray, ' >>> ') .. markup(gray, client_state)))
 end
 
 -- ALSA volume
@@ -189,7 +189,6 @@ function update_package_count()
   if (minutes_passed >= 10 or LAST_PACKAGE_AMOUNT == nil) then
     paru_updates_widget:set_markup(
       markup.font(theme.font,
-        markup(gray, ' | ') ..
         markup(gray, " ") ..
         markup(gray, "…") .. -- loading dots
         markup(gray, update_time)
@@ -383,9 +382,13 @@ function theme.at_screen_connect(s)
 
   local updates_widget = nil
   local music_widget = nil
+  local volume_indicator = nil
+  local cond_separator = nil
   if(s.index == monitor_center) then
     updates_widget = paru_updates_widget
     music_widget = music_player
+    volume_indicator = volume_widget
+    cond_separator = wibox.widget.textbox(markup(gray, " | "))
   end
 
   -- Add widgets to the wibox
@@ -408,10 +411,13 @@ function theme.at_screen_connect(s)
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
       active_app,
+      cond_separator,
       wibox.widget.systray(),
       first,
-      volume_widget,
+      volume_indicator,
+      cond_separator,
       updates_widget,
+      cond_separator,
       mytextclock,
     },
   }
