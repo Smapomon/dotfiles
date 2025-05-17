@@ -89,24 +89,15 @@ theme.cal = lain.widget.cal({
     bg              = theme.bg_normal
   }})
 
--- MPD
-theme.mpd = lain.widget.mpd({
-  settings = function()
-    mpd_notification_preset.fg = white
-    artist = mpd_now.artist .. " "
-    title  = mpd_now.title  .. " "
 
-    if mpd_now.state == "pause" then
-      artist = "mpd "
-      title  = "paused "
-    elseif mpd_now.state == "stop" then
-      artist = ""
-      title  = ""
-    end
+music_player = wibox.widget.textbox()
 
-    widget:set_markup(markup.font(theme.font, markup(gray, artist) .. markup(white, title)))
-  end
-})
+function update_music_player()
+  local command = "playerctl metadata --format '{{emoji(status)}} {{artist}} - {{title}}  {{duration(position)}}/{{duration(mpris:length)}}'"
+  awful.spawn.easy_async(command, function(stdout)
+    music_player:set_text(stdout)
+  end)
+end
 
 -- Last active app
 active_app = wibox.widget.textbox()
@@ -231,12 +222,20 @@ function update_package_count()
 end
 
 update_package_count()
+update_music_player()
 
 gears.timer {
   timeout = 10, -- seconds
   autostart = true,
   call_now = true,
   callback = update_package_count
+}
+
+gears.timer {
+  timeout = 1, -- seconds
+  autostart = true,
+  call_now = true,
+  callback = update_music_player
 }
 
 -- Separators
@@ -383,8 +382,10 @@ function theme.at_screen_connect(s)
   s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(18), bg = theme.bg_normal, fg = theme.fg_normal })
 
   local updates_widget = nil
+  local music_widget = nil
   if(s.index == monitor_center) then
     updates_widget = paru_updates_widget
+    music_widget = music_player
   end
 
   -- Add widgets to the wibox
@@ -399,6 +400,8 @@ function theme.at_screen_connect(s)
       s.mylayoutbox,
       arrl_post,
       s.mypromptbox,
+      first,
+      music_widget,
       first,
     },
     s.mytasklist, -- Middle widget

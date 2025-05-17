@@ -40,7 +40,7 @@ pcall(require, "luarocks.loader")
 
 local gears         = require("gears")
 local awful         = require("awful")
-                      require("awful.autofocus")
+require("awful.autofocus")
 local wibox         = require("wibox")
 local beautiful     = require("beautiful")
 local naughty       = require("naughty")
@@ -48,7 +48,7 @@ local lain          = require("lain")
 local menubar       = require("menubar")
 local freedesktop   = require("freedesktop")
 local hotkeys_popup = require("awful.hotkeys_popup")
-                      require("awful.hotkeys_popup.keys")
+require("awful.hotkeys_popup.keys")
 local mytable       = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 -- }}}
@@ -63,30 +63,30 @@ naughty.config.defaults['screen'] = monitor_center
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
-    naughty.notify {
-        preset = naughty.config.presets.critical,
-        title = "Oops, there were errors during startup!",
-        text = awesome.startup_errors
-    }
+  naughty.notify {
+    preset = naughty.config.presets.critical,
+    title = "Oops, there were errors during startup!",
+    text = awesome.startup_errors
+  }
 end
 
 -- Handle runtime errors after startup
 do
-    local in_error = false
+  local in_error = false
 
-    awesome.connect_signal("debug::error", function (err)
-        if in_error then return end
+  awesome.connect_signal("debug::error", function (err)
+    if in_error then return end
 
-        in_error = true
+    in_error = true
 
-        naughty.notify {
-            preset = naughty.config.presets.critical,
-            title = "Oops, an error happened!",
-            text = tostring(err)
-        }
+    naughty.notify {
+      preset = naughty.config.presets.critical,
+      title = "Oops, an error happened!",
+      text = tostring(err)
+    }
 
-        in_error = false
-    end)
+    in_error = false
+  end)
 end
 
 -- }}}
@@ -95,9 +95,9 @@ end
 
 -- This function will run once every time Awesome is started
 local function run_once(cmd_arr)
-    for _, cmd in ipairs(cmd_arr) do
-        awful.spawn.with_shell(string.format("pgrep -u $USER -fx '%s' > /dev/null || (%s)", cmd, cmd))
-    end
+  for _, cmd in ipairs(cmd_arr) do
+    awful.spawn.with_shell(string.format("pgrep -u $USER -fx '%s' > /dev/null || (%s)", cmd, cmd))
+  end
 end
 
 run_once({ "urxvtd", "unclutter -root" }) -- comma-separated entries
@@ -127,10 +127,10 @@ local browser      = "Brave-browser-beta"
 awful.util.terminal = terminal
 awful.util.tagnames = { "1", "2", "3", "4", "5" }
 awful.layout.layouts = {
-    awful.layout.suit.tile,
-    awful.layout.suit.floating,
-    awful.layout.suit.spiral,
-    awful.layout.suit.max,
+  awful.layout.suit.tile,
+  awful.layout.suit.floating,
+  awful.layout.suit.spiral,
+  awful.layout.suit.max,
 }
 
 lain.layout.termfair.nmaster           = 3
@@ -172,12 +172,12 @@ beautiful.init(string.format("%s/.config/awesome/themes/theme.lua", os.getenv("H
 
 -- Create a launcher widget and a main menu
 local myawesomemenu = {
-   { "Hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
-   { "Manual", string.format("%s -e man awesome", terminal) },
-   { "Edit config", string.format("%s -e %s %s", terminal, editor, awesome.conffile) },
-   { "Lock", function() awful.spawn.with_shell("/home/".. user_home .."/shell_scripts/set_lockscreen.sh") end },
-   { "Restart", awesome.restart },
-   { "Quit", function() awesome.quit() end },
+  { "Hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
+  { "Manual", string.format("%s -e man awesome", terminal) },
+  { "Edit config", string.format("%s -e %s %s", terminal, editor, awesome.conffile) },
+  { "Lock", function() awful.spawn.with_shell("/home/".. user_home .."/shell_scripts/set_lockscreen.sh") end },
+  { "Restart", awesome.restart },
+  { "Quit", function() awesome.quit() end },
 }
 
 awful.util.mymainmenu = freedesktop.menu.build {
@@ -258,7 +258,7 @@ globalkeys = mytable.join(
 
   awful.key({ modkey }, "s", hotkeys_popup.show_help, {description="show help", group="awesome"}),
 
-    -- Tag browsing
+  -- Tag browsing
   awful.key({ modkey }, "Left",   awful.tag.viewprev,
     {description = "view previous", group = "tag"}),
   awful.key({ modkey }, "Right",  awful.tag.viewnext,
@@ -273,7 +273,7 @@ globalkeys = mytable.join(
     {description = "view next", group = "tag"}),
 
 
-    -- Default client focus
+  -- Default client focus
   awful.key({ modkey,           }, "j",
     function ()
       awful.client.focus.byidx( 1)
@@ -578,17 +578,17 @@ for i = 1, 9 do
 end
 
 clientbuttons = mytable.join(
-    awful.button({ }, 1, function (c)
-        c:emit_signal("request::activate", "mouse_click", {raise = true})
-    end),
-    awful.button({ modkey }, 1, function (c)
-        c:emit_signal("request::activate", "mouse_click", {raise = true})
-        awful.mouse.client.move(c)
-    end),
-    awful.button({ modkey }, 3, function (c)
-        c:emit_signal("request::activate", "mouse_click", {raise = true})
-        awful.mouse.client.resize(c)
-    end)
+  awful.button({ }, 1, function (c)
+    c:emit_signal("request::activate", "mouse_click", {raise = true})
+  end),
+  awful.button({ modkey }, 1, function (c)
+    c:emit_signal("request::activate", "mouse_click", {raise = true})
+    awful.mouse.client.move(c)
+  end),
+  awful.button({ modkey }, 3, function (c)
+    c:emit_signal("request::activate", "mouse_click", {raise = true})
+    awful.mouse.client.resize(c)
+  end)
 )
 
 -- Set keys
@@ -600,128 +600,110 @@ root.keys(globalkeys)
 
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
-    -- All clients will match this rule.
-    { rule = { },
-      properties = { border_width = beautiful.border_width,
-                     border_color = beautiful.border_normal,
-                     callback = awful.client.setslave,
-                     focus = awful.client.focus.filter,
-                     raise = true,
-                     keys = clientkeys,
-                     buttons = clientbuttons,
-                     screen = awful.screen.preferred,
-                     placement = awful.placement.no_overlap+awful.placement.no_offscreen,
-                     size_hints_honor = false
-     }
+  -- All clients will match this rule.
+  { rule = { },
+    properties = { border_width = beautiful.border_width,
+      border_color = beautiful.border_normal,
+      callback = awful.client.setslave,
+      focus = awful.client.focus.filter,
+      raise = true,
+      keys = clientkeys,
+      buttons = clientbuttons,
+      screen = awful.screen.preferred,
+      placement = awful.placement.no_overlap+awful.placement.no_offscreen,
+      size_hints_honor = false
+    }
+  },
+
+  -- Floating clients.
+  { rule_any = {
+    instance = {
+      "DTA",  -- Firefox addon DownThemAll.
+      "copyq",  -- Includes session name in class.
+      "pinentry",
+    },
+    class = {
+      "Arandr", "Blueman-manager", "Gpick", "Kruler", "Sxiv",
+      "MessageWin",  -- kalarm.
+      "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
+      "Wpa_gui", "veromix", "xtightvncviewer", "WhatSie", "discord",
+      "Slack", "teams", "Ferdium", "gnome-calculator", "Solaar",
+      "1Password", "Nvidia-settings", "Postman", "Image Lounge",
+      "dolphin", "steam", "Nemo", "qBittorrent", "Emulator"
     },
 
-    -- Floating clients.
-    { rule_any = {
-        instance = {
-            "DTA",  -- Firefox addon DownThemAll.
-            "copyq",  -- Includes session name in class.
-            "pinentry",
-        },
-        class = {
-            "Arandr",
-            "Blueman-manager",
-            "Gpick",
-            "Kruler",
-            "MessageWin",  -- kalarm.
-            "Sxiv",
-            "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
-            "Wpa_gui",
-            "veromix",
-            "xtightvncviewer",
-            "WhatSie",
-            "discord",
-            "Slack",
-            "teams",
-            "Ferdium",
-            "gnome-calculator",
-            "Solaar",
-            "1Password",
-            "Nvidia-settings",
-            "Postman",
-            "Image Lounge",
-            "dolphin",
-            "steam",
-            "Nemo",
-            "qBittorrent"
-        },
-
-        -- Note that the name property shown in xprop might be set slightly after creation of the client
-        -- and the name shown there might not match defined rules here.
-        name = {
-          "Event Tester",  -- xev.
-        },
-        role = {
-          "AlarmWindow",  -- Thunderbird's calendar.
-          "ConfigManager",  -- Thunderbird's about:config.
-          "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
-        }
-      }, properties = { floating = true }},
-
-    -- Add titlebars to normal clients and dialogs
-    { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = false }
+    -- Note that the name property shown in xprop might be set slightly after creation of the client
+    -- and the name shown there might not match defined rules here.
+    name = {
+      "Event Tester",  -- xev.
     },
+    role = {
+      "AlarmWindow",  -- Thunderbird's calendar.
+      "ConfigManager",  -- Thunderbird's about:config.
+      "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
+    }
+  }, properties = { floating = true }},
 
-    {
-        rule       = { class     = "Terminator" },
-        properties = { maximized = false }
+  -- Add titlebars to normal clients and dialogs
+  { rule_any = {type = { "normal", "dialog" }
+  }, properties = { titlebars_enabled = false }
+  },
+
+  {
+    rule       = { class     = "Terminator" },
+    properties = { maximized = false }
+  },
+
+  {
+    rule       = { class     = "Spotify" },
+    properties = { maximized = true }
+  },
+
+  -- Never sticky windows on launch
+  {
+    rule_any = {
+      -- Add classes that should not sticky
+      -- might be best to just make client open function
+      -- for this eventually since stickyness is cancer
+      class = { "Terminator" }
     },
+    properties = { sticky = false }
+  },
 
-    {
-        rule       = { class     = "Spotify" },
-        properties = { maximized = true }
+  -- Don't float on launch
+  {
+    rule_any = {
+
+      class = {
+        "Google-chrome",
+        "Brave-browser",
+        "Brave-browser-beta",
+        "Spotify"
+      }
     },
+    properties = { floating = false }
+  },
 
-    -- Never sticky windows on launch
-    {
-        rule_any = {
-            -- Add classes that should not sticky
-            -- might be best to just make client open function
-            -- for this eventually since stickyness is cancer
-            class = { "Terminator" }
-        },
-        properties = { sticky = false }
+
+  -- Set apps to always map on the correct tag on the correct screen
+  {
+    rule_any = {
+      class = {
+        "Spotify",
+        "Ferdium"
+      }
     },
+    properties = { screen = monitor_left, tag = "MUSIC" }
+  },
 
-    -- Don't float on launch
-    {
-        rule_any = {
-
-            class = {
-                "Google-chrome",
-                "Brave-browser",
-                "Brave-browser-beta",
-                "Spotify"
-            }
-        },
-        properties = { floating = false }
+  {
+    rule_any = {
+      class = {
+        "discord"
+      }
     },
-
-
-    -- Set apps to always map on the correct tag on the correct screen
-    {
-      rule_any = {
-        class = {
-          "Spotify",
-          "Ferdium"
-        }
-      },
-      properties = { screen = monitor_left, tag = "MUSIC" }
-    },
-
-    {
-      rule_any = {
-        class = {
-          "discord"
-        }
-      },
-      properties = { screen = monitor_right, tag = "WEB & CHAT" }
-    },
+    properties = { screen = monitor_right, tag = "WEB & CHAT" }
+  },
 }
 
 -- }}}
@@ -730,32 +712,32 @@ awful.rules.rules = {
 
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
-    -- Set the windows at the slave,
-    -- i.e. put it at the end of others instead of setting it master.
-    -- if not awesome.startup then awful.client.setslave(c) end
+  -- Set the windows at the slave,
+  -- i.e. put it at the end of others instead of setting it master.
+  -- if not awesome.startup then awful.client.setslave(c) end
 
-    if awesome.startup
-      and not c.size_hints.user_position
-      and not c.size_hints.program_position then
-        -- Prevent clients from being unreachable after screen count changes.
-        awful.placement.no_offscreen(c)
-    end
+  if awesome.startup
+    and not c.size_hints.user_position
+    and not c.size_hints.program_position then
+    -- Prevent clients from being unreachable after screen count changes.
+    awful.placement.no_offscreen(c)
+  end
 
-    -- Set rounded corners
-    --c.shape = gears.shape.rounded_rect
+  -- Set rounded corners
+  --c.shape = gears.shape.rounded_rect
 end)
 
 client.connect_signal("focus", function(c)
-    --For debugging
-    --naughty.notify {
-        --title = "Window Props",
-        --text = c.class
-    --}
+  --For debugging
+  --naughty.notify {
+  --title = "Window Props",
+  --text = c.class
+  --}
 
 
-    update_active_app(active_app, c)
+  update_active_app(active_app, c)
 
-    c.border_color = beautiful.border_focus
+  c.border_color = beautiful.border_focus
 end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 
