@@ -26,7 +26,7 @@ theme.wallpaper = function(s)
 end
 
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes"
-theme.font                                      = "FuraCode Nerd Font 10.5"
+theme.font                                      = "Iosevka 11"
 theme.taglist_font                              = "FuraCode Nerd Font"
 theme.menubar_bg_normal                         = "#282a36"
 theme.menubar_bg_focus                          = "#404357"
@@ -113,7 +113,7 @@ function update_active_app(widget, current_client)
     client_state = 'maximized'
   end
 
-  widget:set_markup(markup.font(theme.font, markup(gray, current_app) .. markup(gray, ' >>> ') .. markup(gray, client_state)))
+  widget:set_markup(markup.font(theme.font, markup(gray, current_app) .. markup(gray, ' > ') .. markup(gray, client_state)))
 end
 
 -- ALSA volume
@@ -211,7 +211,6 @@ function update_package_count()
   else
     paru_updates_widget:set_markup(
       markup.font(theme.font,
-        markup(gray, ' | ') ..
         markup(gray, " ") ..
         markup(gray, LAST_PACKAGE_AMOUNT) ..
         markup(gray, update_time)
@@ -380,15 +379,14 @@ function theme.at_screen_connect(s)
   -- Create the wibox
   s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(18), bg = theme.bg_normal, fg = theme.fg_normal })
 
+  local separator = wibox.widget.textbox(markup(gray, " | "))
   local updates_widget = nil
   local music_widget = nil
-  local volume_indicator = nil
   local cond_separator = nil
   if(s.index == monitor_center) then
     updates_widget = paru_updates_widget
     music_widget = music_player
-    volume_indicator = volume_widget
-    cond_separator = wibox.widget.textbox(markup(gray, " | "))
+    cond_separator = separator
   end
 
   -- Add widgets to the wibox
@@ -411,11 +409,11 @@ function theme.at_screen_connect(s)
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
       active_app,
-      cond_separator,
+      separator,
       wibox.widget.systray(),
-      first,
-      volume_indicator,
       cond_separator,
+      volume_widget,
+      separator,
       updates_widget,
       cond_separator,
       mytextclock,

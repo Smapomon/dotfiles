@@ -340,6 +340,7 @@ autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
 
 export PATH="$HOME/packages/flutter/bin:$PATH"
+export PATH="$PATH":"$HOME/.pub-cache/bin"
 
 
 ###-begin-flutter-completion-###
