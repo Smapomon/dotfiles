@@ -328,17 +328,7 @@ function theme.at_screen_connect(s)
     },
 
     layout   = {
-      spacing = 25,
-      spacing_widget = {
-        {
-          forced_width = 5,
-          shape        = gears.shape.circle,
-          widget       = wibox.widget.separator
-        },
-        valign = 'center',
-        halign = 'center',
-        widget = wibox.container.place,
-      },
+      spacing = 12,
       layout  = wibox.layout.fixed.horizontal
     },
     -- Notice that there is *NO* wibox.wibox prefix, it is a template,
