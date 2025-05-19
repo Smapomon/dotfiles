@@ -359,8 +359,24 @@ function theme.at_screen_connect(s)
         left   = 10,
         right  = 10,
         width  = 300,
-        widget = wibox.container.constraint
+        widget = wibox.container.constraint,
       },
+      -- This works in setting the name, but focus style is lost
+      --create_callback = function(self, c)
+        --local class_overrides = {
+          --["Slack"] = "Slack",
+          --["discord"] = "Discord"
+        --}
+
+        --if class_overrides[c.class] then
+          --local tb = self:get_children_by_id('text_role')[1]
+          --local set_markup_silently = tb.set_markup_silently
+          --tb.set_markup_silently = function(slf, text)
+            --local new_text = c.class
+            --return set_markup_silently(tb, new_text)
+          --end
+        --end
+      --end,
       id           = 'background_role',
       widget       = wibox.container.background,
     },
