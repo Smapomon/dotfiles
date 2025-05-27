@@ -114,6 +114,7 @@ alias discord_update_skip="cd ~/.config/discordptb; clear; ls -alh; nvim setting
 
 # NAVIGATION ALIASES
 alias dev='cd ~/dev; clear; ls -lh'
+alias notes='cd ~/dev/notes/brain/; clear; ls -lh'
 alias work='cd ~/dev/work; clear; ls -lh'
 alias omni="cd ~/dev/gitlab/omnitool; clear; ls -lh"
 alias sptla="cd ~/dev/work/spotilla-be; clear; ls -lh"

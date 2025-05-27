@@ -68,6 +68,11 @@ config.keys = {
     action = wezterm.action.EmitEvent 'toggle-ligature',
   },
 
+  -- FONT SIZE backups keys
+  -- because sometimes something captures (ctrl & +) keycombo
+  { key = '?', mods = 'CTRL|SHIFT', action = act.IncreaseFontSize },
+  { key = '_', mods = 'CTRL|SHIFT', action = act.DecreaseFontSize },
+
 }
 
 return config
