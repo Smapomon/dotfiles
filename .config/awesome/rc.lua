@@ -699,6 +699,15 @@ awful.rules.rules = {
   {
     rule_any = {
       class = {
+        "obsidian",
+      }
+    },
+    properties = { screen = monitor_center, tag = "NOTES" }
+  },
+
+  {
+    rule_any = {
+      class = {
         "discord"
       }
     },
