@@ -629,7 +629,7 @@ awful.rules.rules = {
       "Wpa_gui", "veromix", "xtightvncviewer", "WhatSie", "discord",
       "Slack", "teams", "Ferdium", "gnome-calculator", "Solaar",
       "1Password", "Nvidia-settings", "Postman", "Image Lounge",
-      "dolphin", "steam", "Nemo", "qBittorrent", "Emulator"
+      "dolphin", "steam", "Nemo", "qBittorrent", "Emulator", "kcharselect"
     },
 
     -- Note that the name property shown in xprop might be set slightly after creation of the client

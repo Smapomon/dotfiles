@@ -106,6 +106,10 @@ alias dgit='/usr/bin/git --git-dir=$HOME/.dotconf/ --work-tree=$HOME'
 alias git_prune="git fetch -p && git branch -vv | grep 'origin/.*: gone]' | grep -v '\*' | awk '{print \$1}' | xargs git branch -d"
 alias git_hard_prune="git fetch -p && git branch -vv | grep 'origin/.*: gone]' | grep -v '\*' | awk '{print \$1}' | xargs git branch -D"
 alias gco="_fuzzy_branches"
+gitlog() {
+  local count="${1:-10}" # default to 10
+  git log --max-count="$count" | nvim -R -
+}
 
 # ARCH SPECIFIC ALIASES
 alias paru_updates="paru -Qu"
@@ -417,3 +421,6 @@ esac
 # pnpm end
 
 WEBKIT_DISABLE_DMABUF_RENDERER=1
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
