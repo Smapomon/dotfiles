@@ -91,11 +91,18 @@ theme.cal = lain.widget.cal({
 
 
 music_player = wibox.widget.textbox()
+headset_status = wibox.widget.textbox()
 
 function update_music_player()
   local command = "playerctl metadata --format '{{emoji(status)}} {{artist}} - {{title}}  {{duration(position)}}/{{duration(mpris:length)}}'"
   awful.spawn.easy_async(command, function(stdout)
     music_player:set_text(stdout)
+  end)
+end
+
+function update_audio_device()
+  awful.spawn.easy_async(os.getenv("HOME") .. "/shell_scripts/auto_audio_switch.sh", function(stdout)
+    headset_status:set_text(stdout)
   end)
 end
 
@@ -234,6 +241,13 @@ gears.timer {
   autostart = true,
   call_now = true,
   callback = update_music_player
+}
+
+gears.timer {
+  timeout = 5, -- seconds
+  autostart = true,
+  call_now = true,
+  callback = update_audio_device
 }
 
 -- Separators
@@ -388,10 +402,12 @@ function theme.at_screen_connect(s)
   local separator = wibox.widget.textbox(markup(gray, " | "))
   local updates_widget = nil
   local music_widget = nil
+  local headset_widget = nil
   local cond_separator = nil
   if(s.index == monitor_center) then
     updates_widget = paru_updates_widget
     music_widget = music_player
+    headset_widget = headset_status
     cond_separator = separator
   end
 
@@ -410,6 +426,8 @@ function theme.at_screen_connect(s)
       first,
       music_widget,
       first,
+      headset_widget,
+      first
     },
     s.mytasklist, -- Middle widget
     { -- Right widgets

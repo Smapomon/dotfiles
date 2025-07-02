@@ -30,8 +30,6 @@ if monitor_count == 3 then
   monitor_right = 3
 end
 
-local user_home = 'smapo'
-
 -- {{{ Required libraries
 
 -- If LuaRocks is installed, make sure that packages installed through it are
@@ -175,7 +173,7 @@ local myawesomemenu = {
   { "Hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
   { "Manual", string.format("%s -e man awesome", terminal) },
   { "Edit config", string.format("%s -e %s %s", terminal, editor, awesome.conffile) },
-  { "Lock", function() awful.spawn.with_shell("/home/".. user_home .."/shell_scripts/set_lockscreen.sh") end },
+  { "Lock", function() awful.spawn.with_shell(os.getenv("HOME") .."/shell_scripts/set_lockscreen.sh") end },
   { "Restart", awesome.restart },
   { "Quit", function() awesome.quit() end },
 }
@@ -252,7 +250,7 @@ globalkeys = mytable.join(
         position = "top_middle"
       }
 
-      awful.util.spawn("/home/".. user_home .."/shell_scripts/set_lockscreen.sh")
+      awful.util.spawn(os.getenv("HOME") .."/shell_scripts/set_lockscreen.sh")
     end,
     {description = "lock screen", group = "hotkeys"}),
 
@@ -763,15 +761,15 @@ end)
 -- Autostart Applications
 update_volume(volume_widget)
 
-awful.spawn.with_shell("/home/".. user_home .. "/shell_scripts/set_mouse.sh")
-awful.spawn.with_shell("/home/".. user_home .."/shell_scripts/set_caps_escape.sh")
+awful.spawn.with_shell(os.getenv("HOME") .. "/shell_scripts/set_mouse.sh")
+awful.spawn.with_shell(os.getenv("HOME") .."/shell_scripts/set_caps_escape.sh")
 awful.spawn.with_shell("picom")
 awful.spawn.with_shell("nvidia-settings")
-awful.spawn.with_shell("/home/".. user_home .. "/shell_scripts/set_monitor.sh")
+awful.spawn.with_shell(os.getenv("HOME") .. "/shell_scripts/set_monitor.sh")
 awful.spawn.with_shell("nitrogen --restore")
-awful.spawn.with_shell("/home/".. user_home .. "/shell_scripts/autostart_apps.sh")
+awful.spawn.with_shell(os.getenv("HOME") .. "/shell_scripts/autostart_apps.sh")
 
 -- Set autolock for display
-awful.spawn.with_shell("xautolock -time 45 -locker /home/".. user_home .."/shell_scripts/set_lockscreen.sh")
+awful.spawn.with_shell("xautolock -time 45 -locker " .. os.getenv("HOME") .."/shell_scripts/set_lockscreen.sh")
 
 -- }}}
