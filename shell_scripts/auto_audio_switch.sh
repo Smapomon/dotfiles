@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# depends on solaar, because of the headset
 check_headset_connected() {
   solaar show | awk '
     $0 ~ /PRO X Wireless Gaming Headset/ { in_device = 1; next }
@@ -66,4 +67,3 @@ else
   [[ "$DEFAULT_SOURCE" != "$MIC_SOURCE_ID" && -n "$MIC_SOURCE_ID" ]] && wpctl set-default "$MIC_SOURCE_ID"
   echo "🎧 [$(date +'%H:%M')]"
 fi
-
