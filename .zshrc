@@ -43,40 +43,10 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # ------------ SSH SETUP ------------ #
-SSH_ENV="$HOME/.ssh/agent-environment"
-
-function start_agent {
-    echo "Initialising new SSH agent..."
-    /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
-    echo succeeded
-    chmod 600 "${SSH_ENV}"
-    . "${SSH_ENV}" > /dev/null
-    /usr/bin/ssh-add;
-}
-
-function add_ssh_keys {
-	echo "Adding keys..."
-	for possiblekey in ${HOME}/.ssh/id_*; do
-		if grep -q PRIVATE "$possiblekey"; then
-			ssh-add "$possiblekey"
-		fi
-
-    ssh-add "smapo_host_yubi_key"
-    ssh-add "ssh_key"
-	done
-
-}
-
-# Source SSH settings, if applicable
-
-if [ -f "${SSH_ENV}" ]; then
-    . "${SSH_ENV}" > /dev/null
-    #ps ${SSH_AGENT_PID} doesn't work under cywgin
-    ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
-        start_agent;
-    }
-else
-    start_agent;
+if [ -z "$SSH_AUTH_SOCK" ]; then
+  eval "$(ssh-agent -s)" > /dev/null 2>&1
+  ssh-add -q "$HOME/.ssh/id_personal_github"
+  ssh-add -q "$HOME/.ssh/id_work_gitlab"
 fi
 
 #source ~/packages/fzf-git/fzf-git.sh
@@ -125,7 +95,8 @@ alias sptla="cd ~/dev/work/spotilla-be; clear; ls -lh"
 alias get_perm="cd ~/dev/work/perms; clear; ls -lh"
 alias vimconf="cd ~/.config/nvim; clear; files; nvim init.lua"
 alias wmconf="cd ~/.config/awesome; clear; files; nvim rc.lua"
-alias pit="cd ~/dev/github/privateInvestmentTracker; clear; files;"
+alias pit="cd ~/dev/github/networthly; clear; files;"
+alias nw="cd ~/dev/github/networthly; clear; files;"
 
 # SPTLA FUNCTIONS
 alias specmigrate="docker compose run be rake db:migrate RAILS_ENV=test"
@@ -410,7 +381,7 @@ unset __conda_setup
 # Custom appends through shell
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
-nvm use node
+nvm use node > /dev/null 2>&1
 
 # pnpm
 export PNPM_HOME="/home/smapo/.local/share/pnpm"
@@ -424,3 +395,5 @@ WEBKIT_DISABLE_DMABUF_RENDERER=1
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - zsh)"
+
+echo "Ready!"

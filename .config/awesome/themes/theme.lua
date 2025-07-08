@@ -10,8 +10,8 @@ local theme    = {}
 
 -- MONITOR ORDER (number is index)
 local monitor_center = 1
-local monitor_left   = 2
-local monitor_right  = 3
+local monitor_left   = 3
+local monitor_right  = 2
 
 theme.wallpaper = function(s)
   -- get wp based on screen index

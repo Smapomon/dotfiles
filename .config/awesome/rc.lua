@@ -16,7 +16,7 @@ for s in screen do
   monitor_count = monitor_count + 1
 end
 
-local app_direction   = "right"
+local app_direction   = "left"
 local direction_right = 1
 local direction_left  = -1
 
@@ -26,8 +26,8 @@ if app_direction == "right" then
 end
 
 if monitor_count == 3 then
-  monitor_left  = 2
-  monitor_right = 3
+  monitor_left  = 3
+  monitor_right = 2
 end
 
 -- {{{ Required libraries
@@ -627,7 +627,8 @@ awful.rules.rules = {
       "Wpa_gui", "veromix", "xtightvncviewer", "WhatSie", "discord",
       "Slack", "teams", "Ferdium", "gnome-calculator", "Solaar",
       "1Password", "Nvidia-settings", "Postman", "Image Lounge",
-      "dolphin", "steam", "Nemo", "qBittorrent", "Emulator", "kcharselect"
+      "dolphin", "steam", "Nemo", "qBittorrent", "Emulator", "kcharselect",
+      "Cursor"
     },
 
     -- Note that the name property shown in xprop might be set slightly after creation of the client
