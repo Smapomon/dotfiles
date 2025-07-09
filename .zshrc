@@ -76,6 +76,7 @@ alias dgit='/usr/bin/git --git-dir=$HOME/.dotconf/ --work-tree=$HOME'
 alias git_prune="git fetch -p && git branch -vv | grep 'origin/.*: gone]' | grep -v '\*' | awk '{print \$1}' | xargs git branch -d"
 alias git_hard_prune="git fetch -p && git branch -vv | grep 'origin/.*: gone]' | grep -v '\*' | awk '{print \$1}' | xargs git branch -D"
 alias gco="_fuzzy_branches"
+alias gdel="_find_delete_branch"
 gitlog() {
   local count="${1:-10}" # default to 10
   git log --max-count="$count" | nvim -R -
@@ -141,35 +142,59 @@ function is_in_git_repo() {
   git rev-parse HEAD > /dev/null 2>&1
 }
 
+function _find_delete_branch() {
+  is_in_git_repo || return
+
+  fetch_branches_with_spinner
+  current_branch="$(git branch --show-current | tr -d '\n')"
+
+  selected_branch=$(list_sorted_branches |
+    fzf --tac --no-mouse --cycle \
+    --border=bottom \
+    --border-label="|| current: $current_branch ||")
+
+  if [ -n "$selected_branch" ]; then
+    # Confirm branch exists locally before deleting
+    if git show-ref --verify --quiet "refs/heads/$selected_branch"; then
+      git branch -D "$selected_branch"
+    else
+      echo "❌ '$selected_branch' not found locally."
+    fi
+
+    git push origin --delete "$selected_branch"
+  fi
+}
+
 function _fuzzy_branches() {
   is_in_git_repo || return
 
+  fetch_branches_with_spinner
+  current_branch="$(git branch --show-current | tr -d '\n')"
+
+  list_sorted_branches |
+  fzf --tac --no-mouse --cycle --border=bottom --border-label="|| current: $current_branch ||" \
+  --bind 'enter:execute(echo {} | xargs git checkout)+abort,tab:execute-silent(echo {} | pbcopy)+abort'
+}
+
+function fetch_branches_with_spinner() {
   echo "Fetching branches..."
   git fetch -a -p &
   PID=$!
   i=0
   sp="/-\|"
   echo -n ' '
-  while [ -d /proc/$PID ]; do
-    c=`expr ${i} % 4`
-    case ${c} in
-      0) echo "/\c" ;;
-      1) echo "-\c" ;;
-      2) echo "\\ \b\c" ;;
-      3) echo "|\c" ;;
-    esac
-    i=`expr ${i} + 1`
-
+  while kill -0 "$PID" 2>/dev/null; do
+    len=${#sp}
+    c=$((i % len))
+    printf "\b${sp:$c:1}"
+    ((i++))
     sleep 0.05
-    echo "\b\c"
   done
+}
 
-  current_branch="$(git branch --show-current | tr -d '\n')"
-
+function list_sorted_branches() {
   git for-each-ref --sort='authordate:iso8601' --format='%(refname:lstrip=2)' |
-  sed 's=origin/==g' | grep -v HEAD | sort | uniq |
-  fzf --tac --no-mouse --cycle --border=bottom --border-label="|| current: $current_branch ||" \
-  --bind 'enter:execute(echo {} | xargs git checkout)+abort,tab:execute-silent(echo {} | pbcopy)+abort'
+  sed 's=origin/==g' | grep -v HEAD | sort | uniq
 }
 
 function rails_dir_map {
