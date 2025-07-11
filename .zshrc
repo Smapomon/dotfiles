@@ -91,7 +91,7 @@ alias discord_update_skip="cd ~/.config/discordptb; clear; ls -alh; nvim setting
 grepcd() {
   local dir
   dir="$($HOME/shell_scripts/grepcd.sh "$@")" || return
-  [ -n "$dir" ] && cd "$dir"
+  [ -n "$dir" ] && cd "$dir"; clear; ls -lh
 }
 alias dev='grepcd -d'
 alias notes='cd ~/dev/notes/brain/; clear; ls -lh'
