@@ -5,26 +5,32 @@
 # REQUIREMENTS
 #     - fzf must be installed and accessible from PATH
 #     - exa (optional) for pretty previews of directories
-#
-# OPTIONS
-#     -r, --root <path>
-#         Specify the root directory to search under (default: $HOME/dev)
-#
-#     -d, --detailed
-#         Enable a preview window showing contents of each directory
-#
-# EXAMPLES
-#     grepcd                     # Search in default root ($HOME/dev)
-#     grepcd -r ~/projects       # Search in a custom root directory
-#     grepcd -d                  # Enable preview when selecting
-#     grepcd -r ~/code -d        # Custom root + preview
 
 ROOT_DIR="$HOME/dev"
 SHOW_PREVIEW=false
-echo "Root directory set to $ROOT_DIR"
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
+    -h|--help)
+      cat <<EOF
+      Usage: grepcd [OPTIONS]
+
+      Fuzzy find Git project directories under a root path.
+      Selecting a directory will print the full path to stdout,
+      so it can be used for example with "cd" 'cd "\$(path/to/grepcd.sh)"'.
+
+      Options:
+        -r, --root <path>      Set the root directory to search (default: \$HOME/dev)
+        -d, --detailed         Show a preview pane with directory contents
+        -h, --help             Show this help message and exit
+
+      Example:
+        grepcd -d
+        grepcd --root ~/code
+
+EOF
+      exit 0
+      ;;
     -r|--root)
       if [[ -z "$2" || "$2" == -* ]]; then
         echo "Error: --root requires a path argument." >&2
