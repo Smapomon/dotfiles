@@ -21,25 +21,30 @@
 
 ROOT_DIR="$HOME/dev"
 SHOW_PREVIEW=false
+echo "Root directory set to $ROOT_DIR"
 
 while [[ $# -gt 0 ]]; do
-    case "$1" in
-        -r|--root)
-            ROOT_DIR="$2"
-            shift 2
-            ;;
-        -d|--detailed)
-            SHOW_PREVIEW=true
-            shift
-            ;;
-        -*)
-            echo "Unknown option: $1" >&2
-            exit 1
-            ;;
-        *)
-            break
-            ;;
-    esac
+  case "$1" in
+    -r|--root)
+      if [[ -z "$2" || "$2" == -* ]]; then
+        echo "Error: --root requires a path argument." >&2
+        exit 1
+      fi
+      ROOT_DIR="$2"
+      shift 2
+      ;;
+    -d|--detailed)
+      SHOW_PREVIEW=true
+      shift
+      ;;
+    -*)
+      echo "Unknown option: $1" >&2
+      exit 1
+      ;;
+    *)
+      break
+      ;;
+  esac
 done
 
 if ! command -v fzf >/dev/null 2>&1; then
