@@ -88,7 +88,12 @@ alias paru_fzf="paru -Sy \$(paru -Qu | fzf | cut -d \" \" -f 1)"
 alias discord_update_skip="cd ~/.config/discordptb; clear; ls -alh; nvim settings.json"
 
 # NAVIGATION ALIASES
-alias dev='cd ~/dev; clear; ls -lh'
+grepcd() {
+  local dir
+  dir="$($HOME/shell_scripts/grepcd.sh "$@")" || return
+  [ -n "$dir" ] && cd "$dir"
+}
+alias dev='grepcd -d'
 alias notes='cd ~/dev/notes/brain/; clear; ls -lh'
 alias work='cd ~/dev/work; clear; ls -lh'
 alias omni="cd ~/dev/gitlab/omnitool; clear; ls -lh"
