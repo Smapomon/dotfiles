@@ -126,7 +126,7 @@ tooltip {
 #taskbar {
 }
 #taskbar button {
-	min-width: 65px;
+	min-width: 25px;
 	border-bottom: 3px solid rgba(255, 255, 255, 0.3);
 	margin-left: 2px;
 	margin-right: 2px;
