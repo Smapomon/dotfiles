@@ -90,7 +90,7 @@ theme.cal = lain.widget.cal({
   }})
 
 
-music_player = wibox.widget.textbox()
+music_player   = wibox.widget.textbox()
 headset_status = wibox.widget.textbox()
 
 function update_music_player()
@@ -406,7 +406,7 @@ function theme.at_screen_connect(s)
   local cond_separator = nil
   if(s.index == monitor_center) then
     updates_widget = paru_updates_widget
-    music_widget = music_player
+    music_widget   = music_player
     headset_widget = headset_status
     cond_separator = separator
   end
