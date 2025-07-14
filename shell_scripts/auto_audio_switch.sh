@@ -58,7 +58,7 @@ state=$(check_headset_connected)
 DEFAULT_SINK=$(get_current_default "Audio/Sink")
 DEFAULT_SOURCE=$(get_current_default "Audio/Source")
 
-if [[ "$state" == "CONNECTED"]]; then
+if [[ "$state" == "CONNECTED" ]]; then
   [[ "$DEFAULT_SINK" != "$HEADSET_SINK_ID" && -n "$HEADSET_SINK_ID" ]] && wpctl set-default "$HEADSET_SINK_ID"
   [[ "$DEFAULT_SOURCE" != "$MIC_SOURCE_ID" && -n "$MIC_SOURCE_ID" ]] && wpctl set-default "$MIC_SOURCE_ID"
   echo "🎧 [$state]"
