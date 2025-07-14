@@ -45,7 +45,7 @@ get_current_default() {
 HEADSET_SINK_ID=$(get_sink_id_by_name "PRO X Wireless Gaming Headset Analog Stereo")
 MIC_SOURCE_ID=$(get_sink_id_by_name "PRO X Wireless Gaming Headset Mono")
 
-SSL_SINK_ID=$(get_sink_id_by_name "alsa_output.usb-Solid_State_Logic_SSL_2_-00.HiFi__Line2__sink [Audio/Sink]")
+SSL_SINK_ID=$(get_sink_id_by_name "alsa_output.usb-Solid_State_Logic_SSL_2_-00.HiFi__Line1__sink [Audio/Sink]")
 SSL_MIC_SOURCE_ID=$(get_sink_id_by_name "alsa_input.usb-Solid_State_Logic_SSL_2_-00.HiFi__Mic2__source [Audio/Source]")
 
 if [[ -z "$HEADSET_SINK_ID" || -z "$SSL_SINK_ID" ]]; then
@@ -58,12 +58,12 @@ state=$(check_headset_connected)
 DEFAULT_SINK=$(get_current_default "Audio/Sink")
 DEFAULT_SOURCE=$(get_current_default "Audio/Source")
 
-if [[ "$state" == "DISCONNECTED" ]]; then
-  [[ "$DEFAULT_SINK" != "$SSL_SINK_ID" && -n "$SSL_SINK_ID" ]] && wpctl set-default "$SSL_SINK_ID"
-  [[ "$DEFAULT_SOURCE" != "$SSL_MIC_SOURCE_ID" && -n "$SSL_MIC_SOURCE_ID" ]] && wpctl set-default "$SSL_MIC_SOURCE_ID"
-  echo "🎧🔌 [$(date +'%H:%M')]"
-else
+if [[ "$state" == "CONNECTED"]]; then
   [[ "$DEFAULT_SINK" != "$HEADSET_SINK_ID" && -n "$HEADSET_SINK_ID" ]] && wpctl set-default "$HEADSET_SINK_ID"
   [[ "$DEFAULT_SOURCE" != "$MIC_SOURCE_ID" && -n "$MIC_SOURCE_ID" ]] && wpctl set-default "$MIC_SOURCE_ID"
-  echo "🎧 [$(date +'%H:%M')]"
+  echo "🎧 [$state]"
+else
+  [[ "$DEFAULT_SINK" != "$SSL_SINK_ID" && -n "$SSL_SINK_ID" ]] && wpctl set-default "$SSL_SINK_ID"
+  [[ "$DEFAULT_SOURCE" != "$SSL_MIC_SOURCE_ID" && -n "$SSL_MIC_SOURCE_ID" ]] && wpctl set-default "$SSL_MIC_SOURCE_ID"
+  echo "🎧🔌"
 fi
