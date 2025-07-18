@@ -16,7 +16,7 @@ for s in screen do
   monitor_count = monitor_count + 1
 end
 
-local app_direction   = "left"
+local app_direction   = "right"
 local direction_right = 1
 local direction_left  = -1
 
@@ -26,8 +26,8 @@ if app_direction == "right" then
 end
 
 if monitor_count == 3 then
-  monitor_left  = 3
-  monitor_right = 2
+  monitor_left  = 2
+  monitor_right = 3
 end
 
 -- {{{ Required libraries

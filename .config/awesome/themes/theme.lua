@@ -8,10 +8,20 @@ local os       = os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 local theme    = {}
 
--- MONITOR ORDER (number is index)
+local monitor_left   = 1
 local monitor_center = 1
-local monitor_left   = 3
-local monitor_right  = 2
+local monitor_right  = 1
+local monitor_count  = 0
+
+for s in screen do
+  monitor_count = monitor_count + 1
+end
+
+-- MONITOR ORDER (number is index)
+if monitor_count == 3 then
+  monitor_left  = 2
+  monitor_right = 3
+end
 
 theme.wallpaper = function(s)
   -- get wp based on screen index

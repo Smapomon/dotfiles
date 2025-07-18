@@ -62,8 +62,6 @@ config.keys = {
   { key = 'k', mods = 'CTRL|SHIFT',   action = act.ScrollByLine(-1) },
   { key = 'j', mods = 'CTRL|SHIFT',   action = act.ScrollByLine(1) },
   { key = 'Tab', mods = 'CTRL|SHIFT', action = act.MoveTabRelative(1) },
-  { key = 'j', mods = 'CTRL|SHIFT', action = act.MoveTabRelative(1) },
-  { key = 'k', mods = 'CTRL|SHIFT', action = act.MoveTabRelative(-1) },
   {
     key = 'E',
     mods = 'CTRL',
