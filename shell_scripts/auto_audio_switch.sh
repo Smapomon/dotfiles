@@ -1,22 +1,7 @@
 #!/bin/bash
 
-# depends on solaar, because of the headset
-check_headset_connected() {
-  solaar show | awk '
-    $0 ~ /PRO X Wireless Gaming Headset/ { in_device = 1; next }
-    in_device && /^     / {
-      if ($0 ~ /Battery status unavailable/) {
-        print "DISCONNECTED"
-        exit
-      }
-
-      if ($0 ~ /Battery:/ && $0 !~ /unavailable/) {
-        print "CONNECTED"
-        exit
-      }
-    }
-    in_device && $0 !~ /^     / { exit }'
-}
+TOGGLE=false
+[[ "$1" == "-t" || "$1" == --toggle ]] && TOGGLE=true
 
 get_sink_id_by_name() {
   local name="$1"
@@ -53,17 +38,27 @@ if [[ -z "$HEADSET_SINK_ID" || -z "$SSL_SINK_ID" ]]; then
   exit 1
 fi
 
-state=$(check_headset_connected)
 
 DEFAULT_SINK=$(get_current_default "Audio/Sink")
 DEFAULT_SOURCE=$(get_current_default "Audio/Source")
+DEFAULT_SINK_ID=$(get_sink_id_by_name "$DEFAULT_SINK [Audio/Sink]")
+DEFAULT_SOURCE_ID=$(get_sink_id_by_name "$DEFAULT_SOURCE [Audio/Source]")
 
-if [[ "$state" == "CONNECTED" ]]; then
-  [[ "$DEFAULT_SINK" != "$HEADSET_SINK_ID" && -n "$HEADSET_SINK_ID" ]] && wpctl set-default "$HEADSET_SINK_ID"
-  [[ "$DEFAULT_SOURCE" != "$MIC_SOURCE_ID" && -n "$MIC_SOURCE_ID" ]] && wpctl set-default "$MIC_SOURCE_ID"
-  echo "🎧 [$state]"
+HIFI_STATUS="🎧"
+
+if [[ "$DEFAULT_SINK_ID" == "$SSL_SINK_ID" ]]; then
+  if $TOGGLE; then
+    wpctl set-default "$HEADSET_SINK_ID"
+    wpctl set-default "$MIC_SOURCE_ID"
+  else
+    HIFI_STATUS="🎧🔌"
+  fi
 else
-  [[ "$DEFAULT_SINK" != "$SSL_SINK_ID" && -n "$SSL_SINK_ID" ]] && wpctl set-default "$SSL_SINK_ID"
-  [[ "$DEFAULT_SOURCE" != "$SSL_MIC_SOURCE_ID" && -n "$SSL_MIC_SOURCE_ID" ]] && wpctl set-default "$SSL_MIC_SOURCE_ID"
-  echo "🎧🔌"
+  if $TOGGLE; then
+    wpctl set-default "$SSL_SINK_ID"
+    wpctl set-default "$SSL_MIC_SOURCE_ID"
+    HIFI_STATUS="🎧🔌"
+  fi
 fi
+
+echo "$HIFI_STATUS"

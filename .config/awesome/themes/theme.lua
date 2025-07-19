@@ -103,6 +103,15 @@ theme.cal = lain.widget.cal({
 music_player   = wibox.widget.textbox()
 headset_status = wibox.widget.textbox()
 
+headset_status:buttons(gears.table.join(
+  awful.button({}, 1, function()
+    awful.spawn.easy_async(os.getenv("HOME") .. "/shell_scripts/auto_audio_switch.sh --toggle", function(stdout)
+      headset_status:set_text(stdout)
+    end)
+  end)
+))
+
+
 function update_music_player()
   local command = "playerctl metadata --format '{{emoji(status)}} {{artist}} - {{title}}  {{duration(position)}}/{{duration(mpris:length)}}'"
   awful.spawn.easy_async(command, function(stdout)
