@@ -31,7 +31,7 @@ dpkg-deb -x appname_x.y.z-amd64.deb src/
 In the same folder, create a file named `PKGBUILD`:
 
 ```bash
-nano PKGBUILD
+nvim PKGBUILD
 ```
 
 Paste this:
