@@ -318,6 +318,7 @@ export ANDROID_SDK_ROOT="/home/smapo/Android/Sdk"
 export ANDROID_HOME="/home/smapo/Android/Sdk"
 
 ##### XDG DIR CHANGES #####
+export AWS_PROFILE="frostbit"
 export AWS_DEFAULT_PROFILE="frostbit"
 export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME"/aws/credentials
 export AWS_CONFIG_FILE="$XDG_CONFIG_HOME"/aws/config
