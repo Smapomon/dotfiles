@@ -70,7 +70,8 @@ PREVIEW_CMD=$(command -v exa >/dev/null 2>&1 \
     || echo 'ls -lah {}')
 
 if [ "$SHOW_PREVIEW" = true ]; then
-    selected=$(printf '%s\n' "${git_dirs[@]}" | fzf --preview="$PREVIEW_CMD" --preview-window=right:60%)
+  preview_opts="--preview-window=up:60%"
+  selected=$(printf '%s\n' "${git_dirs[@]}" | fzf --preview="$PREVIEW_CMD" $preview_opts)
 else
     selected=$(printf '%s\n' "${git_dirs[@]}" | fzf)
 fi
