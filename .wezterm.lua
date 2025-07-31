@@ -6,10 +6,7 @@ config.enable_wayland = false
 config.max_fps        = 165
 
 -- STYLE
-config.font = wezterm.font_with_fallback {
-  'Iosevka',
-  'FiraCode Nerd Font Mono',
-}
+config.font = wezterm.font 'Iosevka'
 
 config.font_size                    = 13
 config.window_background_opacity    = 0.85
