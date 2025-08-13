@@ -8,21 +8,6 @@ local os       = os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 local theme    = {}
 
-local monitor_left   = 1
-local monitor_center = 1
-local monitor_right  = 1
-local monitor_count  = 0
-
-for s in screen do
-  monitor_count = monitor_count + 1
-end
-
--- MONITOR ORDER (number is index)
-if monitor_count == 3 then
-  monitor_left  = 2
-  monitor_right = 3
-end
-
 theme.wallpaper = function(s)
   -- get wp based on screen index
   local wallpapers = {
@@ -288,50 +273,36 @@ function theme.at_screen_connect(s)
   -- Tags
   local custom_tags    = { "ƀ", "Ƅ", "Ɗ", "ƈ", "ƙ" }
 
-  -- LEFT MONITOR
-  if(s.index == monitor_left)
-  then
-    awful.tag.add("MUSIC", {
-      icon               = "/home/smapo/.config/awesome/icons/music.png",
-      layout             = awful.layout.layouts[1],
-      screen             = s,
-      selected           = true
-    })
+  awful.tag.add("MAIN", {
+    layout   = awful.layout.layouts[1],
+    screen   = s,
+    selected = true
+  })
 
-    -- CENTER MONITOR
-  elseif(s.index == monitor_center)
-  then
-    awful.tag.add("MAIN", {
-      icon     = "/home/smapo/.config/awesome/icons/home-icon.png",
-      layout   = awful.layout.layouts[1],
-      screen   = s,
-      selected = true
-    })
+  awful.tag.add("CODE", {
+    layout = awful.layout.layouts[1],
+    screen = s,
+  })
 
-    awful.tag.add("CODE", {
-      icon   = "/home/smapo/.config/awesome/icons/terminal.png",
-      layout = awful.layout.layouts[1],
-      screen = s,
-    })
+  awful.tag.add("WORK", {
+    layout = awful.layout.layouts[1],
+    screen = s,
+  })
 
-    awful.tag.add("NOTES", {
-      layout = awful.layout.layouts[1],
-      screen = s,
-    })
+  awful.tag.add("WEB & CHAT", {
+    layout   = awful.layout.layouts[1],
+    screen   = s,
+  })
 
-    -- RIGHT MONITOR
-  elseif(s.index == monitor_right)
-  then
-    awful.tag.add("WEB & CHAT", {
-      icon   = "/home/smapo/.config/awesome/icons/web-icon.png",
-      layout = awful.layout.layouts[1],
-      screen = s,
-      selected = true
-    })
-  else
-    awful.tag(custom_tags, s, awful.layout.layouts[1])
-  end
+  awful.tag.add("NOTES", {
+    layout = awful.layout.layouts[1],
+    screen = s,
+  })
 
+  awful.tag.add("MUSIC", {
+    layout   = awful.layout.layouts[1],
+    screen   = s,
+  })
 
   -- Create a promptbox for each screen
   s.mypromptbox = awful.widget.prompt()
@@ -418,17 +389,11 @@ function theme.at_screen_connect(s)
   -- Create the wibox
   s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(18), bg = theme.bg_normal, fg = theme.fg_normal })
 
-  local separator = wibox.widget.textbox(markup(gray, " | "))
-  local updates_widget = nil
-  local music_widget = nil
-  local headset_widget = nil
-  local cond_separator = nil
-  if(s.index == monitor_center) then
-    updates_widget = paru_updates_widget
-    music_widget   = music_player
-    headset_widget = headset_status
-    cond_separator = separator
-  end
+  local separator      = wibox.widget.textbox(markup(gray, " | "))
+  local updates_widget = paru_updates_widget
+  local music_widget   = music_player
+  local headset_widget = headset_status
+  local cond_separator = separator
 
   -- Add widgets to the wibox
   s.mywibox:setup {
@@ -463,13 +428,8 @@ function theme.at_screen_connect(s)
     },
   }
 
-  -- Force widgets to main monitor
-  if(s.index == monitor_center)
-  then
-    local tray = wibox.widget.systray()
-    tray:set_screen(s)
-  end
-
+  local tray = wibox.widget.systray()
+  tray:set_screen(s)
 end
 
 return theme

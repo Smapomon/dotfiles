@@ -6,29 +6,7 @@
 --]]
 
 -- SYSTEM VARIABLES
--- MONITOR ORDER (number is index)
-local monitor_left   = 1
-local monitor_center = 1
-local monitor_right  = 1
-local monitor_count  = 0
-
-for s in screen do
-  monitor_count = monitor_count + 1
-end
-
-local app_direction   = "right"
-local direction_right = 1
-local direction_left  = -1
-
-if app_direction == "right" then
-  direction_right = -1
-  direction_left  = 1
-end
-
-if monitor_count == 3 then
-  monitor_left  = 2
-  monitor_right = 3
-end
+local monitor_index = 1
 
 -- {{{ Required libraries
 
@@ -39,11 +17,9 @@ pcall(require, "luarocks.loader")
 local gears         = require("gears")
 local awful         = require("awful")
 require("awful.autofocus")
-local wibox         = require("wibox")
 local beautiful     = require("beautiful")
 local naughty       = require("naughty")
 local lain          = require("lain")
-local menubar       = require("menubar")
 local freedesktop   = require("freedesktop")
 local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
@@ -53,7 +29,7 @@ local mytable       = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 --{{{ Naughty Defaults
 naughty.config.defaults['icon_size'] = 100
-naughty.config.defaults['screen'] = monitor_center
+naughty.config.defaults['screen'] = monitor_index
 --}}}
 
 -- {{{ Error handling
@@ -217,7 +193,6 @@ screen.connect_signal("arrange", function (s)
   end
 end)
 
--- Create a wibox for each screen and add it
 awful.screen.connect_for_each_screen(function(s) beautiful.at_screen_connect(s) end)
 
 -- }}}
@@ -243,7 +218,7 @@ globalkeys = mytable.join(
 
   awful.key({ modkey }, "l",
     function ()
-      awful.screen.focus(monitor_center)
+      awful.screen.focus(monitor_index)
       naughty.notify {
         title    = "Lock Script",
         text     = "Locking screen...",
@@ -257,10 +232,6 @@ globalkeys = mytable.join(
   awful.key({ modkey }, "s", hotkeys_popup.show_help, {description="show help", group="awesome"}),
 
   -- Tag browsing
-  awful.key({ modkey }, "Left",   awful.tag.viewprev,
-    {description = "view previous", group = "tag"}),
-  awful.key({ modkey }, "Right",  awful.tag.viewnext,
-    {description = "view next", group = "tag"}),
   awful.key({ modkey }, "Escape", awful.tag.history.restore,
     {description = "go back", group = "tag"}),
   awful.key({ modkey }, "Tab", awful.tag.viewnext,
@@ -463,7 +434,7 @@ globalkeys = mytable.join(
   -- rofi
   -- check https://github.com/DaveDavenport/rofi for more details
   awful.key({ modkey }, "p", function ()
-    awful.screen.focus(monitor_center)
+    awful.screen.focus(monitor_index)
     os.execute(string.format('rofi -combi-modi window,drun,ssh -theme solarized -font "hack 10" -show combi -icon-theme "Papirus" -show-icons',
       'combi'))
   end,
@@ -506,16 +477,19 @@ clientkeys = mytable.join(
     {description = "move to master", group = "client"}),
 
   awful.key({ modkey }, "o",
-    function (c)
-      c:move_to_screen(c.screen.index+direction_right)
-    end,
-    {description = "move to screen", group = "client"}),
+    awful.placement.centered, -- move client to the center of screen
+    {description = "Center client", group = "client"}),
 
-  awful.key({ modkey, "Shift" }, "o",
-    function (c)
-      c:move_to_screen(c.screen.index+direction_left)
-    end,
-    {description = "move to screen", group = "client"}),
+  --awful.key({ modkey }, "o",
+    --function (c)
+      --c:move_to_screen(c.screen.index+1)
+    --end,
+    --{description = "move to screen", group = "client"}),
+  --awful.key({ modkey, "Shift" }, "o",
+    --function (c)
+      --c:move_to_screen(c.screen.index-1)
+    --end,
+    --{description = "move to screen", group = "client"}),
 
   awful.key({ modkey }, "n",
     function (c)
@@ -542,7 +516,32 @@ clientkeys = mytable.join(
       c.maximized_horizontal = not c.maximized_horizontal
       c:raise()
     end ,
-    {description = "(un)maximize horizontally", group = "client"})
+    {description = "(un)maximize horizontally", group = "client"}),
+
+  -- Move client position
+  awful.key({ modkey }, "Left",
+    function(c)
+      c:relative_move(-45, 0, 0, 0)
+    end,
+    {description = "move client", group = "client"}),
+
+  awful.key({ modkey }, "Right",
+    function(c)
+      c:relative_move(45, 0, 0, 0)
+    end,
+    {description = "move client", group = "client"}),
+
+  awful.key({ modkey }, "Up",
+    function(c)
+      c:relative_move(0, -45, 0, 0)
+    end,
+    {description = "move client", group = "client"}),
+
+  awful.key({ modkey }, "Down",
+    function(c)
+      c:relative_move(0, 45, 0, 0)
+    end,
+    {description = "move client", group = "client"})
 )
 
 -- Bind all key numbers to tags.
@@ -692,7 +691,7 @@ awful.rules.rules = {
         "Ferdium"
       }
     },
-    properties = { screen = monitor_left, tag = "MUSIC" }
+    properties = { screen = monitor_index, tag = "MUSIC" }
   },
 
   {
@@ -701,7 +700,7 @@ awful.rules.rules = {
         "obsidian",
       }
     },
-    properties = { screen = monitor_center, tag = "NOTES" }
+    properties = { screen = monitor_index, tag = "NOTES" }
   },
 
   {
@@ -710,7 +709,7 @@ awful.rules.rules = {
         "discord"
       }
     },
-    properties = { screen = monitor_right, tag = "WEB & CHAT" }
+    properties = { screen = monitor_index, tag = "WEB & CHAT" }
   },
 }
 

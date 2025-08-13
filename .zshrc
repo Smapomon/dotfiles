@@ -414,7 +414,6 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-# Custom appends through shell
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 nvm use node > /dev/null 2>&1
@@ -431,5 +430,7 @@ WEBKIT_DISABLE_DMABUF_RENDERER=1
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - zsh)"
+
+export PATH=$PATH:$(go env GOPATH)/bin
 
 echo "Ready!"
