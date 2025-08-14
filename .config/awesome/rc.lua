@@ -208,6 +208,27 @@ root.buttons(mytable.join(
 -- }}}
 
 -- {{{ Key bindings
+-- Cycle clients through tags
+local gmath = require("gears.math")
+
+local function cycle_client_tag(dir)
+  local c = client.focus
+  if not c then return end
+
+  dir = dir or 1
+
+  local t = c.screen.selected_tag
+  local tags = c.screen.tags
+  local idx = t.index
+  local newtag = tags[gmath.cycle(#tags, idx + dir)]
+  c:move_to_tag(newtag)
+
+  if dir == 1 then
+    awful.tag.viewnext()
+  else
+    awful.tag.viewprev()
+  end
+end
 
 globalkeys = mytable.join(
   awful.key({ "Control" }, "space",
@@ -243,36 +264,21 @@ globalkeys = mytable.join(
 
 
   -- Default client focus
-  awful.key({ modkey,           }, "j",
-    function ()
-      awful.client.focus.byidx( 1)
-    end,
-    {description = "focus next by index", group = "client"}
-  ),
-  awful.key({ altkey,           }, "Tab",
-    function ()
-      awful.client.focus.byidx( 1)
-    end,
-    {description = "focus next by index", group = "client"}
-  ),
-  awful.key({ modkey,           }, "k",
-    function ()
-      awful.client.focus.byidx(-1)
-    end,
-    {description = "focus previous by index", group = "client"}
-  ),
-  awful.key({ altkey,           }, "Right",
-    function ()
-      awful.client.focus.byidx(1)
-    end,
-    {description = "focus next by index", group = "client"}
-  ),
-  awful.key({ altkey,           }, "Left",
-    function ()
-      awful.client.focus.byidx(-1)
-    end,
-    {description = "focus previous by index", group = "client"}
-  ),
+  awful.key({ modkey, }, "j", function () awful.client.focus.byidx( 1) end,
+    {description = "focus next by index", group = "client"}),
+
+  awful.key({ altkey, }, "Tab", function () awful.client.focus.byidx( 1) end,
+    {description = "focus next by index", group = "client"}),
+
+  awful.key({ modkey, }, "k", function () awful.client.focus.byidx(-1) end,
+    {description = "focus previous by index", group = "client"}),
+
+  awful.key({ altkey, }, "Right", function () awful.client.focus.byidx(1) end,
+    {description = "focus next by index", group = "client"}),
+
+  awful.key({ altkey, }, "Left", function () awful.client.focus.byidx(-1) end,
+    {description = "focus previous by index", group = "client"}),
+
 
   -- Menu
   awful.key({ modkey,           }, "w", function () awful.util.mymainmenu:show() end,
@@ -301,12 +307,16 @@ globalkeys = mytable.join(
   -- Dynamic tagging
   awful.key({ modkey, "Shift" }, "n", function () lain.util.add_tag() end,
     {description = "add new tag", group = "tag"}),
+
   awful.key({ modkey, "Shift" }, "r", function () lain.util.rename_tag() end,
     {description = "rename tag", group = "tag"}),
+
   awful.key({ modkey, "Shift" }, "Left", function () lain.util.move_tag(-1) end,
     {description = "move tag to the left", group = "tag"}),
+
   awful.key({ modkey, "Shift" }, "Right", function () lain.util.move_tag(1) end,
     {description = "move tag to the right", group = "tag"}),
+
   awful.key({ modkey, "Shift" }, "d", function () lain.util.delete_tag() end,
     {description = "delete tag", group = "tag"}),
 
@@ -454,7 +464,6 @@ globalkeys = mytable.join(
 
 clientkeys = mytable.join(
   awful.key({ altkey, "Shift"   }, "m", lain.util.magnify_client, {description = "magnify client", group = "client"}),
-  awful.key({ modkey, "Control" }, "space", awful.client.floating.toggle, {description = "toggle floating", group = "client"}),
   awful.key({ modkey }, "space", awful.client.floating.toggle, {description = "toggle floating", group = "client"}),
 
   awful.key({ modkey }, "f",
@@ -476,20 +485,8 @@ clientkeys = mytable.join(
     end,
     {description = "move to master", group = "client"}),
 
-  awful.key({ modkey }, "o",
-    awful.placement.centered, -- move client to the center of screen
-    {description = "Center client", group = "client"}),
-
-  --awful.key({ modkey }, "o",
-    --function (c)
-      --c:move_to_screen(c.screen.index+1)
-    --end,
-    --{description = "move to screen", group = "client"}),
-  --awful.key({ modkey, "Shift" }, "o",
-    --function (c)
-      --c:move_to_screen(c.screen.index-1)
-    --end,
-    --{description = "move to screen", group = "client"}),
+  awful.key({ modkey }, "o", function() cycle_client_tag() end,
+    {description = "Cycle client through tags", group = "client"}),
 
   awful.key({ modkey }, "n",
     function (c)

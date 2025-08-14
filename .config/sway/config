@@ -24,9 +24,7 @@ set $menu 'rofi -combi-modi window,drun,ssh -theme solarized -font "hack 10" -sh
 
 output * bg ~/wallpapers/duckful_two.png fill
 
-output DP-3 resolution 2560x1440@164.999Hz position 0,0
-output DP-2 resolution 3440x1440@164.999Hz position 2560,0
-output DP-1 resolution 2560x1440@164.999Hz position 6000,0
+output DP-0 resolution 3440x1440@164.999Hz position 0,0
 
 ### General configuration
 #
@@ -65,7 +63,7 @@ input "1133:50504:Logitech_USB_Receiver_Mouse" {
   natural_scroll disabled
   middle_emulation enabled
   accel_profile "flat"
-  pointer_accel -0.4 # (between -1 & 1)
+  pointer_accel -0.7 # (between -1 & 1)
 }
 
 ### Key bindings
@@ -87,12 +85,11 @@ input "1133:50504:Logitech_USB_Receiver_Mouse" {
 # Moving around:
 #
     # Cycle focus
-    bindsym $mod+j focus next --container
-    bindsym $mod+k focus prev --container
+    bindsym $mod+j focus prev --container
+    bindsym $mod+k focus next --container
 
     # Cycle window placement
-    bindsym $mod+o move window to output right, focus output right
-    bindsym Ctrl+Shift+Tab move window to workspace next_on_output
+    bindsym $mod+o move window to workspace next_on_output
 
     # Splits
     bindsym $mod+Alt+j splitv
@@ -108,6 +105,11 @@ input "1133:50504:Logitech_USB_Receiver_Mouse" {
 # Workspaces:
 #
     # Switch to workspace
+    bindsym $mod+Ctrl+j workspace next
+    bindsym $mod+Ctrl+k workspace prev
+
+    #bindsym $mod+Ctrl+n workspace 
+
     bindsym $mod+1 workspace number 1
     bindsym $mod+2 workspace number 2
     bindsym $mod+3 workspace number 3
@@ -118,6 +120,7 @@ input "1133:50504:Logitech_USB_Receiver_Mouse" {
     bindsym $mod+8 workspace number 8
     bindsym $mod+9 workspace number 9
     bindsym $mod+0 workspace number 10
+
     # Move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace number 1
     bindsym $mod+Shift+2 move container to workspace number 2
@@ -163,6 +166,8 @@ input "1133:50504:Logitech_USB_Receiver_Mouse" {
     bindsym $mod+Ctrl+Up resize shrink height 20px
     bindsym $mod+Ctrl+Right resize grow width 20px
 
+    bindsym Ctrl+Alt+space focus left, resize set width 70ppt
+
 mode "resize" {
     bindsym $left resize shrink width 20px
     bindsym $down resize grow height 20px
@@ -179,7 +184,7 @@ mode "resize" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+r mode "resize"
+bindsym Alt+r mode "resize"
 #
 # Utilities:
 #
@@ -201,6 +206,7 @@ bindsym $mod+r mode "resize"
 
     # Special key to take a screenshot with grim
     bindsym Print exec grim
+    bindsym $mod+Shift+S exec grim
 
 #
 # Status Bar:
