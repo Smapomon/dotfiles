@@ -21,7 +21,7 @@ theme.wallpaper = function(s)
 end
 
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes"
-theme.font                                      = "Iosevka 11"
+theme.font                                      = "Iosevka 12"
 theme.taglist_font                              = "FuraCode Nerd Font"
 theme.menubar_bg_normal                         = "#282a36"
 theme.menubar_bg_focus                          = "#404357"
@@ -45,7 +45,7 @@ theme.menu_width                                = dpi(130)
 theme.menu_submenu_icon                         = theme.dir .. "/icons/submenu.png"
 theme.awesome_icon                              = theme.dir .."/icons/awesome.png"
 theme.taglist_squares_sel                       = theme.dir .. "/icons/square_sel.png"
-theme.taglist_squares_unsel                     = theme.dir .. "/icons/square_unsel.png"
+theme.taglist_squares_unsel                     = theme.dir .. "/icons/square_unsel_v2.png"
 theme.layout_tile                               = theme.dir .. "/icons/tile.png"
 theme.layout_spiral                             = theme.dir .. "/icons/spiral.png"
 theme.layout_max                                = theme.dir .. "/icons/max.png"

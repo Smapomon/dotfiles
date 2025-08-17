@@ -280,6 +280,7 @@ globalkeys = mytable.join(
     {description = "focus previous by index", group = "client"}),
 
 
+
   -- Menu
   awful.key({ modkey,           }, "w", function () awful.util.mymainmenu:show() end,
     {description = "show main menu", group = "awesome"}),
@@ -369,12 +370,8 @@ globalkeys = mytable.join(
     {description = "dropdown application", group = "launcher"}),
 
   -- Widgets popups
-  awful.key({ altkey, }, "c", function () if beautiful.cal then beautiful.cal.show(7) end end,
-    {description = "show calendar", group = "widgets"}),
-  awful.key({ altkey, }, "h", function () if beautiful.fs then beautiful.fs.show(7) end end,
+  awful.key({ modkey, }, "e", function () if beautiful.fs then beautiful.fs.show(7) end end,
     {description = "show filesystem", group = "widgets"}),
-  awful.key({ altkey, }, "w", function () if beautiful.weather then beautiful.weather.show(7) end end,
-    {description = "show weather", group = "widgets"}),
 
   -- Screen brightness
   awful.key({ }, "XF86MonBrightnessUp", function () os.execute("xbacklight -inc 10") end,
@@ -427,12 +424,6 @@ globalkeys = mytable.join(
       awful.util.spawn_with_shell("playerctl previous")
     end),
 
-  -- Copy primary to clipboard (terminals to gtk)
-  awful.key({ modkey }, "c", function () awful.spawn.with_shell("xsel | xsel -i -b") end,
-    {description = "copy terminal to gtk", group = "hotkeys"}),
-  -- Copy clipboard to primary (gtk to terminals)
-  --awful.key({ modkey }, "v", function () awful.spawn.with_shell("xsel -b | xsel") end,
-  --{description = "copy gtk to terminal", group = "hotkeys"}),
   -- Open diodon for clipboard histroy
   awful.key({ modkey }, "v", function () awful.spawn.with_shell("/usr/bin/diodon") end,
     {description = "copy gtk to terminal", group = "hotkeys"}),
@@ -445,7 +436,7 @@ globalkeys = mytable.join(
   -- check https://github.com/DaveDavenport/rofi for more details
   awful.key({ modkey }, "p", function ()
     awful.screen.focus(monitor_index)
-    os.execute(string.format('rofi -combi-modi window,drun,ssh -theme solarized -font "hack 10" -show combi -icon-theme "Papirus" -show-icons',
+    os.execute(string.format('rofi -combi-modi window,drun,ssh -theme solarized -font "hack 14" -show combi -icon-theme "Papirus" -show-icons',
       'combi'))
   end,
     {description = "show rofi", group = "launcher"}),
@@ -487,6 +478,10 @@ clientkeys = mytable.join(
 
   awful.key({ modkey }, "o", function() cycle_client_tag() end,
     {description = "Cycle client through tags", group = "client"}),
+
+  awful.key({ modkey }, "c", awful.placement.centered,
+    {description = "Center tag", group = "client"}),
+
 
   awful.key({ modkey }, "n",
     function (c)

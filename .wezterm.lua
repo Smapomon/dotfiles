@@ -13,14 +13,14 @@ config.font = wezterm.font_with_fallback {
   'FiraCode Nerd Font',
 }
 
-config.font_size                    = 13
+config.font_size                    = 18
 config.window_background_opacity    = 0.85
 config.hide_tab_bar_if_only_one_tab = true
 config.cursor_blink_rate            = 0
 
 config.window_frame = {
   font                 = wezterm.font { family = 'Roboto', weight = 'Bold' },
-  font_size            = 12.0,
+  font_size            = 18.0,
   active_titlebar_bg   = '#000000',
   inactive_titlebar_bg = '#000000',
 }
