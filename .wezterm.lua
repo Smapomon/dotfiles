@@ -2,8 +2,9 @@ local wezterm = require 'wezterm'
 local config  = wezterm.config_builder()
 local act     = wezterm.action
 
-config.enable_wayland = false
-config.max_fps        = 165
+config.enable_wayland            = false
+config.max_fps                   = 165
+config.warn_about_missing_glyphs = false
 
 -- STYLE
 --config.font = wezterm.font 'Iosevka'
