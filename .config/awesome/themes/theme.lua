@@ -21,7 +21,7 @@ theme.wallpaper = function(s)
 end
 
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes"
-theme.font                                      = "Iosevka 12"
+theme.font                                      = "Iosevka 10"
 theme.taglist_font                              = "FuraCode Nerd Font"
 theme.menubar_bg_normal                         = "#282a36"
 theme.menubar_bg_focus                          = "#404357"
