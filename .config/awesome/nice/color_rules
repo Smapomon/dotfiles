@@ -1,9 +1,11 @@
 return {
 -- Table: {1}
 {
-   ["brave-browser"]="#2b373dff",
-   ["Navigator"]="#ebebebff",
-   ["gnome-calculator"]="#ffffffff",
    ["discord"]="#141015",
+   ["Navigator"]="#ebebebff",
+   ["cursor"]="#191c22",
+   ["brave-browser"]="#2b373dff",
+   ["obs"]="#1d1f26",
+   ["gnome-calculator"]="#ffffffff",
 },
 }

@@ -7,21 +7,28 @@
 
 -- SYSTEM VARIABLES
 -- MONITOR ORDER (number is index)
-local monitor_left   = 1
-local monitor_center = 1
-local monitor_right  = 1
-local monitor_count  = 0
+MONITOR_LEFT        = 1
+MONITOR_RIGHT       = 1
+local monitor_count = 0
 
 for s in screen do
   monitor_count = monitor_count + 1
 end
 
-if monitor_count == 3 then
-  monitor_left  = 2
-  monitor_right = 3
+if monitor_count == 2 then
+  MONITOR_LEFT   = 2
+  MONITOR_RIGHT  = 1
 end
 
-local user_home = 'vim_muumi'
+local dir_left = -1
+local dir_right = 1
+
+WALLPAPERS = {
+  "/home/smapo/wallpapers/Duckful (2).png",
+  "/home/smapo/wallpapers/Duckful (2).png",
+}
+
+local user_home = 'smapo'
 
 -- {{{ Required libraries
 
@@ -46,7 +53,7 @@ local mytable       = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 --{{{ Naughty Defaults
 naughty.config.defaults['icon_size'] = 100
-naughty.config.defaults['screen'] = monitor_center
+naughty.config.defaults['screen'] = MONITOR_RIGHT
 --}}}
 
 -- {{{ Error handling
@@ -285,7 +292,7 @@ globalkeys = mytable.join(
     -- X screen locker
     awful.key({ modkey }, "l",
       function ()
-        awful.screen.focus(monitor_center)
+        awful.screen.focus(MONITOR_RIGHT)
         naughty.notify {
           title    = "Lock Script",
           text     = "Locking screen...",
@@ -448,7 +455,7 @@ globalkeys = mytable.join(
     awful.key({ modkey, "Control" }, "Down",     function () awful.client.incwfact(0.05) end,
               {description = "decrease the number of master clients", group = "layout"}),
     awful.key({ altkey, "Control" }, "space",     function ()
-      awful.screen.focused().selected_tag.master_width_factor = 0.75
+      awful.screen.focused().selected_tag.master_width_factor = 0.7
     end, {description = "set master col size", group = "layout"}),
 
 
@@ -575,19 +582,8 @@ globalkeys = mytable.join(
     awful.key({ modkey }, "q", function () awful.spawn(browser) end,
               {description = "run browser", group = "launcher"}),
 
-    -- Default
-    --awful.key({ modkey }, "p", function() menubar.show() end,
-              --{description = "show the menubar", group = "launcher"}),
-    -- dmenu
-    --awful.key({ modkey }, "space", function ()
-            --awful.util.spawn_with_shell("~/shell_scripts/fuzzy_win")
-        --end,
-        --{description = "show dmenu", group = "launcher"}),
-    -- alternatively use rofi, a dmenu-like application with more features
-    -- check https://github.com/DaveDavenport/rofi for more details
-    -- rofi
     awful.key({ modkey }, "p", function ()
-            awful.screen.focus(monitor_center)
+            awful.screen.focus(MONITOR_RIGHT)
             os.execute(string.format('rofi -combi-modi window,drun,ssh -theme solarized -font "hack 10" -show combi -icon-theme "Papirus" -show-icons',
             'combi'))
         end,
@@ -595,23 +591,12 @@ globalkeys = mytable.join(
     -- Prompt
     awful.key({ modkey }, "r", function () awful.screen.focused().mypromptbox:run() end,
               {description = "run prompt", group = "launcher"}),
-
-    --awful.key({ modkey }, "space",
-              --function ()
-                  --awful.prompt.run {
-                    --prompt       = "Find window: ",
-                    --textbox      = awful.screen.focused().mypromptbox.widget,
-                    --exe_callback = awful.util.eval,
-                    --history_path = awful.util.get_cache_dir() .. "/history_eval"
-                  --}
-              --end,
-              --{description = "lua execute prompt", group = "awesome"}),
     --]]
 
     -- Screenshot snip
     awful.key({ modkey, "Shift" }, "s",
                 function ()
-                    awful.util.spawn_with_shell("FILE=" .. os.getenv("HOME") .. "/Pictures/Screenshots/snapshot-$(date +%Y-%m-%dT%H-%M-%S).png && maim -s --hidecursor $FILE && sleep 0.5 && xclip -selection clipboard $FILE -t image/png && paplay /home/vim_muumi/Music/sound_effects/camera-shutter.mp3")
+                    awful.util.spawn_with_shell("FILE=" .. os.getenv("HOME") .. "/Pictures/Screenshots/snapshot-$(date +%Y-%m-%dT%H-%M-%S).png && maim -s --hidecursor $FILE && sleep 0.5 && xclip -selection clipboard $FILE -t image/png && paplay /home/smapo/Music/sound_effects/camera-shutter.mp3")
                 end,
               {description = "Grab a screenshot of selected area", group = "awesome"})
 )
@@ -625,19 +610,19 @@ clientkeys = mytable.join(
             c:raise()
         end,
         {description = "toggle fullscreen", group = "client"}),
-    awful.key({ modkey, "Control"   }, "c",      function (c) c:kill()                       end,
+    awful.key({ modkey, "Control"   }, "c",      function (c) c:kill()                                  end,
               {description = "close", group = "client"}),
-    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
+    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle,
               {description = "toggle floating", group = "client"}),
-    awful.key({ modkey, }, "space",  function (c) awful.titlebar.toggle(c)               end,
+    awful.key({ modkey, }, "space",  function (c) awful.titlebar.toggle(c)                              end,
               {description = "toggle floating", group = "client"}),
-    awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
+    awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster())            end,
               {description = "move to master", group = "client"}),
-    awful.key({ modkey,           }, "o",      function (c) c:move_to_screen(c.screen.index-1)             end,
+    awful.key({ modkey,           }, "o",      function (c) c:move_to_screen(c.screen.index+dir_right)  end,
               {description = "move to screen", group = "client"}),
-    awful.key({ modkey, "Shift"   }, "o",      function (c) c:move_to_screen(c.screen.index+1)             end,
+    awful.key({ modkey, "Shift"   }, "o",      function (c) c:move_to_screen(c.screen.index+dir_left)   end,
               {description = "move to screen", group = "client"}),
-    awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
+    awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop                       end,
               {description = "toggle keep on top", group = "client"}),
     awful.key({ modkey,           }, "n",
         function (c)
@@ -876,24 +861,24 @@ awful.rules.rules = {
 
     -- Set apps to always map on the correct tag on the correct screen
     {
-        rule = { class = "Spotify" },
-        properties = { screen = monitor_left, tag = "MUSIC" }
+        rule_any = {
+            class = {
+                "Spotify",
+                "Ferdium"
+            }
+        },
+        properties = { screen = MONITOR_LEFT, tag = "MUSIC" }
     },
 
     {
-        rule = { class = "Ferdium" },
-        properties = { screen = monitor_left, tag = "MUSIC" }
+        rule_any = {
+            class = {
+                "discord",
+                "ticktick"
+            }
+        },
+        properties = { screen = MONITOR_RIGHT, tag = "WEB & CHAT" }
     },
-
-    {
-        rule = { class = "Brave-browser" },
-        properties = { screen = monitor_right, tags = {"WEB & CHAT"} }
-    },
-
-    {
-        rule = { class = "discord" },
-        properties = { screen = monitor_right, tags = {"WEB & CHAT"} }
-    }
 }
 
 -- }}}
@@ -951,8 +936,9 @@ awful.spawn.with_shell("nvidia-settings")
 awful.spawn.with_shell("/home/".. user_home .. "/shell_scripts/set_monitor.sh")
 awful.spawn.with_shell("nitrogen --restore")
 awful.spawn.with_shell("/home/".. user_home .. "/shell_scripts/autostart_apps.sh")
+awful.spawn.with_shell("/home/".. user_home .."/shell_scripts/keep_monitors_alive.sh")
 
 -- Set autolock for display
-awful.spawn.with_shell("xautolock -time 45 -locker /home/".. user_home .."/shell_scripts/set_lockscreen.sh")
+--awful.spawn.with_shell("xautolock -time 45 -locker /home/".. user_home .."/shell_scripts/set_lockscreen.sh")
 
 -- }}}

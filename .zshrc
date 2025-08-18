@@ -17,6 +17,11 @@ export XDG_CONFIG_HOME=$HOME/.config
 export XDG_STATE_HOME=$HOME/.local/state
 export XDG_CACHE_HOME=$HOME/.cache
 
+export XCURSOR_PATH=${XCURSOR_PATH}:~/.local/share/icons
+
+# setup API keys etc
+export $(xargs <$HOME/.zsh_secure_vars)
+
 # setup language variables
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
@@ -118,6 +123,7 @@ alias sptla="cd ~/dev/work/spotilla-be; clear; ls -lh"
 alias get_perm="cd ~/dev/work/perms; clear; ls -lh"
 alias vimconf="cd ~/.config/nvim; clear; files; nvim init.lua"
 alias wmconf="cd ~/.config/awesome; clear; files; nvim rc.lua"
+alias notes="cd ~/dev/notes/brain; clear; ls -lh"
 
 # NAVIGATE WINDOW CLIENTS
 alias fuzzy_win='wmctrl -i -a $(wmctrl -l | fzf | cut -d\  -f1); exit'
@@ -129,7 +135,7 @@ alias dspec_all="docker compose run be rspec ./spec"
 alias jarru="clear; docker compose run be brakeman -A -z -I"
 
 # DOCKER FUNCTIONS
-alias dcup="clear; rm tmp/pids/server.pid; docker compose up"
+alias dcup="clear; rm tmp/pids/server.pid; docker compose up --remove-orphans"
 alias dc_debug="clear; rm tmp/pids/server.pid; docker compose run --service-ports be"
 alias dbld="clear; docker compose build"
 alias docker_start="sudo systemctl start docker.service"

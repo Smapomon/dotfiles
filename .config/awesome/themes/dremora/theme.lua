@@ -15,8 +15,9 @@ local os = os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 local theme                                     = {}
+
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/dremora"
-theme.font                                      = "FuraCode Nerd Font 10.5"
+theme.font                                      = "FuraCode Nerd Font 13.5"
 theme.taglist_font                              = "FuraCode Nerd Font"
 theme.menubar_bg_normal                         = "#282a36"
 theme.menubar_bg_focus                          = "#404357"
@@ -80,24 +81,10 @@ theme.titlebar_maximized_button_normal_active   = theme.dir .. "/icons/titlebar/
 theme.titlebar_maximized_button_focus_inactive  = theme.dir .. "/icons/titlebar/maximized_focus_inactive.png"
 theme.titlebar_maximized_button_normal_inactive = theme.dir .. "/icons/titlebar/maximized_normal_inactive.png"
 
-
--- MONITOR ORDER (number is index)
-local monitor_left   = 2
-local monitor_center = 1
-local monitor_right  = 3
-
 theme.wallpaper = function(s)
   -- get wp based on screen index
-  local wallpapers = {
-    --"/home/vim_muumi/wallpapers/Trump-Wrong-1024.png",
-    "/home/vim_muumi/wallpapers/Duckful (2).png",
-    "/home/vim_muumi/wallpapers/reckful-everland.jpg",
-    "/home/vim_muumi/wallpapers/byron-last-wave-dark.jpg",
-  }
-
-  return wallpapers[s.index]
+  return WALLPAPERS[s.index]
 end
-
 
 awful.util.tagnames   = { "ƀ", "Ƅ", "Ɗ", "ƈ", "ƙ" }
 
@@ -105,6 +92,7 @@ local markup     = lain.util.markup
 local separators = lain.util.separators
 local white      = theme.fg_focus
 local gray       = "#858585"
+local green      = "#00703c"
 
 -- Textclock
 local mytextclock = wibox.widget.textclock(
@@ -191,7 +179,7 @@ local bat = lain.widget.bat({
     settings = function()
         bat_header = " Bat "
         bat_p      = bat_now.perc .. " "
-        widget:set_markup(markup.font(theme.font, markup(gray, bat_header) .. markup(white, bat_p)))
+        widget:set_markup(markup.font(theme.font, markup(green, bat_header) .. markup(green, bat_p) .. markup(green, "%") .. markup(gray, " | ")))
     end
 })
 
@@ -298,36 +286,33 @@ function theme.at_screen_connect(s)
     local custom_tags    = { "ƀ", "Ƅ", "Ɗ", "ƈ", "ƙ" }
 
     -- LEFT MONITOR
-    if(s.index == monitor_left)
+    if(s.index == MONITOR_LEFT)
     then
         awful.tag.add("MUSIC", {
-            icon               = "/home/vim_muumi/.config/awesome/icons/music.png",
+            icon               = "/home/smapo/.config/awesome/icons/music.png",
             layout             = awful.layout.layouts[1],
             screen             = s,
             selected           = true
         })
 
-    -- CENTER MONITOR
-    elseif(s.index == monitor_center)
+    -- MAIN MONITOR
+    elseif(s.index == MONITOR_RIGHT)
     then
         awful.tag.add("MAIN", {
-            icon     = "/home/vim_muumi/.config/awesome/icons/home-icon.png",
+            icon     = "/home/smapo/.config/awesome/icons/home-icon.png",
             layout   = awful.layout.layouts[1],
             screen   = s,
             selected = true
         })
 
         awful.tag.add("CODE", {
-            icon   = "/home/vim_muumi/.config/awesome/icons/terminal.png",
+            icon   = "/home/smapo/.config/awesome/icons/terminal.png",
             layout = awful.layout.layouts[1],
             screen = s,
         })
 
-    -- RIGHT MONITOR
-    elseif(s.index == monitor_right)
-    then
         awful.tag.add("WEB & CHAT", {
-            icon   = "/home/vim_muumi/.config/awesome/icons/web-icon.png",
+            icon   = "/home/smapo/.config/awesome/icons/web-icon.png",
             layout = awful.layout.layouts[1],
             screen = s,
             selected = true
@@ -408,7 +393,7 @@ function theme.at_screen_connect(s)
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(18), bg = theme.bg_normal, fg = theme.fg_normal })
+    s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(20), bg = theme.bg_normal, fg = theme.fg_normal })
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -427,20 +412,17 @@ function theme.at_screen_connect(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+            bat,
             active_app,
             wibox.widget.systray(),
             first,
-            --theme.mpd.widget,
-            --theme.mail.widget,
-            --theme.fs.widget,
-            --theme.volume.bar,
             volume_widget,
             mytextclock,
         },
     }
 
         -- Force widgets to main monitor
-    if(s.index == monitor_center)
+    if(s.index == MONITOR_RIGHT)
     then
         local tray = wibox.widget.systray()
         tray:set_screen(s)
