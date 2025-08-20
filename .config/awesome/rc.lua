@@ -352,7 +352,7 @@ globalkeys = mytable.join(
   awful.key({ modkey, "Control" }, "Down",     function () awful.client.incwfact(0.05) end,
     {description = "decrease the number of master clients", group = "layout"}),
   awful.key({ altkey, "Control" }, "space",     function ()
-    awful.screen.focused().selected_tag.master_width_factor = 0.60
+    awful.screen.focused().selected_tag.master_width_factor = 0.65
   end, {description = "set master col size", group = "layout"}),
 
 
