@@ -96,11 +96,27 @@ headset_status:buttons(gears.table.join(
   end)
 ))
 
-
 function update_music_player()
-  local command = "playerctl metadata --format '{{emoji(status)}} {{artist}} - {{title}}  {{duration(position)}}/{{duration(mpris:length)}}'"
+  local function ellipsize(text, max_len)
+    if not text then return "" end
+    text = text:gsub("\n", "") -- strip newlines
+    if #text > max_len then
+      return text:sub(1, max_len - 3) .. "..."
+    else
+      return text
+    end
+  end
+
+  local command = "playerctl metadata --format '{{emoji(status)}} {{artist}}|{{title}}|{{duration(position)}}/{{duration(mpris:length)}}'"
   awful.spawn.easy_async(command, function(stdout)
-    music_player:set_text(stdout)
+    local status, artist, title, time = stdout:match("^(%S+)%s+([^|]*)|([^|]*)|(.+)$")
+    if status and artist and title and time then
+      artist = ellipsize(artist, 30)
+      title  = ellipsize(title, 50)
+      music_player:set_text(string.format("%s %s - %s  %s", status, artist, title, time))
+    else
+      music_player:set_text(stdout) -- fallback
+    end
   end)
 end
 
