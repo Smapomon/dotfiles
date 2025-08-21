@@ -15,7 +15,7 @@ config.font = wezterm.font_with_fallback {
 }
 
 config.font_size                    = 18
-config.window_background_opacity    = 0.85
+config.window_background_opacity    = 0.95
 config.hide_tab_bar_if_only_one_tab = true
 config.cursor_blink_rate            = 0
 

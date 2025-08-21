@@ -11,10 +11,7 @@ local theme    = {}
 theme.wallpaper = function(s)
   -- get wp based on screen index
   local wallpapers = {
-    --"/home/smapo/wallpapers/Trump-Wrong-1024.png",
     "/home/smapo/wallpapers/Duckful (2).png",
-    "/home/smapo/wallpapers/Duckful (2).png",
-    "/home/smapo/wallpapers/reckful-everland.jpg",
   }
 
   return wallpapers[s.index]
@@ -85,9 +82,10 @@ theme.cal = lain.widget.cal({
   }})
 
 
-music_player   = wibox.widget.textbox()
+-------------------
+--- HEADSET STATUS
+-------------------
 headset_status = wibox.widget.textbox()
-
 headset_status:buttons(gears.table.join(
   awful.button({}, 1, function()
     awful.spawn.easy_async(os.getenv("HOME") .. "/shell_scripts/auto_audio_switch.sh --toggle", function(stdout)
@@ -96,6 +94,22 @@ headset_status:buttons(gears.table.join(
   end)
 ))
 
+function update_audio_device()
+  awful.spawn.easy_async(os.getenv("HOME") .. "/shell_scripts/auto_audio_switch.sh", function(stdout)
+    headset_status:set_text(stdout)
+  end)
+end
+
+-------------------
+--- MUSIC PLAYER
+-------------------
+music_player = wibox.widget.textbox()
+music_tooltip = awful.tooltip {
+  objects = {music_player},
+  mode = "outside",
+  align = "right",
+  delay_show = 0.1,
+}
 function update_music_player()
   local function ellipsize(text, max_len)
     if not text then return "" end
@@ -107,22 +121,27 @@ function update_music_player()
     end
   end
 
-  local command = "playerctl metadata --format '{{emoji(status)}} {{artist}}|{{title}}|{{duration(position)}}/{{duration(mpris:length)}}'"
+  -- GET metadata from playerctl
+  local command = "playerctl metadata --format '{{emoji(status)}} {{artist}}|{{title}}|{{album}}|{{playerName}}|{{duration(position)}}/{{duration(mpris:length)}}'"
   awful.spawn.easy_async(command, function(stdout)
-    local status, artist, title, time = stdout:match("^(%S+)%s+([^|]*)|([^|]*)|(.+)$")
+    local status, artist, title, album, player, time = stdout:match("^(%S+)%s+([^|]*)|([^|]*)|([^|]*)|([^|]*)|(.+)$")
     if status and artist and title and time then
+      -- Full text for tooltip
+      local full_text = string.format(
+        "Status: %s\nPlayer: %s\n\nArtist: %s\nAlbum: %s\nTitle: %s\n\nPosition: %s",
+        status, player,
+        artist, album, title,
+        time
+      )
+      music_tooltip:set_text(full_text)
+
+      -- Elipsize text for widget
       artist = ellipsize(artist, 30)
       title  = ellipsize(title, 50)
       music_player:set_text(string.format("%s %s - %s  %s", status, artist, title, time))
     else
       music_player:set_text(stdout) -- fallback
     end
-  end)
-end
-
-function update_audio_device()
-  awful.spawn.easy_async(os.getenv("HOME") .. "/shell_scripts/auto_audio_switch.sh", function(stdout)
-    headset_status:set_text(stdout)
   end)
 end
 

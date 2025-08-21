@@ -644,11 +644,6 @@ awful.rules.rules = {
     properties = { maximized = false }
   },
 
-  {
-    rule       = { class     = "Spotify" },
-    properties = { maximized = true }
-  },
-
   -- Never sticky windows on launch
   {
     rule_any = {
@@ -679,13 +674,13 @@ awful.rules.rules = {
   {
     rule_any = {
       class = {
-        "Spotify",
-        "Ferdium"
+        "discord",
+        "Slack",
+        "ticktick"
       }
     },
-    properties = { screen = monitor_index, tag = "MUSIC" }
+    properties = { screen = monitor_index, tag = "WEB & CHAT" }
   },
-
   {
     rule_any = {
       class = {
@@ -694,14 +689,14 @@ awful.rules.rules = {
     },
     properties = { screen = monitor_index, tag = "NOTES" }
   },
-
   {
     rule_any = {
       class = {
-        "discord"
+        "Spotify",
+        "Ferdium"
       }
     },
-    properties = { screen = monitor_index, tag = "WEB & CHAT" }
+    properties = { screen = monitor_index, tag = "MUSIC" }
   },
 }
 
@@ -732,7 +727,6 @@ client.connect_signal("focus", function(c)
   --title = "Window Props",
   --text = c.class
   --}
-
 
   update_active_app(active_app, c)
 
