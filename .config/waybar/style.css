@@ -18,7 +18,7 @@ window#waybar.hidden {
 #custom-archicon, #clock, #cpu, #memory,
 #disk, #temperature, #idle_inhibitor, #pulseaudio,
 #pulseaudio_slider, #network, #window, #mode,
-#language {
+#language, #custom-playerctl {
   color: #161320;
   margin-top: 6px;
   margin-bottom: 6px;
@@ -158,6 +158,11 @@ window#waybar.hidden {
 #mode {
   color: #1A1826;
   background: #F5E0DC;
+}
+
+#custom-playerctl {
+  color: #000;
+  background: #F8BD96;
 }
 
 /* === Optional animation === */

@@ -6,16 +6,16 @@
 set $mod Mod4
 
 # Home row direction keys, like vim
-set $left h
 set $down j
 set $up k
+set $left h
 set $right l
 
 # Your preferred terminal emulator
 set $term wezterm
 
 # Your preferred application launcher
-set $menu 'rofi -combi-modi window,drun,ssh -theme solarized -font "hack 10" -show combi -icon-theme "Papirus" -show-icons'
+set $menu 'rofi -combi-modi window,drun,ssh -theme solarized -font "hack 14" -show combi -icon-theme "Papirus" -show-icons'
 
 ### Output configuration
 #
@@ -23,8 +23,7 @@ set $menu 'rofi -combi-modi window,drun,ssh -theme solarized -font "hack 10" -sh
 # * affects all outputs
 
 output * bg ~/wallpapers/duckful_two.png fill
-
-output DP-0 resolution 3440x1440@164.999Hz position 0,0
+output DP-1 resolution 3840x2160@143.988Hz position 0,0
 
 ### General configuration
 #
@@ -63,7 +62,7 @@ input "1133:50504:Logitech_USB_Receiver_Mouse" {
   natural_scroll disabled
   middle_emulation enabled
   accel_profile "flat"
-  pointer_accel -0.7 # (between -1 & 1)
+  pointer_accel 0 # (between -1 & 1)
 }
 
 ### Key bindings

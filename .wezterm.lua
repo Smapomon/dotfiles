@@ -3,7 +3,7 @@ local config  = wezterm.config_builder()
 local act     = wezterm.action
 
 config.enable_wayland            = false
-config.max_fps                   = 165
+config.max_fps                   = 144
 config.warn_about_missing_glyphs = false
 
 -- STYLE
