@@ -76,6 +76,8 @@ end
 
 run_once({ "urxvtd", "unclutter -root" }) -- comma-separated entries
 
+awful.screen.set_auto_dpi_enabled(true)
+
 -- This function implements the XDG autostart specification
 --[[
 awful.spawn.with_shell(
