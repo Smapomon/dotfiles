@@ -2,7 +2,7 @@
 {
   "layer": "top", // Waybar at top layer
   "position": "top", // Waybar position (top|bottom|left|right)
-  "height": 35, // Waybar height (to be removed for auto height)
+  "height": 45, // Waybar height (to be removed for auto height)
   "spacing": 4, // Gaps between modules (4px)
   // Choose the order of the modules
   "modules-left": [
@@ -17,6 +17,7 @@
     "hyprland/window",
     "tray",
     "network",
+    "custom/packages",
     "pulseaudio",
     "memory",
     "clock",
@@ -34,7 +35,6 @@
     "format-icons": {
       "active": "",
       "default": "",
-      //"persistent": ""
     },
     "all-outputs": false // recommended
   },
@@ -98,6 +98,13 @@
     },
     "on-click": "pavucontrol"
   },
+  "custom/packages": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "$HOME/.config/waybar/scripts/packages.sh",
+    "tooltip": true,
+    "tail": true
+  },
   "custom/playerctl": {
     "format": "{}",
     "return-type": "json",
@@ -107,7 +114,8 @@
     "on-right-click": "sys-notif media",
     "on-scroll-up": "playerctl position 3+",
     "on-scroll-down": "playerctl position 3-",
-    "tooltip": false
+    "tooltip": true,
+    "tail": true
   }
 }
 
