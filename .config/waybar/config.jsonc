@@ -6,15 +6,14 @@
   "spacing": 4, // Gaps between modules (4px)
   // Choose the order of the modules
   "modules-left": [
-    "wlr/taskbar",
-    "custom/playerctl",
+    "group/taskdrawer",
   ],
   "modules-center": [
     "hyprland/workspaces",
   ],
   "modules-right": [
     "hyprland/submap",
-    "hyprland/window",
+    "custom/playerctl",
     "tray",
     "network",
     "custom/packages",
@@ -116,6 +115,15 @@
     "on-scroll-down": "playerctl position 3-",
     "tooltip": true,
     "tail": true
-  }
+  },
+  "group/taskdrawer": {
+    "modules": ["hyprland/window", "wlr/taskbar"],
+    "orientation": "horizontal",
+    "drawer": {
+      "click-to-reveal": true,        // click to expand/collapse (hover works if you set false)
+      "transition-duration": 50,     // ms
+      "transition-left-to-right": true
+    }
+  },
 }
 
