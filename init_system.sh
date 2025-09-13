@@ -26,7 +26,7 @@ echo "-"
 echo "####################################"
 echo "# Installing basic dependencies... #"
 echo "####################################"
-sudo pacman -Sy --noconfirm alsa-utils picom wezterm playerctl ripgrep the_silver_searcher pavucontrol rofi scrot i3lock maim xclip fd libfido2 ufw
+sudo pacman -Sy --noconfirm alsa-utils wezterm playerctl ripgrep the_silver_searcher pavucontrol rofi fd libfido2 ufw
 
 # enable firewall
 echo "-"
@@ -60,7 +60,7 @@ echo "-"
 echo "###############################"
 echo "# Installing deps from AUR... #"
 echo "###############################"
-paru -Sy --noconfirm diodon neovim-git fzf
+paru -Sy --noconfirm neovim-git fzf
 
 echo "-"
 echo "-"
@@ -73,43 +73,8 @@ echo "-"
 echo "-"
 echo "-"
 echo "########################################"
-echo "# Changing AwesomeWM to git version... #"
+echo "# Cursor theme... #"
 echo "########################################"
-paru -Sy awesome-git
-cd ~
-
-# install nice window decorators
-mkdir ~/.config/awesome
-touch ~/.config/awesome/rc.lua
-cd ~/.config/awesome
-git clone https://github.com/mut-ex/awesome-wm-nice.git nice
-
-# install themes
-git clone --recurse-submodules --remote-submodules --depth 1 -j 2 https://github.com/lcpz/awesome-copycats.git
-mv -bv awesome-copycats/* ~/.config/awesome; rm -rf awesome-copycats
-
-# remove useless themes
-cd themes
-rm -rf blackburn
-rm -rf copland
-rm -rf holo
-rm -rf multicolor
-rm -rf powerarrow
-rm -rf powerarrow-dark
-rm -rf rainbow
-rm -rf steamburn
-rm -rf vertex
-
-# make the template config the one in use for now
-cd ..
-cp rc.lua.template rc.lua
-
-cd ~
-
-# Install theme deps
-sudo pacman -Sy --noconfirm amixer dmenu librewolf mpc mpd scrot unclutter xbacklight xsel slock rofi
-sudo pacman -Sy --noconfirm lxappearance-gtk3 arc-gtk-theme
-paru -Sy --noconfirm gtk2_prefs
 paru -Sy --noconfirm bibata-cursor-theme-bin
 ln --symbolic /usr/share/icons/Bibata-Original-Ice ~/.local/share/icons/default
 
