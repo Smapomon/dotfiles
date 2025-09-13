@@ -27,6 +27,7 @@ echo "####################################"
 echo "# Installing basic dependencies... #"
 echo "####################################"
 sudo pacman -Sy --noconfirm alsa-utils wezterm playerctl ripgrep the_silver_searcher pavucontrol rofi fd libfido2 ufw
+sudo pacman -Sy --noconfirm gnome-keyring libsecret
 
 # enable firewall
 echo "-"

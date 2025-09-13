@@ -434,3 +434,4 @@ eval "$(pyenv init - zsh)"
 export PATH=$PATH:$(go env GOPATH)/bin
 
 echo "Ready!"
+eval "$(/home/smapo/.local/bin/mise activate zsh)"
