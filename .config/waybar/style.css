@@ -14,11 +14,22 @@ window#waybar.hidden {
   opacity: 0.2;
 }
 
+/* Adding margin and padding */
+#windowcount {
+    margin-left: 0px;
+    padding: 0px 5px;
+}
+
+/* Different background when empty */
+window#waybar #windowcount {
+  background: #F5C2E7;
+}
+
 /* - Genera rules for visible modules -- */
 #custom-archicon, #clock, #cpu, #memory,
 #disk, #temperature, #idle_inhibitor, #pulseaudio,
 #pulseaudio_slider, #network, #window, #mode,
-#language, #custom-playerctl, #custom-packages {
+#language, #custom-playerctl, #custom-packages, #windowcount {
   color: #161320;
   margin-top: 6px;
   margin-bottom: 6px;

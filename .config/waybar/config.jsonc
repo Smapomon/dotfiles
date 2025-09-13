@@ -6,6 +6,7 @@
   "spacing": 4, // Gaps between modules (4px)
   // Choose the order of the modules
   "modules-left": [
+    "hyprland/windowcount",
     "group/taskdrawer",
   ],
   "modules-center": [
@@ -26,6 +27,10 @@
     "format": "<span font='9' rise='-4444'> {title} | {class} </span>",
     "separate-outputs": false,
     "icon": true,
+  },
+  "hyprland/windowcount": {
+    "format": "{}",
+    "separate-outputs": true
   },
   "hyprland/workspaces": {
     "format": "<sub>{icon} {name}</sub>",
