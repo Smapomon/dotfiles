@@ -37,8 +37,8 @@
     "format-window-separator": "\n",
     "window-rewrite-default": "",
     "format-icons": {
-      "active": "",
-      "default": "",
+      "active": "",
+      "default": "",
     },
     "all-outputs": false // recommended
   },
