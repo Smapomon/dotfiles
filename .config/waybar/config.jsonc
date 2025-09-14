@@ -23,6 +23,12 @@
     "clock",
   ],
   // Modules configuration
+  "hyprland/language": {
+    "format": "{}",
+    "format-fi": "FI",
+    "format-en": "US",
+    "format-cn": "CN",
+  },
   "hyprland/window": {
     "format": "<span font='9' rise='-4444'> {title} | {class} </span>",
     "separate-outputs": false,
