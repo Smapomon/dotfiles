@@ -51,7 +51,8 @@ echo "-"
 echo "#######################"
 echo "# Installing fonts... #"
 echo "#######################"
-sudo pacman -Sy --noconfirm noto-fonts-cjk wqy-zenhei otf-ipaexfont ttf-bakmuk
+sudo pacman -Sy --noconfirm noto-fonts noto-fonts-cjk wqy-zenhei otf-ipaexfont ttf-bakmuk ttf-liberation
+sudo pacman -Sy --noconfirm otf-font-awesome ttf-jetbrains-mono ttf-jetbrains-mono-nerd
 paru -Sy --noconfirm noto-fonts-emoji adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts ttf-droid ttf-iosevka
 
 # paru deps
