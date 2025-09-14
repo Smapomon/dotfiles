@@ -8,14 +8,15 @@
 
 # Outlook
 # ==========================
- font-family = Iosevka
+ font-family      = Iosevka
  window-padding-x = 10
  window-padding-y = 10
- font-size   = 18
- theme       = ayu
+ font-size        = 18
+ theme            = ayu
 
  # Keybindings
  # =========================
- keybind=ctrl+shift+j=scroll_page_lines:1
- keybind=ctrl+shift+k=scroll_page_lines:-1
+ keybind = ctrl+shift+j=scroll_page_lines:1
+ keybind = ctrl+shift+k=scroll_page_lines:-1
  keybind = ctrl+shift+r=reload_config
+ keybind = ctrl+shift+x=write_screen_file:open

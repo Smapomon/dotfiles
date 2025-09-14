@@ -25,9 +25,6 @@ export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS="@im=fcitx"
 
-export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
-export PATH="$PATH:$GEM_HOME/bin"
-
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
@@ -333,7 +330,6 @@ export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export MYSQL_HISTFILE="$XDG_DATA_HOME"/mysql_history
 export NVM_DIR="$XDG_DATA_HOME"/nvm
 export PSQL_HISTORY="$XDG_DATA_HOME/psql_history"
-export RBENV_ROOT="$XDG_DATA_HOME"/rbenv
 export SOLARGRAPH_CACHE="$XDG_CACHE_HOME"/solargraph
 alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 ##### XDG DIR CHANGES #####
@@ -414,8 +410,6 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
 nvm use node > /dev/null 2>&1
 
 # pnpm
@@ -433,5 +427,6 @@ eval "$(pyenv init - zsh)"
 
 export PATH=$PATH:$(go env GOPATH)/bin
 
-echo "Ready!"
 eval "$(/home/smapo/.local/bin/mise activate zsh)"
+
+echo "Ready!"
