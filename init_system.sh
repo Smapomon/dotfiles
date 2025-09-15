@@ -29,6 +29,9 @@ echo "####################################"
 sudo pacman -Sy --noconfirm alsa-utils wezterm playerctl ripgrep the_silver_searcher pavucontrol rofi fd libfido2 ufw
 sudo pacman -Sy --noconfirm gnome-keyring libsecret
 
+# make sure things like slack and obs can access display through dbus
+sudo pamcan -S --noconfirm xdg-desktop-portal-hyprland 
+
 # enable firewall
 echo "-"
 echo "-"

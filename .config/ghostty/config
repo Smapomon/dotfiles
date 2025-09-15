@@ -11,7 +11,7 @@
  font-family      = Iosevka
  window-padding-x = 10
  window-padding-y = 10
- font-size        = 18
+ font-size        = 14
  theme            = ayu
 
  # Keybindings
