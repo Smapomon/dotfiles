@@ -4,3 +4,6 @@
   cob    = !git checkout -b $1 && git push -u origin
 [pull]
 	rebase = false
+
+[includeIf "gitdir:~/.dotconf/"]
+    path = ~/.gitconfig.dotconf

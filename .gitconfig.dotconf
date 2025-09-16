@@ -1,0 +1,2 @@
+[core]
+    hooksPath = ~/.config/dotgit-hooks

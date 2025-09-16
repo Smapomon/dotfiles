@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+w="$HOME"
+f="$w/.config/hypr/overrides.conf"
+
+mkdir -p "$(dirname "$f")"
+
+[ -f "$f" ] || : > "$f"
