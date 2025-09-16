@@ -316,8 +316,6 @@ export PATH="$HOME/dev/android_studio/android-studio-2021.3.1.16-linux/android-s
 export PATH="/usr/java/jre1.8.0_341/bin:$PATH"
 alias luamake=/luamake
 export PATH="${HOME}/lsp_servers/lua-language-server/bin:${PATH}"
-export PATH=/usr/bin/aws_completer:$PATH
-
 export ANDROID_SDK_ROOT="/home/smapo/Android/Sdk"
 export ANDROID_HOME="/home/smapo/Android/Sdk"
 
@@ -345,10 +343,10 @@ PERL_MB_OPT="--install_base \"/home/smapo/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/smapo/perl5"; export PERL_MM_OPT;
 
 autoload bashcompinit && bashcompinit
-autoload -Uz compinit && compinit
-complete -C '/usr/bin/aws_completer' aws
-
 autoload -U +X bashcompinit && bashcompinit
+autoload -Uz compinit && compinit
+_AWS_COMPLETE_PATH=$(which aws_completer)
+complete -C "$_AWS_COMPLETE_PATH" aws
 complete -o nospace -C /usr/local/bin/terraform terraform
 
 export PATH="$HOME/packages/flutter/bin:$PATH"
