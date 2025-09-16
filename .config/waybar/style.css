@@ -181,6 +181,15 @@ window#waybar #windowcount {
   background: #F8BD96;
 }
 
+#custom-hypr_mode { padding: 0 8px; }
+#custom-hypr_mode.fullscreen        { color: #e06c75; }
+#custom-hypr_mode.maximized         { color: #e5c07b; }
+#custom-hypr_mode.pseudo-maximized  { color: #d19a66; }
+#custom-hypr_mode.floating          { color: #61afef; }
+#custom-hypr_mode.pseudo-floating   { color: #56b6c2; }
+#custom-hypr_mode.pseudotiled       { color: #98c379; }
+#custom-hypr_mode.tiled             { color: #c678dd; }
+
 /* === Optional animation === */
 @keyframes blink {
   to {

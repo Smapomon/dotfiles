@@ -8,6 +8,7 @@
   "modules-left": [
     "hyprland/windowcount",
     "group/taskdrawer",
+    "custom/hypr_mode"
   ],
   "modules-center": [
     "hyprland/workspaces",
@@ -28,6 +29,11 @@
     "format-fi": "FI",
     "format-en": "US",
     "format-cn": "CN",
+  },
+  "custom/hypr_mode": {
+    "exec": "~/.config/waybar/scripts/window_mode.sh",
+    "return-type": "json",
+    "interval": 1
   },
   "hyprland/window": {
     "format": "<span font='9' rise='-4444'> {title} | {class} </span>",
