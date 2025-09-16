@@ -11,8 +11,8 @@ New ones will be added each time I start using a new OS or a TWM.
 #### main
 ```
 OS       = Archlinux
-GRAPHICS = XORG
-TWM      = awesomewm
+GRAPHICS = wayland
+TWM      = hyprland
 ```
 
 
@@ -20,8 +20,8 @@ TWM      = awesomewm
 Installation processes
 ### Importing dotfiles to system
 ```console
-git clone --separate-git-dir=~/.dotconf git@github.com:Smapomon/dotfiles.git $HOME/myconf-tmp
-cp ~/myconf-tmp/.gitmodules ~  # If you use Git submodules
+git clone --separate-git-dir=$HOME/.dotconf git@github.com:Smapomon/dotfiles.git $HOME/myconf-tmp
+cp $HOME/myconf-tmp/.gitmodules ~  # If you use Git submodules
 rm -r ~/myconf-tmp/
 alias dgit='/usr/bin/git --git-dir=$HOME/.dotconf/ --work-tree=$HOME'
 ```
@@ -33,7 +33,7 @@ Use git init to create a new directory with bare repo
 git init --bare $HOME/.dotconf
 ```
 
-Create an alias to bashr, zshrc or whichever shell system you use.
+Create an alias to bashrc, zshrc or whichever shell system you use.
 Alias will make it easier to access the repo since using git without options will not work.
 Note that when installing to a new system from the repo, the alias is automatically going to be in the zshrc (in this case).
 ```
@@ -64,14 +64,13 @@ Run `init_system.sh` to get minimal dependencies with some sensible additions
 
 Current setup:
 - Chinese, Japanese, and Korean fonts in additions to basic latin letters
-- Audio controls which are setup with AwesomeWM bindings
+- Audio controls
 - Paru as the AUR helper
-- wezterm as the default terminal
+- ghostty as the default terminal
 - Rofi as the application switcher
-- Diodon as the clipboard manager
+- cliphist as the clipboard manager
 - neovim-git version
-- awesomewm-git version is used with slightly modified dremora theme
-- brave-beta-bin is the default browser
+- zen-browser-bin (firefox fork with some nice to have things) is the default browser
 - ZSH with some plugins, and powerlevel10k theme
 
 After running setup script, create a new ssh key for github, and set it up for use.
@@ -83,39 +82,14 @@ Run the commands in `Importing dotfiles to system` section, but you can skip the
 After installing everything reset configs to remote main with:
 `dgit reset --hard origin/main`
 
-create the file: "/etc/rofi.rasi" with the following:
-
-```console
-configuration {
-    kb-row-up: "Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab";
-    kb-row-down: "Down,Control+j";
-    kb-accept-entry: "Control+m,Return,KP_Enter";
-    terminal: "mate-terminal";
-    kb-remove-to-eol: "Control+Shift+e";
-    /*kb-mode-next: "Shift+Right,Control+Tab,Control+l";*/
-    kb-mode-previous: "Shift+Left,Control+Shift+Tab,Control+h";
-    kb-remove-char-back: "BackSpace";
-}
-```
-
 
 ## TODO
 - git installation to init script
 - script for github setup
 - script for dotfiles init
 - script for neovim setup
-- wallpapers setup script
 
 ## Troubleshooting
-
-### AWESOMEWM
-Bad argument #1 to 'registerlock' (userdata expected, got nil)
-gdk 3 & 4 do not play nice together change if you are using nice window decorations find gdk require from nice files and change it:
-
-```console
---local gdk = lgi.require('Gdk')
-local gdk = lgi.require('Gdk', '3.0')
-```
 
 ### Pacman
 Keyring expired
