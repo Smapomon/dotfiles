@@ -1,60 +1,38 @@
 #!/usr/bin/env bash
-exec 2>|"$XDG_RUNTIME_DIR/waybar-updates.log"
-export LC_ALL=C.UTF-8 LANG=C.UTF-8
-IFS=$'\n\t'
 
-PIDFILE="$XDG_RUNTIME_DIR/waybar-updates.pid"
-echo $$ > "$PIDFILE"
+# Prints Waybar JSON with the number of available pacman/AUR updates via paru.
+# Shows only the number in the bar; tooltip includes the number and last-checked time.
 
-INTERVAL=$((10*60))  # 10 minutes
-last_check=0
-updates=0
+set -u
 
-escape_json() {
-  local s=$1
-  s=${s//\\/\\\\}; s=${s//\"/\\\"}
-  s=${s//$'\n'/\\n}; s=${s//$'\r'/\\r}; s=${s//$'\t'/\\t}
-  printf '%s' "$s"
-}
+ICON="󰏔"
 
-check_updates() {
-  # If paru exits nonzero, keep previous values and don't update timestamp
-  if updates_out="$(paru -Qu 2>/dev/null)"; then
-    updates="$(wc -l <<<"$updates_out")"
-    last_check="$(date +%s)"
-    return 0
-  else
-    return 1
-  fi
-}
-
-print_json() {
-  local time_str
-  if (( last_check > 0 )); then
-    time_str="$(date +'%H:%M' -d @"$last_check")"
-  else
-    time_str="–"
-  fi
-
-  local text="$updates ($time_str)"
-  local tooltip="Updates: $updates  Last checked: $time_str"
-
-  printf '{"text":"  %s","tooltip":"%s"}\n' \
-    "$(escape_json "$text")" \
-    "$(escape_json "$tooltip")"
-}
-
-# Initial check + print once at startup
-check_updates
-print_json
-
-# Only update the timestamp/output when an actual check runs
 while :; do
-  now="$(date +%s)"
-  if (( now - last_check >= INTERVAL || last_check == 0 )); then
-    if check_updates; then
-      print_json
-    fi
+  # Count updates (repo + AUR). Suppress errors if paru is updating databases, etc.
+  updates_raw="$(paru -Qu 2>/dev/null | wc -l || echo 0)"
+  # Trim spaces just in case
+  updates="$(echo "$updates_raw" | tr -d '[:space:]')"
+
+  # Fallback to 0 if parsing fails
+  if ! printf '%s' "$updates" | grep -qE '^[0-9]+$'; then
+    updates="0"
   fi
-  sleep 10
+
+  last_run="$(date '+%Y-%m-%d %H:%M:%S')"
+
+  # Class for styling (optional): "has-updates" if > 0, otherwise "up-to-date"
+  if [ "$updates" -gt 0 ] 2>/dev/null; then
+    klass="has-updates"
+  else
+    klass="up-to-date"
+  fi
+
+  # Tooltip with newline; escape newline for JSON
+  tooltip="Updates: ${updates}\nLast checked: ${last_run}"
+  tooltip_escaped="$(printf '%s' "$tooltip" | sed ':a;N;$!ba;s/\n/\\n/g')"
+
+  # Emit Waybar JSON (one line)
+  printf '{"text":"%s %s","tooltip":"%s","class":"%s"}\n' "$ICON" "$updates" "$tooltip_escaped" "$klass"
+
+  sleep 600
 done
