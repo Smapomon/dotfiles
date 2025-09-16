@@ -99,9 +99,9 @@ echo "-"
 echo "################################"
 echo "# Installing tools and apps... #"
 echo "################################"
-paru -Sy --noconfirm brave-beta-bin deno
+paru -Sy --noconfirm zen-browser-bin deno
 sudo pacman -Sy --noconfirm zsh
-paru -Sy --noconfirm neofetch rbenv nvm
+paru -Sy --noconfirm neofetch rbenv nvm ruby-build
 paru -Sy --noconfirm discord-ptb bat man-db man-pages openvpn slack-desktop solaar vlc nemo nemo-preview
 paru -Sy --noconfirm exa ttf-firacode-nerd xorg-xinput
 paru -Sy --noconfirm ferdium-bin arandr nvidia-settings
