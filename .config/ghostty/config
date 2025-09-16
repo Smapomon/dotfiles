@@ -8,15 +8,18 @@
 
 # Outlook
 # ==========================
- font-family      = Iosevka
- window-padding-x = 10
- window-padding-y = 10
- font-size        = 16
- theme            = ayu
+font-family      = Iosevka
+window-padding-x = 10
+window-padding-y = 10
+font-size        = 16
+theme            = ayu
 
- # Keybindings
- # =========================
- keybind = ctrl+shift+j=scroll_page_lines:1
- keybind = ctrl+shift+k=scroll_page_lines:-1
- keybind = ctrl+shift+r=reload_config
- keybind = ctrl+shift+x=write_screen_file:open
+# Keybindings
+# =========================
+keybind = ctrl+shift+j=scroll_page_lines:1
+keybind = ctrl+shift+k=scroll_page_lines:-1
+keybind = ctrl+shift+r=reload_config
+keybind = ctrl+shift+x=write_screen_file:open
+
+shell-integration          = detect
+shell-integration-features = true
