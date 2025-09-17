@@ -3,7 +3,7 @@ echo "To run give sudo permissions..."
 sudo echo "Permissions recieved..."
 
 # Install Git as it will be needed for many tools
-sudo pacman -Syu --noconfirm git
+sudo pacman -S --noconfirm git
 
 # check for paru installation
 if [ -d ~/packages/paru ]; then
@@ -26,8 +26,8 @@ echo "-"
 echo "####################################"
 echo "# Installing basic dependencies... #"
 echo "####################################"
-sudo pacman -Sy --noconfirm alsa-utils wezterm playerctl ripgrep the_silver_searcher pavucontrol rofi fd libfido2 ufw
-sudo pacman -Sy --noconfirm gnome-keyring libsecret
+sudo pacman -S --noconfirm alsa-utils wezterm playerctl ripgrep the_silver_searcher pavucontrol rofi fd libfido2 ufw
+sudo pacman -S --noconfirm gnome-keyring libsecret
 
 # make sure things like slack and obs can access display through dbus
 sudo pamcan -S --noconfirm xdg-desktop-portal-hyprland 
@@ -54,9 +54,9 @@ echo "-"
 echo "#######################"
 echo "# Installing fonts... #"
 echo "#######################"
-sudo pacman -Sy --noconfirm noto-fonts noto-fonts-cjk wqy-zenhei otf-ipaexfont ttf-bakmuk ttf-liberation
-sudo pacman -Sy --noconfirm otf-font-awesome ttf-jetbrains-mono ttf-jetbrains-mono-nerd
-paru -Sy --noconfirm noto-fonts-emoji adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts ttf-droid ttf-iosevka
+sudo pacman -S --noconfirm noto-fonts noto-fonts-cjk wqy-zenhei otf-ipaexfont ttf-bakmuk ttf-liberation
+sudo pacman -S --noconfirm otf-font-awesome ttf-jetbrains-mono ttf-jetbrains-mono-nerd
+paru -S --noconfirm noto-fonts-emoji adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts ttf-droid ttf-iosevka
 
 # paru deps
 echo "-"
@@ -65,7 +65,7 @@ echo "-"
 echo "###############################"
 echo "# Installing deps from AUR... #"
 echo "###############################"
-paru -Sy --noconfirm neovim-git fzf
+paru -S --noconfirm neovim-git fzf
 
 echo "-"
 echo "-"
@@ -80,7 +80,7 @@ echo "-"
 echo "########################################"
 echo "# Cursor theme... #"
 echo "########################################"
-paru -Sy --noconfirm bibata-cursor-theme-bin
+paru -S --noconfirm bibata-cursor-theme-bin
 ln --symbolic /usr/share/icons/Bibata-Original-Ice ~/.local/share/icons/default
 
 sudo tee -a /etc/rofi.rasi > /dev/null <<EOT
@@ -102,12 +102,12 @@ echo "-"
 echo "################################"
 echo "# Installing tools and apps... #"
 echo "################################"
-paru -Sy --noconfirm zen-browser-bin deno
-sudo pacman -Sy --noconfirm zsh
-paru -Sy --noconfirm neofetch rbenv nvm ruby-build
-paru -Sy --noconfirm discord-ptb bat man-db man-pages openvpn slack-desktop solaar vlc nemo nemo-preview
-paru -Sy --noconfirm exa ttf-firacode-nerd xorg-xinput
-paru -Sy --noconfirm ferdium-bin arandr nvidia-settings
+paru -S --noconfirm zen-browser-bin deno
+sudo pacman -S --noconfirm zsh
+paru -S --noconfirm neofetch rbenv nvm ruby-build
+paru -S --noconfirm discord-ptb bat man-db man-pages openvpn slack-desktop solaar vlc nemo nemo-preview
+paru -S --noconfirm exa ttf-firacode-nerd xorg-xinput
+paru -S --noconfirm ferdium-bin arandr nvidia-settings
 
 git clone --depth=1 https://github.com/savq/paq-nvim.git "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/pack/paqs/start/paq-nvim
 
@@ -117,7 +117,7 @@ echo "-"
 echo "########################"
 echo "# Installing docker... #"
 echo "########################"
-paru -Sy --noconfirm docker docker-compose
+paru -S --noconfirm docker docker-compose
 sudo systemctl --now enable docker.service
 sudo groupadd docker
 sudo usermod -aG docker $USER
