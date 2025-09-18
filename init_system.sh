@@ -32,6 +32,9 @@ sudo pacman -S --noconfirm gnome-keyring libsecret
 # make sure things like slack and obs can access display through dbus
 sudo pamcan -S --noconfirm xdg-desktop-portal-hyprland 
 
+# make sure dunst is not installed so that mako is used instead
+sudo pacman -Rns --noconfirm dunst
+
 # enable firewall
 echo "-"
 echo "-"
@@ -102,8 +105,8 @@ echo "-"
 echo "################################"
 echo "# Installing tools and apps... #"
 echo "################################"
+sudo pacman -S --noconfirm zsh mako
 paru -S --noconfirm zen-browser-bin deno
-sudo pacman -S --noconfirm zsh
 paru -S --noconfirm neofetch rbenv nvm ruby-build
 paru -S --noconfirm discord-ptb bat man-db man-pages openvpn slack-desktop solaar vlc nemo nemo-preview
 paru -S --noconfirm exa ttf-firacode-nerd xorg-xinput
