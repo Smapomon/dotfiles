@@ -20,6 +20,10 @@ window#waybar.hidden {
     padding: 0px 5px;
 }
 
+#submap {
+  color: #FFFFFF;
+}
+
 /* Different background when empty */
 window#waybar #windowcount {
   background: #F5C2E7;
