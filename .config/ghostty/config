@@ -8,11 +8,12 @@
 
 # Outlook
 # ==========================
-font-family      = Iosevka
-window-padding-x = 10
-window-padding-y = 10
-font-size        = 16
-theme            = catppuccin-mocha
+font-family          = Iosevka
+window-padding-x     = 15
+window-padding-y     = 15
+font-size            = 16
+theme                = ayu
+window-padding-color = extend
 
 # Keybindings
 # =========================
