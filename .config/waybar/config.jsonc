@@ -19,6 +19,7 @@
     "tray",
     "network",
     "custom/packages",
+    "hyprland/language",
     "pulseaudio",
     "memory",
     "clock",
