@@ -115,7 +115,7 @@ alias dspec_all="docker compose run be rspec ./spec"
 alias jarru="clear; docker compose run be brakeman -A -z -I"
 
 # DOCKER FUNCTIONS
-alias dcup="clear; rm tmp/pids/server.pid; docker compose up --remove-orphans"
+alias dcup="clear; rm tmp/pids/server.pid; docker compose up --build --remove-orphans"
 alias dc_debug="clear; rm tmp/pids/server.pid; docker compose run --service-ports be"
 alias dbld="clear; docker compose build"
 alias docker_start="sudo systemctl start docker.service"
@@ -320,8 +320,8 @@ export ANDROID_SDK_ROOT="/home/smapo/Android/Sdk"
 export ANDROID_HOME="/home/smapo/Android/Sdk"
 
 ##### XDG DIR CHANGES #####
-export AWS_PROFILE="spotilla"
-export AWS_DEFAULT_PROFILE="spotilla"
+export AWS_PROFILE="nordvim"
+export AWS_DEFAULT_PROFILE="nordvim"
 export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME"/aws/credentials
 export AWS_CONFIG_FILE="$XDG_CONFIG_HOME"/aws/config
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
@@ -396,6 +396,9 @@ elif type compctl &>/dev/null; then
 fi
 
 ###-end-flutter-completion-###
+
+# 1password completions
+eval "$(op completion zsh)"; compdef _op op
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
