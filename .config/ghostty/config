@@ -17,8 +17,8 @@ window-padding-color = extend
 
 # Keybindings
 # =========================
-keybind = ctrl+shift+j=scroll_page_lines:1
-keybind = ctrl+shift+k=scroll_page_lines:-1
+keybind = ctrl+shift+j=scroll_page_lines:5
+keybind = ctrl+shift+k=scroll_page_lines:-5
 keybind = ctrl+shift+r=reload_config
 keybind = ctrl+shift+x=write_screen_file:open
 
