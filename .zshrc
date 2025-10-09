@@ -69,7 +69,7 @@ alias ip='ip -c'
 alias chown_all='sudo chown -R $USER:$USER *'
 
 # GIT ALIASES
-alias c_branch="git branch --show-current | tr -d '\n' | xclip -selection clipboard"
+alias c_branch="git symbolic-ref --short HEAD | wl-copy -n"
 alias dgit='/usr/bin/git --git-dir=$HOME/.dotconf/ --work-tree=$HOME'
 alias git_prune="git fetch -p && git branch -vv | grep 'origin/.*: gone]' | grep -v '\*' | awk '{print \$1}' | xargs git branch -d"
 alias git_hard_prune="git fetch -p && git branch -vv | grep 'origin/.*: gone]' | grep -v '\*' | awk '{print \$1}' | xargs git branch -D"
