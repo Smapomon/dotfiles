@@ -29,7 +29,14 @@ export PATH="$PATH:$GEM_HOME/bin"
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(
+  git
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  kamal
+  rails
+  docker
+)
 
 export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 source $ZSH/oh-my-zsh.sh
@@ -172,6 +179,24 @@ function _find_delete_branch() {
   fi
 }
 
+# Copy to clipboard on Wayland first, else fall back to X11/macOS/OSC52.
+_clipboard_copy() {
+  if command -v wl-copy >/dev/null 2>&1; then
+    wl-copy
+  elif command -v xclip >/dev/null 2>&1; then
+    xclip -selection clipboard
+  elif command -v xsel >/dev/null 2>&1; then
+    xsel --clipboard --input
+  elif command -v pbcopy >/dev/null 2>&1; then
+    pbcopy
+  else
+    # Last-resort: OSC52 (works over many terminals/tmux if enabled)
+    data="$(cat)"
+    b64="$(printf %s "$data" | base64 | tr -d '\r\n')"
+    printf '\033]52;c;%s\a' "$b64"
+  fi
+}
+
 function _fuzzy_branches() {
   is_in_git_repo || return
 
@@ -180,7 +205,7 @@ function _fuzzy_branches() {
 
   list_sorted_branches |
   fzf --tac --no-mouse --cycle --border=bottom --border-label="|| current: $current_branch ||" \
-  --bind 'enter:execute(echo {} | xargs git checkout)+abort,tab:execute-silent(echo {} | pbcopy)+abort'
+  --bind 'enter:execute(echo {} | xargs git checkout)+abort,tab:execute-silent(echo {} | _clipboard_copy)+abort'
 }
 
 function fetch_branches_with_spinner() {
@@ -422,6 +447,9 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# doom path
+export PATH="$HOME/.emacs.d/bin:$PATH"
 
 # pyenv
 WEBKIT_DISABLE_DMABUF_RENDERER=1

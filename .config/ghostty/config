@@ -6,6 +6,10 @@
 # Additionally, each config option is also explained in detail
 # on Ghostty's website, at https://ghostty.org/docs/config.
 
+
+# force it on because of high memory usage
+gtk-single-instance = true
+
 # Outlook
 # ==========================
 font-family          = Iosevka
