@@ -259,7 +259,8 @@ function rails_env_append() {
 
 function open_console() {
 	docker_instance_name=$(rails_dir_map)
-	ex_command="clear; docker compose --remove-orphans run $docker_instance_name rails c"
+	ex_command="docker compose run --remove-orphans $docker_instance_name rails c"
+  echo "Running: $ex_command"
 	eval $ex_command;
 }
 
