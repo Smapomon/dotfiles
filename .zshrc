@@ -453,10 +453,10 @@ esac
 export PATH="$HOME/.emacs.d/bin:$PATH"
 
 # pyenv
-WEBKIT_DISABLE_DMABUF_RENDERER=1
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - zsh)"
+#WEBKIT_DISABLE_DMABUF_RENDERER=1
+#export PYENV_ROOT="$HOME/.pyenv"
+#[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+#eval "$(pyenv init - zsh)"
 
 # rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
