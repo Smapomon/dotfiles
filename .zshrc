@@ -368,7 +368,7 @@ PERL_MM_OPT="INSTALL_BASE=/home/smapo/perl5"; export PERL_MM_OPT;
 
 autoload bashcompinit && bashcompinit
 autoload -U +X bashcompinit && bashcompinit
-autoload -Uz compinit && compinit
+autoload -Uz compinit && compinit -u
 _AWS_COMPLETE_PATH=$(which aws_completer)
 complete -C "$_AWS_COMPLETE_PATH" aws
 complete -o nospace -C /usr/local/bin/terraform terraform
