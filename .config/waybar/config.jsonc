@@ -7,6 +7,7 @@
   // Choose the order of the modules
   "modules-left": [
     "hyprland/windowcount",
+    "custom/special_workspace_indicator",
     "group/taskdrawer",
     "custom/hypr_mode"
   ],
@@ -35,6 +36,12 @@
     "exec": "~/.config/waybar/scripts/window_mode.sh",
     "return-type": "json",
     "interval": 1
+  },
+  "custom/special_workspace_indicator": {
+    "exec": "~/.config/waybar/scripts/special_workspace_indicator.sh",
+    "return-type": "json",
+    "interval": 1,
+    "tooltip": true
   },
   "hyprland/window": {
     "format": "<span font='9' rise='-4444'> {title} | {class} </span>",
