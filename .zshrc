@@ -346,12 +346,14 @@ function install_with_bundle() {
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-export PATH="$HOME/dev/android_studio/android-studio-2021.3.1.16-linux/android-studio/bin:$PATH"
+#export PATH="$HOME/dev/android_studio/android-studio-2021.3.1.16-linux/android-studio/bin:$PATH"
 export PATH="/usr/java/jre1.8.0_341/bin:$PATH"
 alias luamake=/luamake
 export PATH="${HOME}/lsp_servers/lua-language-server/bin:${PATH}"
 export ANDROID_SDK_ROOT="/home/smapo/Android/Sdk"
 export ANDROID_HOME="/home/smapo/Android/Sdk"
+export PATH="$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/emulator"
+export ANDROID_AVD_HOME="$HOME/.config/.android/avd"
 
 ##### XDG DIR CHANGES #####
 export AWS_PROFILE="nordvim"
