@@ -1,3 +1,22 @@
+# Collect Git identity (used later)
+read -rp "Git email: " GIT_USER_EMAIL
+read -rp "Git user name: " GIT_USER_NAME
+
+if [ -z "$GIT_USER_NAME" ] || [ -z "$GIT_USER_EMAIL" ]; then
+  echo "Git user name and email must not be empty."
+  exit 1
+fi
+
+GIT_PRIVATE_CONFIG="$HOME/.private_profile.gitconfig"
+
+cat > "$GIT_PRIVATE_CONFIG" <<EOF
+[user]
+  name = $GIT_USER_NAME
+  email = $GIT_USER_EMAIL
+EOF
+
+chmod 600 "$GIT_PRIVATE_CONFIG"
+
 # Get sudo perms from user
 echo "To run give sudo permissions..."
 sudo echo "Permissions recieved..."

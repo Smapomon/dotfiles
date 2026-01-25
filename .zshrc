@@ -39,6 +39,16 @@ plugins=(
 )
 
 export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
+
+# For this to work, zsh-completions must be first cloned:
+# git clone https://github.com/zsh-users/zsh-completions.git \
+#  ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+
+autoload bashcompinit && bashcompinit
+autoload -U +X bashcompinit && bashcompinit
+autoload -Uz compinit && compinit -u
+
 source $ZSH/oh-my-zsh.sh
 
 # ------------ NVM SETUP ------------ #
@@ -366,9 +376,6 @@ PERL_LOCAL_LIB_ROOT="/home/smapo/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_R
 PERL_MB_OPT="--install_base \"/home/smapo/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/smapo/perl5"; export PERL_MM_OPT;
 
-autoload bashcompinit && bashcompinit
-autoload -U +X bashcompinit && bashcompinit
-autoload -Uz compinit && compinit -u
 _AWS_COMPLETE_PATH=$(which aws_completer)
 complete -C "$_AWS_COMPLETE_PATH" aws
 complete -o nospace -C /usr/local/bin/terraform terraform

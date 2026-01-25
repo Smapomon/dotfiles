@@ -5,5 +5,14 @@
 [pull]
 	rebase = false
 
+; Hooks and such
 [includeIf "gitdir:~/.dotconf/"]
-    path = ~/.gitconfig.dotconf
+  path = ~/.gitconfig.dotconf
+
+; Private profile, don't include in dotfile repo
+; This will include things such as:
+; [user]
+;   email = your.name@some.domain
+;   name = Your Name
+[include]
+  path = ~/.private_profile.gitconfig
