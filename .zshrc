@@ -36,6 +36,7 @@ plugins=(
   kamal
   rails
   docker
+  mise
 )
 
 export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
@@ -430,6 +431,9 @@ fi
 
 ###-end-flutter-completion-###
 
+# activate mise
+eval "$(mise activate zsh)"
+
 # 1password completions
 eval "$(op completion zsh)"; compdef _op op
 
@@ -477,3 +481,4 @@ export PATH=$PATH:$(go env GOPATH)/bin
 export PATH="$HOME/.local/bin:$PATH"
 
 echo "Ready!"
+export PATH="$HOME/.npm-global/bin:$PATH"
