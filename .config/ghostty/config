@@ -20,7 +20,7 @@ window-padding-x     = 15
 window-padding-y     = 15
 font-size            = 14
 theme                = Ayu
-window-padding-color = extend
+#window-padding-color = extend
 
 # Keybindings
 # =========================
@@ -31,3 +31,6 @@ keybind = ctrl+shift+x=write_screen_file:open
 
 shell-integration          = detect
 shell-integration-features = true
+
+# Startup
+initial-command = tmux new-session -A -s main
