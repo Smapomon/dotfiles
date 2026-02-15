@@ -70,6 +70,7 @@ fi
 # ------------ ALIASES ------------ #
 
 # BASIC SHELL STUFF
+alias vim="nvim" # use \vim to open vim
 alias cdf="cd \$(fd --type d --hidden --follow | fzf --color --scheme=path) && files"
 alias ls="exa --long --header --icons --color=always --group-directories-first"
 alias files="clear;ls -lh"
