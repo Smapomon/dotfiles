@@ -19,8 +19,8 @@ font-family          = Iosevka
 window-padding-x     = 15
 window-padding-y     = 15
 font-size            = 14
-theme                = Ayu
-#window-padding-color = extend
+theme                = Catppuccin Mocha
+window-padding-color = extend
 
 # Keybindings
 # =========================
@@ -29,8 +29,11 @@ keybind = ctrl+shift+k=scroll_page_lines:-5
 keybind = ctrl+shift+r=reload_config
 keybind = ctrl+shift+x=write_screen_file:open
 
+# Prevent ghostty new tab
+keybind = ctrl+shift+t=unbind
+
 shell-integration          = detect
 shell-integration-features = true
 
-# Startup
-initial-command = tmux new-session -A -s main
+# Startup (every time Ghostty starts)
+# command = tmux new-session
