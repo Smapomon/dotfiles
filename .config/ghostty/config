@@ -12,6 +12,10 @@ gtk-single-instance = true
 
 gtk-custom-css = tab-bar.css
 
+# QoL Stuff
+# ==========================
+confirm-close-surface = false
+
 
 # Outlook
 # ==========================
