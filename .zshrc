@@ -479,7 +479,11 @@ eval "$(rbenv init -)"
 # go paths
 export PATH=$PATH:$(go env GOPATH)/bin
 
+# opencode
+export PATH="$HOME/.opencode/bin:$PATH"
+
 export PATH="$HOME/.local/bin:$PATH"
 
 echo "Ready!"
 export PATH="$HOME/.npm-global/bin:$PATH"
+
