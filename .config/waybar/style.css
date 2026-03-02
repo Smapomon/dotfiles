@@ -200,6 +200,7 @@ window#waybar #windowcount {
 #custom-hypr_mode.pseudo-floating   { color: #56b6c2; }
 #custom-hypr_mode.pseudotiled       { color: #98c379; }
 #custom-hypr_mode.tiled             { color: #c678dd; }
+#custom-hypr_mode.monocle           { color: #e06c75; }
 
 /* === Optional animation === */
 @keyframes blink {

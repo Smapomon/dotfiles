@@ -27,9 +27,12 @@ workspace=$(jq -r '.workspace.name // (.workspace.id|tostring)' <<<"$aw")
 # floating (+ optional pseudo): floating / pseudo-floating (rare but possible)
 # pseudo: pseudotiled
 # else: tiled
+ws_id=$(jq -r '.workspace.id' <<<"$aw")
 mode="tiled"; class="tiled"
 
-if [[ "$fullscreen_val" -eq 2 ]]; then
+if [[ -f "/tmp/hypr_monocle/$ws_id" ]]; then
+  mode="monocle"; class="monocle"
+elif [[ "$fullscreen_val" -eq 2 ]]; then
   mode="fullscreen"; class="fullscreen"
 elif [[ "$fullscreen_val" -eq 1 && "$pseudo" == "true" ]]; then
   mode="pseudo-maximized"; class="pseudo-maximized"
