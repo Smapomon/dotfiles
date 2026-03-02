@@ -100,8 +100,6 @@ gitlog() {
 }
 
 # ARCH SPECIFIC ALIASES
-alias paru_updates="paru -Qu"
-alias paru_fzf="paru -Sy \$(paru -Qu | fzf | cut -d \" \" -f 1)"
 alias discord_update_skip="cd ~/.config/discordptb; clear; ls -alh; nvim settings.json"
 
 # NAVIGATION ALIASES
@@ -163,6 +161,20 @@ alias ytdl="yt-dlp -o '%(title)s.%(ext)s' "
 
 
 # ------------ ALIAS FUNCTIONS ------------ #
+function parusearch() {
+  paru --color never -Slq | tr -cd '[:print:]\n' | grep -E '^[a-zA-Z0-9_+.-]+$' | fzf \
+    --multi \
+    --preview 'paru --color never -Si {1}' \
+    --preview-window=right:60%:wrap | xargs -ro paru -S
+}
+
+function paruupdate() {
+  paru --color never -Qu | tr -cd '[:print:]\n' | fzf \
+    --multi \
+    --preview 'paru --color never -Si {1}' \
+    --preview-window=right:60%:wrap | awk '{print $1}' | xargs -ro paru -S --noconfirm
+}
+
 
 function is_in_git_repo() {
   git rev-parse HEAD > /dev/null 2>&1
