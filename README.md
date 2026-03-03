@@ -55,7 +55,7 @@ Instructions for this can be seen when creating a new empty repo in github for e
 Make sure that your Arch installation is up-to-date and Git is installed.
 ```console
 sudo pacman -Syu
-sudo pacman -Sy git
+sudo pacman -S git
 ```
 
 
