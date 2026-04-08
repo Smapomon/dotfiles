@@ -22,7 +22,7 @@ confirm-close-surface = false
 font-family          = Iosevka
 window-padding-x     = 15
 window-padding-y     = 15
-font-size            = 14
+font-size            = 18
 theme                = Catppuccin Mocha
 #window-padding-color = extend
 

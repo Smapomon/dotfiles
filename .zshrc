@@ -23,9 +23,6 @@ export XDG_CACHE_HOME=$HOME/.cache
 # setup language variables
 export GTK_IM_MODULE=simple ghostty
 
-export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
-export PATH="$PATH:$GEM_HOME/bin"
-
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
@@ -381,7 +378,6 @@ export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export MYSQL_HISTFILE="$XDG_DATA_HOME"/mysql_history
 export NVM_DIR="$XDG_DATA_HOME"/nvm
 export PSQL_HISTORY="$XDG_DATA_HOME/psql_history"
-export RBENV_ROOT="$XDG_DATA_HOME"/rbenv
 export SOLARGRAPH_CACHE="$XDG_CACHE_HOME"/solargraph
 alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 ##### XDG DIR CHANGES #####
@@ -447,6 +443,10 @@ fi
 # activate mise
 eval "$(mise activate zsh)"
 
+export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+export PATH="$PATH:$GEM_HOME/bin"
+
+
 # 1password completions
 eval "$(op completion zsh)"; compdef _op op
 
@@ -511,10 +511,6 @@ export PATH="$HOME/.emacs.d/bin:$PATH"
 #export PYENV_ROOT="$HOME/.pyenv"
 #[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 #eval "$(pyenv init - zsh)"
-
-# rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
 
 # go paths
 export PATH=$PATH:$(go env GOPATH)/bin
