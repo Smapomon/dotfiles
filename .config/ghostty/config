@@ -17,7 +17,7 @@ gtk-custom-css = tab-bar.css
 confirm-close-surface = false
 
 
-# Outlook
+# Appearance
 # ==========================
 font-family          = Iosevka
 window-padding-x     = 15
@@ -28,8 +28,6 @@ theme                = Catppuccin Mocha
 
 # Keybindings
 # =========================
-keybind = ctrl+shift+j=scroll_page_lines:5
-keybind = ctrl+shift+k=scroll_page_lines:-5
 keybind = ctrl+shift+r=reload_config
 keybind = ctrl+shift+x=write_screen_file:open
 
@@ -41,3 +39,6 @@ shell-integration-features = true
 
 # Startup (every time Ghostty starts)
 # command = tmux new-session
+
+# Local machine-specific overrides (not tracked in git)
+config-file = config.local
