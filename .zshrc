@@ -261,7 +261,7 @@ function rails_dir_map {
 			APPNAME="api"
       ;;
 		*)
-			APPNAME="omnitool"
+			APPNAME="web"
 			;;
 	esac
 
