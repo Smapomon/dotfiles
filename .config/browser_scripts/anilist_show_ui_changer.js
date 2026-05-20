@@ -169,17 +169,29 @@
         markFollowingForReorder(overview);
     }
 
+    // Throttle + trailing debounce. Anilist's Vue mutates the DOM constantly
+    // (animations, search dropdown, hydration), so a pure trailing debounce
+    // gets reset forever and apply() never runs.
     let timer;
+    let lastApplyAt = 0;
     function debouncedApply() {
         clearTimeout(timer);
-        timer = setTimeout(apply, 250);
+        const now = Date.now();
+        if (now - lastApplyAt >= 500) {
+            lastApplyAt = now;
+            apply();
+            return;
+        }
+        timer = setTimeout(() => {
+            lastApplyAt = Date.now();
+            apply();
+        }, 250);
     }
 
     const observer = new MutationObserver(debouncedApply);
     observer.observe(document.body, {
         childList: true,
         subtree: true,
-        characterData: true,
     });
 
     // SPA navigation hook: history mutations don't fire popstate, so patch them.
@@ -190,7 +202,7 @@
         let attempts = 0;
         const poll = setInterval(() => {
             apply();
-            if (++attempts >= 12) clearInterval(poll); // ~6s
+            if (++attempts >= 30) clearInterval(poll); // ~15s for slow loads
         }, 500);
     }
 
