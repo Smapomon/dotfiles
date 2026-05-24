@@ -8,6 +8,12 @@ fi
 
 export SSH_AUTH_SOCK=~/.1password/agent.sock
 
+# NVIDIA XWayland perf
+export __GL_YIELD=USLEEP
+export __GL_THREADED_OPTIMIZATIONS=0
+export __GL_SYNC_TO_VBLANK=0
+
+
 # SET MANPAGER
 export MANPAGER="nvim +Man!"
 
@@ -77,7 +83,6 @@ alias icat="wezterm imgcat"
 alias termconf="cd ~; clear; nvim .zshrc"
 alias :q="exit"
 alias :qa="exit"
-alias sdn="shutdown now"
 alias restart_audio="systemctl --user restart pipewire.service"
 alias set_caps_escape="~/shell_scripts/set_caps_escape.sh"
 alias set_mouse="~/shell_scripts/set_mouse.sh"
@@ -85,6 +90,9 @@ alias set_mouse="~/shell_scripts/set_mouse.sh"
 alias print_disks="lsblk -e 254 -A -o NAME,FSTYPE,LABEL,MOUNTPOINT,FSUSE%,FSSIZE"
 alias ip='ip -c'
 alias chown_all='sudo chown -R $USER:$USER *'
+
+# POWER STUFF
+alias sdn="shutdown now"
 
 # GIT ALIASES
 alias c_branch="git symbolic-ref --short HEAD | wl-copy -n"
