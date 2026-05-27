@@ -453,8 +453,8 @@ fi
 # activate mise
 eval "$(mise activate zsh)"
 
-export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
-export PATH="$PATH:$GEM_HOME/bin"
+#export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+#export PATH="$PATH:$GEM_HOME/bin"
 
 
 # 1password completions
