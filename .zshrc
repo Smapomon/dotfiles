@@ -169,10 +169,25 @@ alias ytdl="yt-dlp -o '%(title)s.%(ext)s' "
 
 # ------------ ALIAS FUNCTIONS ------------ #
 function parusearch() {
-  paru --color never -Slq | tr -cd '[:print:]\n' | grep -E '^[a-zA-Z0-9_+.-]+$' | fzf \
+  local query="$*"
+  local selected
+
+  selected="$(
+    {
+      if [[ -n "$query" ]]; then
+        paru --color never -Ss "$query" | awk '/^[^[:space:]][^/]+\/[^[:space:]]+/ { print $1 }'
+      else
+        paru --repo --color never -Sl | awk '{ print $1 "/" $2 }'
+      fi
+    } | fzf \
+    --query "$query" \
     --multi \
-    --preview 'paru --color never -Si {1}' \
-    --preview-window=right:60%:wrap | xargs -ro paru -S
+    --bind 'change:reload:if [ -n {q} ]; then paru --color never -Ss {q} | awk '"'"'/^[^[:space:]][^/]+\/[^[:space:]]+/ { print $1 }'"'"'; else paru --repo --color never -Sl | awk '"'"'{ print $1 "/" $2 }'"'"'; fi' \
+    --preview 'pkg={1}; paru --color never -Si "$pkg" 2>/dev/null || paru --color never -Si "${pkg#*/}"' \
+    --preview-window=right:60%:wrap
+  )" || return
+
+  printf '%s\n' "$selected" | awk -F/ '{ print $2 }' | xargs -ro paru -S
 }
 
 function paruupdate() {
@@ -453,8 +468,8 @@ fi
 # activate mise
 eval "$(mise activate zsh)"
 
-#export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
-#export PATH="$PATH:$GEM_HOME/bin"
+export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+export PATH="$PATH:$GEM_HOME/bin"
 
 
 # 1password completions
@@ -513,6 +528,9 @@ case ":$PATH:" in
 esac
 # pnpm end
 
+# nvm
+nvm use --lts --silent
+
 # doom path
 export PATH="$HOME/.emacs.d/bin:$PATH"
 
@@ -532,4 +550,3 @@ export PATH="$HOME/.local/bin:$PATH"
 
 echo "Ready!"
 export PATH="$HOME/.npm-global/bin:$PATH"
-
