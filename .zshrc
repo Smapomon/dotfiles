@@ -134,7 +134,7 @@ alias nw="cd ~/dev/github/networthly; clear; files;"
 alias specmigrate="docker compose run be rake db:migrate RAILS_ENV=test"
 alias dspec="docker compose run be rspec ./spec/$1"
 alias dspec_all="docker compose run be rspec ./spec"
-alias jarru="clear; docker compose run be brakeman -A -z -I"
+alias jarru="clear; brakeman -A -z -I"
 
 # DOCKER FUNCTIONS
 alias dcup="clear; rm tmp/pids/server.pid; docker compose up --build --remove-orphans"

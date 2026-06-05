@@ -1,0 +1,9 @@
+theme = "midnight"   # graphite, midnight, paper, ember, catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha, zenburn, custom
+mode = "split"        # auto, split, stack
+vcs = "git"          # git, jj, sl
+watch = false
+exclude_untracked = false
+line_numbers = true
+wrap_lines = false
+agent_notes = false
+transparent_background = false
