@@ -76,17 +76,12 @@ fi
 
 # BASIC SHELL STUFF
 alias vim="nvim" # use \vim to open vim
-alias cdf="cd \$(fd --type d --hidden --follow | fzf --color --scheme=path) && files"
-alias ls="exa --long --header --icons --color=always --group-directories-first"
+alias ls="eza --long --header --icons --color=always --group-directories-first"
 alias files="clear;ls -lh"
 alias icat="wezterm imgcat"
-alias termconf="cd ~; clear; nvim .zshrc"
-alias :q="exit"
-alias :qa="exit"
 alias restart_audio="systemctl --user restart pipewire.service"
 alias set_caps_escape="~/shell_scripts/set_caps_escape.sh"
 alias set_mouse="~/shell_scripts/set_mouse.sh"
-#alias print_disks="lsblk -e7,254 -A -o NAME,FSTYPE,LABEL,MOUNTPOINT,FSUSE%,FSSIZE | grep -v 'nvme1n1.*\|nvme0n1p3.*\|nvme0n1p4.*'"
 alias print_disks="lsblk -e 254 -A -o NAME,FSTYPE,LABEL,MOUNTPOINT,FSUSE%,FSSIZE"
 alias ip='ip -c'
 alias chown_all='sudo chown -R $USER:$USER *'
@@ -120,27 +115,15 @@ grepcd() {
   fi
 }
 alias dev='grepcd -d'
-alias notes='cd ~/dev/notes/brain/; clear; ls -lh'
-alias work='cd ~/dev/work; clear; ls -lh'
-alias omni="cd ~/dev/gitlab/omnitool; clear; ls -lh"
 alias sptla="cd ~/dev/work/spotilla-be; clear; ls -lh"
-alias get_perm="cd ~/dev/work/perms; clear; ls -lh"
 alias vimconf="cd ~/.config/nvim; clear; files; nvim init.lua"
 alias wmconf="cd ~/.config/hypr; clear; files; nvim hyprland.conf"
-alias pit="cd ~/dev/github/networthly; clear; files;"
-alias nw="cd ~/dev/github/networthly; clear; files;"
 
 # SPTLA FUNCTIONS
-alias specmigrate="docker compose run be rake db:migrate RAILS_ENV=test"
-alias dspec="docker compose run be rspec ./spec/$1"
-alias dspec_all="docker compose run be rspec ./spec"
 alias jarru="clear; brakeman -A -z -I"
 
 # DOCKER FUNCTIONS
 alias dcup="clear; rm tmp/pids/server.pid; docker compose up --build --remove-orphans"
-alias dc_debug="clear; rm tmp/pids/server.pid; docker compose run --service-ports be"
-alias dbld="clear; docker compose build"
-alias docker_start="sudo systemctl start docker.service"
 
 # RAILS FUNCTIONS
 alias rcon="open_console"
