@@ -1,3 +1,20 @@
+# Installing The Easy Way
+
+## Just Use Debtap
+
+After you have downloaded the package and you have debtap installed, run the following:
+`debtap path/to/packag_x.y.z-amd64.deb`
+
+## Install Using Package Manager
+
+The command will produce the `package.pkg.tar.zst`.
+Then run:
+`paru -U package.pkg.tar.zst`
+
+You are done!
+
+If this did not work, read on...
+
 # 🧾 Installing `.deb` Packages on Arch Linux
 
 This guide shows how to convert and install `.deb` packages on Arch Linux using `makepkg`.
