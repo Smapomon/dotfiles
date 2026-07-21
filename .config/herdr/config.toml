@@ -1,0 +1,81 @@
+# herdr configuration
+
+# Show first-run notification setup on startup.
+# Missing also shows onboarding; set false after you've chosen.
+onboarding = false
+
+[theme]
+name = "catppuccin"
+
+[terminal]
+new_cwd = "follow"
+
+[update]
+# Check herdr.dev for new Herdr versions in the background.
+version_check = true
+
+[keys]
+# Prefix key to enter prefix mode (default: "ctrl+b")
+prefix = "ctrl+s"
+
+# Prefix-mode actions
+previous_workspace = "prefix+k"
+next_workspace     = "prefix+j"
+help               = "prefix+?"
+edit_scrollback    = "prefix+e"
+previous_tab       = "prefix+p"
+next_tab           = "prefix+n"
+toggle_sidebar     = "prefix+b"
+resize_mode        = "prefix+r"
+
+# Navigate-mode movement.
+# These local shortcuts win while navigate mode is open.
+# They are independent from focus_pane_*. Do not include prefix+, esc, enter, tab, or 1..9 here.
+navigate_workspace_up = "k"
+navigate_workspace_down = "j"
+
+[ui]
+# Sidebar width (auto-scaled based on workspace names, this sets the default)
+# sidebar_width = 26
+
+# Ask for confirmation before closing a workspace
+# confirm_close = true
+
+# Background notification popup delivery
+[ui.toast]
+# off = disable pop-up notifications
+# herdr = show in-app toasts
+# terminal = ask the outer terminal to show a desktop notification
+# system = ask the OS notification service directly
+delivery = "herdr"
+# delay_seconds = 1
+
+[ui.toast.herdr]
+position = "top-right"
+
+[ui.toast.clipboard]
+# enabled = true
+# position = "bottom-center"
+
+# Play sounds when agents change state in background workspaces
+[ui.sound]
+enabled = false
+
+[session]
+# Resume supported AI-agent panes into their native conversation sessions after
+# a Herdr server restart. Requires official integrations that report session refs.
+# resume_agents_on_restore = true
+
+[remote]
+
+[experimental]
+# Experimental local Kitty graphics rendering for attached clients.
+# Requires a Kitty graphics-compatible outer terminal.
+# kitty_graphics = false
+# Save recent pane screen history across full server restarts.
+pane_history = false
+
+[advanced]
+# Maximum scrollback buffer size in bytes retained per pane terminal.
+# Matches Ghostty's default scrollback-limit behavior.
+# scrollback_limit_bytes = 10000000
