@@ -27,6 +27,8 @@ previous_tab       = "prefix+p"
 next_tab           = "prefix+n"
 toggle_sidebar     = "prefix+b"
 resize_mode        = "prefix+r"
+rename_workspace   = "prefix+shift+w"
+new_workspace      = "prefix+shift+n"
 
 # Navigate-mode movement.
 # These local shortcuts win while navigate mode is open.
