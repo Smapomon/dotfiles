@@ -1,5 +1,5 @@
-theme = "midnight"   # graphite, midnight, paper, ember, catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha, zenburn, custom
-mode = "split"        # auto, split, stack
+theme = "ayu-dark"
+mode = "stack"        # auto, split, stack
 vcs = "git"          # git, jj, sl
 watch = false
 exclude_untracked = false
