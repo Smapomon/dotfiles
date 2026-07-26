@@ -16,6 +16,7 @@ local zen = require("lua/zen")
 local minimize = require("lua/minimize")
 require("lua/keybinds")(programs, zen, minimize)
 require("lua/windows")
+require("lua/graphical_session")
 require("lua/autostart")
 
 -- add any system specific overrides here (optional file)
