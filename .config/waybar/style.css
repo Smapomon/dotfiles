@@ -100,6 +100,18 @@ window#waybar #windowcount {
 }
 
 /* Modules center */
+/* group/workspaces takes the widget name "workspaces", so this keeps styling
+   the row exactly as it did the built-in module. The buttons themselves are now
+   custom/wsN labels rather than GtkButtons, hence the #custom-wsN rules.
+
+   These #custom-wsN rules exist only for the workaround documented in
+   config.jsonc (Alexays/Waybar#5008). When the native hyprland/workspaces
+   module is restored, replace each of them with the "#workspaces button"
+   equivalent - the colours and transitions carry over unchanged:
+     #custom-wsN...          -> #workspaces button
+     #custom-wsN.occupied... -> #workspaces button.occupied
+     #custom-wsN.active...   -> #workspaces button.active
+     #custom-wsN:hover...    -> #workspaces button:hover */
 #workspaces {
   background: rgba(0, 0, 0, 0.5);
   border-radius: 10px;
@@ -107,27 +119,35 @@ window#waybar #windowcount {
   padding: 0px 6px;
 }
 
-#workspaces button {
+#custom-ws1, #custom-ws2, #custom-ws3, #custom-ws4, #custom-ws5,
+#custom-ws6, #custom-ws7, #custom-ws8, #custom-ws9, #custom-ws10 {
   color: #B5E8E0;
   background: transparent;
   padding: 4px 4px;
-  transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
+  margin: 0px;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
-#workspaces button.occupied {
+#custom-ws1.occupied, #custom-ws2.occupied, #custom-ws3.occupied,
+#custom-ws4.occupied, #custom-ws5.occupied, #custom-ws6.occupied,
+#custom-ws7.occupied, #custom-ws8.occupied, #custom-ws9.occupied,
+#custom-ws10.occupied {
   color: #A6E3A1;
 }
 
-#workspaces button.active {
+#custom-ws1.active, #custom-ws2.active, #custom-ws3.active,
+#custom-ws4.active, #custom-ws5.active, #custom-ws6.active,
+#custom-ws7.active, #custom-ws8.active, #custom-ws9.active,
+#custom-ws10.active {
   color: #89B4FA;
   text-shadow: 0 0 4px #ABE9B3;
 }
 
-#workspaces button:hover {
+#custom-ws1:hover, #custom-ws2:hover, #custom-ws3:hover, #custom-ws4:hover,
+#custom-ws5:hover, #custom-ws6:hover, #custom-ws7:hover, #custom-ws8:hover,
+#custom-ws9:hover, #custom-ws10:hover {
   color: #89B4FA;
 }
-
-#workspaces button.active:hover {}
 
 /* Modules right */
 #taskbar {

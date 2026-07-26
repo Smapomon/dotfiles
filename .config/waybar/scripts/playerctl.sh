@@ -3,6 +3,11 @@ exec 2>"$XDG_RUNTIME_DIR/waybar-playerctl.log"
 export LC_ALL=C.UTF-8 LANG=C.UTF-8   # ensure UTF-8 output
 IFS=$'\n\t'
 
+# Longest "artist - title" we render before ellipsising. The timing is appended
+# after this, so keeping the trim here (rather than leaning on waybar's
+# max-length) is what guarantees the clock never gets cut off.
+MAX_META=40
+
 escape_json() {
   local s=$1
   s=${s//\\/\\\\}
@@ -11,6 +16,30 @@ escape_json() {
   s=${s//$'\r'/\\r}
   s=${s//$'\t'/\\t}
   printf '%s' "$s"
+}
+
+# We ask playerctl for raw metadata and escape it ourselves, because trimming a
+# pre-escaped string can slice an entity in half ("&amp;" -> "&am") and any
+# malformed markup makes waybar drop the whole module.
+escape_pango() {
+  local s=$1
+  # The backslashes matter: since bash 5.2 a bare & in a replacement expands to
+  # the matched text, which would yield "<lt;" instead of "&lt;".
+  s=${s//&/\&amp;}
+  s=${s//</\&lt;}
+  s=${s//>/\&gt;}
+  printf '%s' "$s"
+}
+
+# Character-aware under the UTF-8 locale set above, so this never splits a
+# multi-byte character.
+truncate_meta() {
+  local s=$1
+  if (( ${#s} > MAX_META )); then
+    printf '%s…' "${s:0:MAX_META-1}"
+  else
+    printf '%s' "$s"
+  fi
 }
 
 progress_bar() {
@@ -34,34 +63,41 @@ while true; do
     artist=${artist:1}; title=${title:1}; album=${album:1}; arturl=${arturl:1}
     hpos=${hpos:1}; hlen=${hlen:1}
 
-    line="${artist:+$artist${title:+ - }}${title:+$title}${hpos:+ ${hpos}${hlen:+|}}${hlen}"
+    # Always render a clock, even before the player reports position/length.
+    meta="$(escape_pango "$(truncate_meta "${artist:+$artist${title:+ - }}${title}")")"
+    timing="${hpos:-0:00}/${hlen:-0:00}"
+    line="${meta:+$meta  }${timing}"
+
     (( percentage = length ? (100 * (position % length)) / length : 0 ))
     bar="$(progress_bar "$percentage" 16)"
 
     case $playing in
-      ⏸️|Paused)  text="<span foreground=\"#6B6B6B\" size=\"smaller\">⏸️ ${line}</span>" ;;
-      ▶️|Playing) text="<small>▶️ ${line}</small>" ;;
-      *)          text="<span foreground=\"#073642\">No Audio</span>" ;;
+      ⏸️|Paused)  class="paused"
+                  text="<span foreground=\"#6B6B6B\" size=\"smaller\">⏸️ ${line}</span>" ;;
+      ▶️|Playing) class="playing"
+                  text="<small>▶️ ${line}</small>" ;;
+      *)          class="stopped"
+                  text="<span foreground=\"#073642\">No Audio</span>" ;;
     esac
 
     tooltip=$(
       printf '%s\n' \
-        "<b>${playing}</b> — <i>${name}</i>" \
-        "<b>${artist}</b>${title:+ — ${title}}" \
-        "${album:+Album: ${album}}" \
-        "Time: ${hpos} / ${hlen}  (${percentage}%)" \
+        "<b>$(escape_pango "${playing}")</b> — <i>$(escape_pango "${name}")</i>" \
+        "<b>$(escape_pango "${artist}")</b>${title:+ — $(escape_pango "${title}")}" \
+        "${album:+Album: $(escape_pango "${album}")}" \
+        "Time: ${hpos:-0:00} / ${hlen:-0:00}  (${percentage}%)" \
         "${bar}"
     )
 
     printf '{"text":"%s","tooltip":"%s","class":"%s","percentage":%s}\n' \
       "$(escape_json "$text")" \
       "$(escape_json "$tooltip")" \
-      "$percentage" \
+      "$class" \
       "$percentage" || break 2
 
   done < <(
     playerctl --follow metadata --player playerctld --format \
-      $':{{emoji(status)}}\t:{{position}}\t:{{mpris:length}}\t:{{playerName}}\t:{{markup_escape(artist)}}\t:{{markup_escape(title)}}\t:{{markup_escape(album)}}\t:{{mpris:artUrl}}\t:{{duration(position)}}\t:{{duration(mpris:length)}}' &
+      $':{{emoji(status)}}\t:{{position}}\t:{{mpris:length}}\t:{{playerName}}\t:{{artist}}\t:{{title}}\t:{{album}}\t:{{mpris:artUrl}}\t:{{duration(position)}}\t:{{duration(mpris:length)}}' &
     echo $! >"$XDG_RUNTIME_DIR/waybar-playerctl.pid"
   )
 

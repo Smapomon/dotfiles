@@ -11,8 +11,26 @@
     "group/taskdrawer",
     "custom/hypr_mode"
   ],
+  // WORKAROUND (waybar 0.15.0 / hyprland 0.56.0): the built-in
+  // hyprland/workspaces module is replaced by custom/wsN buttons, because waybar
+  // hardcodes the pre-Lua "dispatch workspace <id>" IPC string and Hyprland
+  // >=0.55 rejects it, so its buttons cannot switch workspaces.
+  //   upstream: https://github.com/Alexays/Waybar/issues/5008
+  //
+  // REVERT ONCE FIXED UPSTREAM - the native module is the better option (it
+  // handles multiple monitors and a dynamic workspace count, which the custom
+  // buttons below do not). To check whether a waybar release has landed the fix:
+  //   hyprctl dispatch 'workspace 2'   # legacy syntax; "ok" means it works again
+  // Then:
+  //   1. put "hyprland/workspaces" back in modules-center, dropping
+  //      "group/workspaces" and "custom/ws_watch"
+  //   2. re-enable the commented-out "hyprland/workspaces" block below and
+  //      delete "group/workspaces", "custom/ws_watch" and "custom/ws1".."ws10"
+  //   3. in style.css swap the #custom-wsN rules back for "#workspaces button"
+  //   4. delete scripts/ws_button.sh and scripts/hypr_ws_watch.sh
   "modules-center": [
-    "hyprland/workspaces",
+    "group/workspaces",
+    "custom/ws_watch",
   ],
   "modules-right": [
     "hyprland/submap",
@@ -45,6 +63,21 @@
   },
   "hyprland/window": {
     "format": "<span font='9' rise='-4444'> {title} | {class} </span>",
+    // Caps the title at 45 characters so {class} stays readable. max-length
+    // alone cannot do this: it ellipsises the end of the string, which is where
+    // the class sits.
+    //
+    // Note rewrite runs on the *formatted* output, not on {title} alone, so the
+    // pattern has to carry the span tags across (cutting inside them produces
+    // unparseable markup and an empty module). It therefore depends on the
+    // format above - update both together.
+    //   [^\x80-\xBF][\x80-\xBF]*  consumes one whole UTF-8 character, so a trim
+    //                             never lands mid-character.
+    //   .* then ( \| [^|]* </span>)$  anchors on the last " | ", letting titles
+    //                             that themselves contain "|" work.
+    "rewrite": {
+      "^(<span[^>]*> )((?:[^\\x80-\\xBF][\\x80-\\xBF]*){45}).*( \\| [^|]* </span>)$": "$1$2…$3"
+    },
     "separate-outputs": false,
     "icon": true,
   },
@@ -52,15 +85,142 @@
     "format": "{}",
     "separate-outputs": true
   },
-  "hyprland/workspaces": {
-    "format": "<sub>{icon} {name}</sub>",
-    "format-window-separator": "\n",
-    "window-rewrite-default": "",
-    "format-icons": {
-      "active": "",
-      "default": "",
-    },
-    "all-outputs": false // recommended
+  // The original native module, kept for the revert described above. The icons
+  // are nf-fa-circle (U+F111, active) and nf-fa-circle_o (U+F10C, default).
+  // "hyprland/workspaces": {
+  //   "format": "<sub>{icon} {name}</sub>",
+  //   "format-window-separator": "\n",
+  //   "window-rewrite-default": "",
+  //   "format-icons": {
+  //     "active": "",
+  //     "default": "",
+  //   },
+  //   "all-outputs": false // recommended
+  // },
+  "group/workspaces": {
+    "orientation": "horizontal",
+    "modules": [
+      "custom/ws1", "custom/ws2", "custom/ws3", "custom/ws4", "custom/ws5",
+      "custom/ws6", "custom/ws7", "custom/ws8", "custom/ws9", "custom/ws10"
+    ]
+  },
+  // Long-running listener: caches workspace state and raises SIGRTMIN+5 so the
+  // custom/wsN modules refresh on events instead of polling. Prints nothing, so
+  // waybar keeps it hidden; restart-interval is a safety net if Hyprland restarts.
+  "custom/ws_watch": {
+    "exec": "$HOME/.config/waybar/scripts/hypr_ws_watch.sh",
+    "restart-interval": 5,
+    "tooltip": false
+  },
+  "custom/ws1": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "$HOME/.config/waybar/scripts/ws_button.sh 1",
+    "interval": "once",
+    "signal": 5,
+    "on-click": "hyprctl dispatch 'hl.dsp.focus({workspace=1})'",
+    "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({workspace=\"m+1\"})'",
+    "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({workspace=\"m-1\"})'",
+    "tooltip": false
+  },
+  "custom/ws2": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "$HOME/.config/waybar/scripts/ws_button.sh 2",
+    "interval": "once",
+    "signal": 5,
+    "on-click": "hyprctl dispatch 'hl.dsp.focus({workspace=2})'",
+    "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({workspace=\"m+1\"})'",
+    "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({workspace=\"m-1\"})'",
+    "tooltip": false
+  },
+  "custom/ws3": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "$HOME/.config/waybar/scripts/ws_button.sh 3",
+    "interval": "once",
+    "signal": 5,
+    "on-click": "hyprctl dispatch 'hl.dsp.focus({workspace=3})'",
+    "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({workspace=\"m+1\"})'",
+    "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({workspace=\"m-1\"})'",
+    "tooltip": false
+  },
+  "custom/ws4": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "$HOME/.config/waybar/scripts/ws_button.sh 4",
+    "interval": "once",
+    "signal": 5,
+    "on-click": "hyprctl dispatch 'hl.dsp.focus({workspace=4})'",
+    "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({workspace=\"m+1\"})'",
+    "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({workspace=\"m-1\"})'",
+    "tooltip": false
+  },
+  "custom/ws5": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "$HOME/.config/waybar/scripts/ws_button.sh 5",
+    "interval": "once",
+    "signal": 5,
+    "on-click": "hyprctl dispatch 'hl.dsp.focus({workspace=5})'",
+    "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({workspace=\"m+1\"})'",
+    "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({workspace=\"m-1\"})'",
+    "tooltip": false
+  },
+  "custom/ws6": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "$HOME/.config/waybar/scripts/ws_button.sh 6",
+    "interval": "once",
+    "signal": 5,
+    "on-click": "hyprctl dispatch 'hl.dsp.focus({workspace=6})'",
+    "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({workspace=\"m+1\"})'",
+    "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({workspace=\"m-1\"})'",
+    "tooltip": false
+  },
+  "custom/ws7": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "$HOME/.config/waybar/scripts/ws_button.sh 7",
+    "interval": "once",
+    "signal": 5,
+    "on-click": "hyprctl dispatch 'hl.dsp.focus({workspace=7})'",
+    "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({workspace=\"m+1\"})'",
+    "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({workspace=\"m-1\"})'",
+    "tooltip": false
+  },
+  "custom/ws8": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "$HOME/.config/waybar/scripts/ws_button.sh 8",
+    "interval": "once",
+    "signal": 5,
+    "on-click": "hyprctl dispatch 'hl.dsp.focus({workspace=8})'",
+    "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({workspace=\"m+1\"})'",
+    "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({workspace=\"m-1\"})'",
+    "tooltip": false
+  },
+  "custom/ws9": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "$HOME/.config/waybar/scripts/ws_button.sh 9",
+    "interval": "once",
+    "signal": 5,
+    "on-click": "hyprctl dispatch 'hl.dsp.focus({workspace=9})'",
+    "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({workspace=\"m+1\"})'",
+    "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({workspace=\"m-1\"})'",
+    "tooltip": false
+  },
+  "custom/ws10": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "$HOME/.config/waybar/scripts/ws_button.sh 10",
+    "interval": "once",
+    "signal": 5,
+    "on-click": "hyprctl dispatch 'hl.dsp.focus({workspace=10})'",
+    "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({workspace=\"m+1\"})'",
+    "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({workspace=\"m-1\"})'",
+    "tooltip": false
   },
   "wlr/taskbar": {
     "format": "{icon}",
@@ -132,7 +292,11 @@
   "custom/playerctl": {
     "format": "{}",
     "return-type": "json",
-    "max-length": 40,
+    // Generous backstop only: playerctl.sh trims the "artist - title" part
+    // itself (MAX_META) so the timing it appends afterwards is never the thing
+    // that gets ellipsised away.
+    "max-length": 64,
+    "min-length": 30,
     "exec": "$HOME/.config/waybar/scripts/playerctl.sh 2> /dev/null",
     "on-click": "playerctl play-pause",
     "on-right-click": "sys-notif media",
