@@ -1,4 +1,4 @@
-theme = "ayu-dark"
+theme = "andromeeda"
 mode = "stack"        # auto, split, stack
 vcs = "git"          # git, jj, sl
 watch = false
