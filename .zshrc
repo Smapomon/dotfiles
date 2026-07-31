@@ -57,6 +57,10 @@ autoload -Uz compinit && compinit -u
 
 source $ZSH/oh-my-zsh.sh
 
+# FZF completions
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
+
 # ------------ NVM SETUP ------------ #
 source /usr/share/nvm/init-nvm.sh
 export NVM_DIR="$HOME/.nvm"
@@ -69,8 +73,6 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
   ssh-add -q "$HOME/.ssh/id_personal_github"
   ssh-add -q "$HOME/.ssh/id_work_gitlab"
 fi
-
-#source ~/packages/fzf-git/fzf-git.sh
 
 # ------------ ALIASES ------------ #
 
