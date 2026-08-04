@@ -30,7 +30,7 @@
   //   4. delete scripts/ws_button.sh and scripts/hypr_ws_watch.sh
   "modules-center": [
     "group/workspaces",
-    "custom/ws_watch",
+    "custom/ws_watch"
   ],
   "modules-right": [
     "hyprland/submap",
@@ -38,17 +38,16 @@
     "tray",
     "network",
     "custom/packages",
-    "hyprland/language",
     "pulseaudio",
     "memory",
-    "clock",
+    "clock"
   ],
   // Modules configuration
   "hyprland/language": {
     "format": "{}",
     "format-fi": "FI",
     "format-en": "US",
-    "format-cn": "CN",
+    "format-cn": "CN"
   },
   "custom/hypr_mode": {
     "exec": "~/.config/waybar/scripts/window_mode.sh",
@@ -79,7 +78,7 @@
       "^(<span[^>]*> )((?:[^\\x80-\\xBF][\\x80-\\xBF]*){45}).*( \\| [^|]* </span>)$": "$1$2…$3"
     },
     "separate-outputs": false,
-    "icon": true,
+    "icon": true
   },
   "hyprland/windowcount": {
     "format": "{}",
@@ -254,7 +253,7 @@
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     "format": "{:%d - %H:%M:%OS}",
     "format-alt": "{:%d.%m.%Y}",
-    "interval": 1,
+    "interval": 1
   },
   "memory": {
     "format": "{}%   MEM"
@@ -313,6 +312,6 @@
       "transition-duration": 50,     // ms
       "transition-left-to-right": true
     }
-  },
+  }
 }
 
