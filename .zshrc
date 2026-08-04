@@ -450,9 +450,8 @@ fi
 
 ###-end-flutter-completion-###
 
-# activate mise, and add mise completions
+# activate mise
 eval "$(mise activate zsh)"
-source <(usage g completion-init zsh)
 
 # Let the active mise Ruby determine its gem directories.
 unset GEM_HOME GEM_PATH

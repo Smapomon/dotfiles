@@ -19,3 +19,5 @@
   path = ~/.private_profile.gitconfig
 [init]
 	defaultBranch = main
+[core]
+	pager = hunk pager
