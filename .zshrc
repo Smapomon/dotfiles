@@ -34,8 +34,11 @@ export GTK_IM_MODULE=simple ghostty
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
+# Things like fzf-tab need to be available in the omz plugins location
+# git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
 plugins=(
   git
+  fzf-tab
   zsh-autosuggestions
   zsh-syntax-highlighting
   kamal
@@ -56,6 +59,14 @@ autoload -U +X bashcompinit && bashcompinit
 autoload -Uz compinit && compinit -u
 
 source $ZSH/oh-my-zsh.sh
+
+# fzf-tab: fuzzy-find all completions with fzf
+zstyle ':completion:*:*:*:*:*' menu no                # disable zsh's menu so fzf-tab takes over (overrides OMZ's 'menu select')
+zstyle ':completion:*:descriptions' format '[%d]'     # show completion group headers in fzf-tab
+zstyle ':fzf-tab:*' switch-group '<' '>'              # cycle completion groups with < and >
+zstyle ':fzf-tab:*' fzf-bindings 'tab:toggle+down'    # Tab marks item and moves down (multi-select like stock fzf)
+zstyle ':fzf-tab:*' use-fzf-default-opts yes          # respect FZF_DEFAULT_OPTS styling
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
 # FZF completions
 source /usr/share/fzf/key-bindings.zsh
