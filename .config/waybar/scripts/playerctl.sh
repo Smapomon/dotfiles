@@ -69,7 +69,7 @@ while true; do
     timing="${hpos:-0:00}/${hlen:-0:00}"
     line="${meta:+$meta  }${timing}"
 
-    (( percentage = length ? (100 * (position % length)) / length : 0 ))
+    (( percentage = length ? (100 * position) / length : 0 ))
     bar="$(progress_bar "$percentage" 16)"
 
     case $playing in
