@@ -55,10 +55,11 @@ progress_bar() {
   printf '%s' "$bar"
 }
 
-trap 'kill "$(<"$XDG_RUNTIME_DIR/waybar-playerctl.pid")" 2>/dev/null' EXIT
-
 while true; do
-  while read -r playing position length name artist title album arturl hpos hlen; do
+  if read -r playing position length name artist title album arturl hpos hlen < <(
+    playerctl --player playerctld metadata --format \
+      $':{{emoji(status)}}\t:{{position}}\t:{{mpris:length}}\t:{{playerName}}\t:{{artist}}\t:{{title}}\t:{{album}}\t:{{mpris:artUrl}}\t:{{duration(position)}}\t:{{duration(mpris:length)}}'
+  ); then
     playing=${playing:1}; position=${position:1}; length=${length:1}; name=${name:1}
     artist=${artist:1}; title=${title:1}; album=${album:1}; arturl=${arturl:1}
     hpos=${hpos:1}; hlen=${hlen:1}
@@ -93,14 +94,12 @@ while true; do
       "$(escape_json "$text")" \
       "$(escape_json "$tooltip")" \
       "$class" \
-      "$percentage" || break 2
+      "$percentage" || break
+  else
+    printf '%s\n' \
+      '{"text":"<span foreground=\"#dc322f\">No Audio</span>","class":"stopped","percentage":0}' \
+      || break
+  fi
 
-  done < <(
-    playerctl --follow metadata --player playerctld --format \
-      $':{{emoji(status)}}\t:{{position}}\t:{{mpris:length}}\t:{{playerName}}\t:{{artist}}\t:{{title}}\t:{{album}}\t:{{mpris:artUrl}}\t:{{duration(position)}}\t:{{duration(mpris:length)}}' &
-    echo $! >"$XDG_RUNTIME_DIR/waybar-playerctl.pid"
-  )
-
-  echo '<span foreground="#dc322f">No Audio</span>' || break
   sleep 1
 done

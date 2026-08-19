@@ -1,9 +1,13 @@
 theme = "andromeeda"
-mode = "stack"        # auto, split, stack
+mode = "stack"
 vcs = "git"          # git, jj, sl
 watch = false
 exclude_untracked = false
 line_numbers = true
-wrap_lines = false
+wrap_lines = true
 agent_notes = false
 transparent_background = false
+hunk_headers = true
+menu_bar = true
+copy_decorations = false
+cursor_line = "off"
