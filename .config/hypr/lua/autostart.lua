@@ -18,8 +18,10 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("/usr/bin/gnome-keyring-daemon --start --components=secrets,ssh &")
     hl.exec_cmd("nvidia-settings & solaar")
     hl.exec_cmd("ticktick")
-    hl.exec_cmd("discord-ptb & ferdium & slack")
+    hl.exec_cmd("discord-ptb & slack")
     hl.exec_cmd("wl-paste --watch cliphist store")
+    hl.exec_cmd("google-chrome-stable --app=https://web.whatsapp.com/")
+
 end)
 
 -- exec equivalents: top-level code re-runs on every config reload,

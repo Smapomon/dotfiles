@@ -130,7 +130,7 @@ grepcd() {
 alias dev='grepcd -d'
 alias sptla="cd ~/dev/work/spotilla-be; clear; ls -lh"
 alias vimconf="cd ~/.config/nvim; clear; files; nvim init.lua"
-alias wmconf="cd ~/.config/hypr; clear; files; nvim hyprland.conf"
+alias wmconf="cd ~/.config/hypr; clear; files; nvim hyprland.lua"
 
 # SPTLA FUNCTIONS
 alias jarru="clear; brakeman -A -z -I"
