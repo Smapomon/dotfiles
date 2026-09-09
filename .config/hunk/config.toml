@@ -11,3 +11,4 @@ hunk_headers = true
 menu_bar = true
 copy_decorations = false
 cursor_line = "off"
+prompt_save_view_preferences = false
