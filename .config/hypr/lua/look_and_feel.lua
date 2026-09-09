@@ -61,6 +61,7 @@ hl.config({
         new_status    = "slave",
         new_on_top    = true,
         new_on_active = "before",
+        mfact         = 0.5,
     },
 
     misc = {
