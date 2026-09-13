@@ -35,3 +35,18 @@ hl.device({
     name        = "logitech-pro-2-mouse-1",
     sensitivity = -0.75,
 })
+
+hl.device({
+    name        = "logitech-pro-2-mouse-2",
+    sensitivity = -0.75,
+})
+
+hl.device({
+    name        = "logitech-pro-2-mouse-3",
+    sensitivity = -0.75,
+})
+
+hl.device({
+    name        = "logitech-pro-2-mouse-4",
+    sensitivity = -0.75,
+})
