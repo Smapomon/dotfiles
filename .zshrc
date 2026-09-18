@@ -461,6 +461,9 @@ fi
 
 ###-end-flutter-completion-###
 
+# Make sure npm-global is before mise activation
+export PATH="$HOME/.npm-global/bin:$PATH"
+
 # activate mise
 eval "$(mise activate zsh)"
 
@@ -545,4 +548,3 @@ export PATH="$HOME/.opencode/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
 echo "Ready!"
-export PATH="$HOME/.npm-global/bin:$PATH"
