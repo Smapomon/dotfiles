@@ -9,6 +9,7 @@ hl.window_rule({ match = { class = "^com.mitchellh.ghostty$" }, opacity = "0.90"
 hl.window_rule({ match = { class = "(Chatgpt)" }, opacity = "0.95" })
 hl.window_rule({ match = { class = "(fcitx)" }, pseudo = true })
 
+-- Float windows
 hl.window_rule({ match = { class = "^(nemo)$" }, float = true })
 hl.window_rule({ match = { class = "^(nvidia-settings)$" }, float = true })
 hl.window_rule({ match = { class = "^(solaar)$" }, float = true })
@@ -23,6 +24,7 @@ hl.window_rule({ match = { class = "^(xdg-desktop-portal-gtk)$" }, float = true 
 hl.window_rule({ match = { class = "^(cursor)$" }, float = true })
 hl.window_rule({ match = { class = "^(jetbrains-studio)$" }, float = true })
 hl.window_rule({ match = { class = "^(steam)$" }, float = true })
+hl.window_rule({ match = { class = "^(com.onepassword.OnePassword)$" }, float = true })
 
 hl.window_rule({
     -- Ignore maximize requests from all apps. You'll probably like this.
