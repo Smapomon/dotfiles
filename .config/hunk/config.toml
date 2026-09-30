@@ -1,5 +1,5 @@
 theme = "andromeeda"
-mode = "stack"
+mode = "split"
 vcs = "git"          # git, jj, sl
 watch = false
 exclude_untracked = false
