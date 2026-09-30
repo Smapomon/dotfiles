@@ -10,13 +10,16 @@
 [includeIf "gitdir:~/.dotconf/"]
   path = ~/.gitconfig.dotconf
 
-; Private profile, don't include in dotfile repo
+; Private profiles, don't include in dotfile repo
 ; This will include things such as:
 ; [user]
 ;   email = your.name@some.domain
 ;   name = Your Name
 [include]
   path = ~/.private_profile.gitconfig
+[includeIf "gitdir:~/dev/work/"]
+    path = ~/.work_profile.gitconfig
+
 [init]
 	defaultBranch = main
 [core]
