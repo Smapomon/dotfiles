@@ -21,3 +21,4 @@
 	defaultBranch = main
 [core]
 	pager = hunk pager
+	sshCommand = ssh -4
