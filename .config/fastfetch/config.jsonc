@@ -12,9 +12,11 @@
     "break", // section
     "display",
     "break", // section
+    "cpu",
+    "gpu",
+    "break", // section
     "memory",
     "swap",
-    "break", // section
     "disk",
   ]
 }
