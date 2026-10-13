@@ -3,7 +3,8 @@
 hl.config({
     cursor = {
         hide_on_key_press    = true,
-        no_hardware_cursors  = true,
+        -- Software cursors can leak into grim captures, including slurp's crosshair.
+        no_hardware_cursors  = false,
     },
 
     input = {
