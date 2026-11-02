@@ -16,7 +16,7 @@ hl.bind(mainMod .. " + CTRL + R", hl.dsp.exec_cmd("hyprctl reload"))
 
 hl.bind(mainMod .. " + space", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + M", function() zen.toggle_monocle() end)
-hl.bind(mainMod .. " + SHIFT + M", hl.dsp.window.fullscreen({ mode = "maximized" }))
+hl.bind(mainMod .. " + SHIFT + M", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
 hl.bind(mainMod .. " + CTRL + SHIFT + M", hl.dsp.window.fullscreen({ mode = "maximized" }))
 hl.bind("CTRL + ALT + space", hl.dsp.layout("mfact exact 0.7"))
 hl.bind(mainMod .. " + BACKSPACE", hl.dsp.window.set_prop({ prop = "opaque", value = "toggle" }))
