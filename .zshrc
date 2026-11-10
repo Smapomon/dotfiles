@@ -388,8 +388,8 @@ export PATH="$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/
 export ANDROID_AVD_HOME="$HOME/.config/.android/avd"
 
 ##### XDG DIR CHANGES #####
-export AWS_PROFILE="nordvim"
-export AWS_DEFAULT_PROFILE="nordvim"
+export AWS_PROFILE="spotilla"
+export AWS_DEFAULT_PROFILE="spotilla"
 export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME"/aws/credentials
 export AWS_CONFIG_FILE="$XDG_CONFIG_HOME"/aws/config
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
@@ -409,8 +409,7 @@ PERL_LOCAL_LIB_ROOT="/home/smapo/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_R
 PERL_MB_OPT="--install_base \"/home/smapo/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/smapo/perl5"; export PERL_MM_OPT;
 
-_AWS_COMPLETE_PATH=$(which aws_completer)
-complete -C "$_AWS_COMPLETE_PATH" aws
+complete -C "$HOME/.local/bin/aws_completer" aws
 complete -o nospace -C /usr/local/bin/terraform terraform
 
 export PATH="$HOME/packages/flutter/bin:$PATH"
