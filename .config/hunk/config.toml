@@ -14,3 +14,12 @@ cursor_line = "off"
 prompt_save_view_preferences = false
 file_gap = 4
 animations = false
+
+[keybindings]
+# Swap file navigation: "," goes to the next file, "." to the previous one
+"hunk.review.previousFile" = "."
+"hunk.review.nextFile" = ","
+# Free "v" from visual selection and use it for hunk-files' toggle viewed
+"hunk.review.startVisualSelection" = false
+"hunk.history.startVisualSelection" = false
+"hunk-files.toggleViewed" = "v"
