@@ -91,7 +91,7 @@ fi
 alias vim="nvim" # use \vim to open vim
 alias ls="eza --long --header --icons --color=always --group-directories-first"
 alias files="clear;ls -lh"
-alias icat="wezterm imgcat"
+alias icat="kitten icat"
 alias restart_audio="systemctl --user restart pipewire.service"
 alias set_caps_escape="~/shell_scripts/set_caps_escape.sh"
 alias set_mouse="~/shell_scripts/set_mouse.sh"
@@ -547,3 +547,7 @@ export PATH="$HOME/.opencode/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
 echo "Ready!"
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/smapo/.local/bin:$PATH"

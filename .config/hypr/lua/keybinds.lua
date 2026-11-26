@@ -52,6 +52,7 @@ hl.bind(mainMod .. " + K", function()
     hl.dispatch(bringToTop)
 end)
 
+hl.bind(mainMod .. " + G", hl.dsp.group.toggle())
 hl.bind(mainMod .. " + TAB", hl.dsp.group.next())
 hl.bind(mainMod .. " + H", hl.dsp.group.prev())
 

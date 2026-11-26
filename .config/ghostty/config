@@ -10,7 +10,7 @@
 # force it on because of high memory usage
 gtk-single-instance = true
 
-gtk-custom-css = tab-bar.css
+#gtk-custom-css = tab-bar.css
 
 # QoL Stuff
 # ==========================
