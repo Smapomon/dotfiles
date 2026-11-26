@@ -55,6 +55,10 @@ end)
 hl.bind(mainMod .. " + G", hl.dsp.group.toggle())
 hl.bind(mainMod .. " + TAB", hl.dsp.group.next())
 hl.bind(mainMod .. " + H", hl.dsp.group.prev())
+hl.bind(mainMod .. " + SHIFT + G", function()
+    local option = "group.groupbar.enabled"
+    hl.config({ [option] = not hl.get_config(option) })
+end)
 
 hl.bind(mainMod .. " + SHIFT + J", hl.dsp.layout("swapnext"))
 hl.bind(mainMod .. " + SHIFT + K", hl.dsp.layout("swapprev"))
